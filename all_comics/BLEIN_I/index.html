@@ -14,45 +14,79 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh; /* Full viewport height */
-            flex-direction: column; /* Align images in column */
+            flex-direction: column; /* Align elements in a column */
         }
-        img {
+        .image-container {
+            text-align: center;
+        }
+        .image-container img {
             max-width: 100%; /* Ensure images fit within viewport */
             height: auto;
             display: block;
             margin-bottom: 20px; /* Space between images */
         }
+        .navigation-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 50px; /* Rounded button */
+        }
     </style>
 </head>
 <body>
-    <!-- Images with their respective src attributes -->
-    <img src="0.png">
-    <img src="0_.png">
-    <img src="01.png">
-    <img src="02.png">
-    <img src="03.png">
-    <img src="04.png">
-    <img src="05.png">
-    <img src="06.png">
-    <img src="07.png">
-    <img src="08.png">
-    <img src="09.png">
-    <img src="10.png">
-    <img src="11.png">
-    <img src="12.png">
-    <img src="13.png">
-    <img src="14.png">
-    <img src="15.png">
-    <img src="16.png">
-    <img src="17.png">
-    <img src="18.png">
-    <img src="19.png">
-    <img src="20.png">
-    <img src="21.png">
-    <img src="22.png">
-    <img src="23.png">
-    <img src="24.png">
-    <img src="25.png">
-    <img src="25.2.png">
+    <div id="page1" class="image-container">
+        <!-- Images for page 1 -->
+        <img src="0.png">
+        <img src="0_.png">
+        <img src="01.png">
+        <img src="02.png">
+        <img src="03.png">
+        <img src="04.png">
+        <img src="05.png">
+        <img src="06.png">
+        <img src="07.png">
+        <img src="08.png">
+    </div>
+
+    <div id="page2" class="image-container" style="display: none;">
+        <!-- Images for page 2 -->
+        <img src="09.png">
+        <img src="10.png">
+        <img src="11.png">
+        <img src="12.png">
+        <img src="13.png">
+        <img src="14.png">
+        <img src="15.png">
+        <img src="16.png">
+        <img src="17.png">
+        <img src="18.png">
+    </div>
+
+    <button id="nextButton" class="navigation-button" onclick="togglePages()">Next Page</button>
+
+    <script>
+        function togglePages() {
+            var page1 = document.getElementById("page1");
+            var page2 = document.getElementById("page2");
+            var nextButton = document.getElementById("nextButton");
+
+            if (page1.style.display === "none") {
+                page1.style.display = "block";
+                page2.style.display = "none";
+                nextButton.textContent = "Next Page";
+            } else {
+                page1.style.display = "none";
+                page2.style.display = "block";
+                nextButton.textContent = "Previous Page";
+            }
+        }
+    </script>
 </body>
 </html>
