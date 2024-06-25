@@ -10,19 +10,15 @@
             color: #FFEEFB; /* Text color */
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Full viewport height */
-            overflow-x: auto; /* Enable horizontal scrolling */
-            overflow-y: hidden; /* Hide vertical scrollbar */
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+            overflow-y: auto; /* Enable vertical scrolling */
             white-space: nowrap; /* Prevent images from wrapping */
+            text-align: center; /* Center images horizontally */
         }
         img {
-            max-height: 100vh; /* Ensure images fit within viewport height */
-            width: auto;
+            max-width: 100%; /* Ensure images fit within viewport width */
+            height: auto;
             display: inline-block;
-            margin-right: 20px; /* Space between images */
             vertical-align: middle; /* Vertically center images */
         }
     </style>
