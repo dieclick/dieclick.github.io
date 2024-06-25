@@ -25,6 +25,9 @@
             display: block;
             margin-bottom: 20px; /* Space between images */
         }
+        .navigation-buttons {
+            margin-top: 20px;
+        }
         .navigation-button {
             background-color: #4CAF50;
             color: white;
@@ -34,57 +37,48 @@
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin-top: 20px;
+            margin-right: 10px;
             cursor: pointer;
             border-radius: 50px; /* Rounded button */
         }
     </style>
 </head>
 <body>
-    <div id="page1" class="image-container">
+    <div class="image-container">
         <!-- Images for page 1 -->
-        <img src="0.png">
-        <img src="0_.png">
-        <img src="01.png">
-        <img src="02.png">
-        <img src="03.png">
-        <img src="04.png">
-        <img src="05.png">
-        <img src="06.png">
-        <img src="07.png">
-        <img src="08.png">
+        <img id="image1" src="0.png">
+        <img id="image2" src="0_.png" style="display: none;"> <!-- Initially hidden -->
     </div>
 
-    <div id="page2" class="image-container" style="display: none;">
-        <!-- Images for page 2 -->
-        <img src="09.png">
-        <img src="10.png">
-        <img src="11.png">
-        <img src="12.png">
-        <img src="13.png">
-        <img src="14.png">
-        <img src="15.png">
-        <img src="16.png">
-        <img src="17.png">
-        <img src="18.png">
+    <div class="navigation-buttons">
+        <button class="navigation-button" onclick="showPrevious()">Previous</button>
+        <button class="navigation-button" onclick="showNext()">Next</button>
     </div>
-
-    <button id="nextButton" class="navigation-button" onclick="togglePages()">Next Page</button>
 
     <script>
-        function togglePages() {
-            var page1 = document.getElementById("page1");
-            var page2 = document.getElementById("page2");
-            var nextButton = document.getElementById("nextButton");
+        var currentImage = 1; // Variable to track currently displayed image
 
-            if (page1.style.display === "none") {
-                page1.style.display = "block";
-                page2.style.display = "none";
-                nextButton.textContent = "Next Page";
+        function showNext() {
+            if (currentImage === 1) {
+                document.getElementById("image1").style.display = "none";
+                document.getElementById("image2").style.display = "block";
+                currentImage = 2;
             } else {
-                page1.style.display = "none";
-                page2.style.display = "block";
-                nextButton.textContent = "Previous Page";
+                document.getElementById("image1").style.display = "block";
+                document.getElementById("image2").style.display = "none";
+                currentImage = 1;
+            }
+        }
+
+        function showPrevious() {
+            if (currentImage === 1) {
+                document.getElementById("image1").style.display = "none";
+                document.getElementById("image2").style.display = "block";
+                currentImage = 2;
+            } else {
+                document.getElementById("image1").style.display = "block";
+                document.getElementById("image2").style.display = "none";
+                currentImage = 1;
             }
         }
     </script>
