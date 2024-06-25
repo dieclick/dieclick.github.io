@@ -14,13 +14,16 @@
             justify-content: center;
             align-items: center;
             height: 100vh; /* Full viewport height */
-            overflow: hidden; /* Prevent vertical scroll */
+            overflow-x: auto; /* Enable horizontal scrolling */
+            overflow-y: hidden; /* Hide vertical scrollbar */
+            white-space: nowrap; /* Prevent images from wrapping */
         }
         img {
             max-height: 100vh; /* Ensure images fit within viewport height */
             width: auto;
-            display: block;
-            margin: auto; /* Center images horizontally */
+            display: inline-block;
+            margin-right: 20px; /* Space between images */
+            vertical-align: middle; /* Vertically center images */
         }
     </style>
 </head>
