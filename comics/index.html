@@ -7,7 +7,8 @@
         body {
             background-image: url('hm6.png'); /* Background image */
             background-repeat: no-repeat; /* No repeat */
-            background-size: 100% 100%; /* Cover entire viewport */
+            background-size: cover; /* Cover entire viewport */
+            background-position: center center; /* Center the background image */
             font-family: Arial, sans-serif; /* Font style */
             color: #FFFFFF; /* Text color */
             margin: 0; /* Remove default margin */
@@ -16,6 +17,7 @@
             flex-direction: column; /* Stack elements vertically */
             align-items: center; /* Center align items horizontally */
             justify-content: center; /* Center align items vertically */
+            height: 100vh; /* Ensure full viewport height */
         }
         a {
             text-decoration: none; /* Remove underline from links */
@@ -25,12 +27,19 @@
             max-width: 100%; /* Ensure images fit within container */
             height: auto; /* Maintain aspect ratio */
             margin-bottom: 10px; /* Space between images */
+            transition: transform 0.3s ease-in-out; /* Smooth hover transition */
+        }
+        img:hover {
+            transform: translateY(-5px); /* Move image up slightly on hover */
+        }
+        .comic-entry {
+            text-align: center; /* Center align text */
+            margin-bottom: 20px; /* Space between entries */
         }
     </style>
 </head>
 <body>
-    <!-- Comic entry with image and text -->
-    <div>
+    <div class="comic-entry">
         <a href="axioma_uno/index.html">
             <img alt="Axioma Uno - SUMA MERTE" src="Destinata_green.png">
         </a>
