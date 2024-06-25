@@ -35,26 +35,33 @@
         nav a:hover {
             background: rgba(255, 255, 255, 0.2);
         }
-        nav img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 20px;
-        }
         .content {
             margin-left: 270px;
             padding: 20px;
             color: #ffffff;
         }
+        .highlight {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .highlight a {
+            display: inline-block;
+            margin: 20px;
+        }
+        .highlight img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .highlight img:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
     <nav>
-        <a href="https://dieclick.github.io/destinata/index.html">
-            <img alt="Destinata" src="demo_hero_logo_white.png" width="510" height="130">
-        </a>
-        <a href="https://dieclick.github.io/aleph/index.html">
-            <img alt="Alef" src="logo130.png" width="430" height="130">
-        </a>
         <a href="https://dieclick.github.io/all_comics">COMICS</a>
         <a href="https://www.artstation.com/dieclick">Art Station</a>
         <a href="https://dieclick.github.io/all_games">Games</a>
@@ -64,6 +71,14 @@
         <a href="https://dieclick.github.io/TOP/">Terms of Privacy IG</a>
     </nav>
     <div class="content">
+        <div class="highlight">
+            <a href="https://dieclick.github.io/destinata/index.html">
+                <img alt="Destinata" src="demo_hero_logo_white.png">
+            </a>
+            <a href="https://dieclick.github.io/aleph/index.html">
+                <img alt="Alef" src="logo130.png">
+            </a>
+        </div>
         <h1>Welcome to Dieclick</h1>
         <p>Explore the links in the navigation bar to learn more about our projects and connect with us on various platforms.</p>
     </div>
