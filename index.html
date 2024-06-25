@@ -8,41 +8,47 @@
         body {
             background: url('hm5.png') no-repeat center center fixed;
             background-size: cover;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            color: #ffffff;
+            font-family: 'Arial', sans-serif;
             margin: 0;
-            padding: 0;
+            display: flex;
         }
-        h1 {
-            margin-top: 50px;
-            font-size: 2.5em;
+        nav {
+            width: 250px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
         }
-        a {
+        nav a {
             display: block;
-            margin: 20px 0;
+            margin: 10px 0;
             font-size: 1.2em;
             text-decoration: none;
             color: #ffffff;
-            padding: 10px 20px;
-            border: 2px solid #ffffff;
-            border-radius: 10px;
-            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
         }
-        a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #000000;
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
-        a img {
-            display: block;
-            margin: 0 auto;
+        nav img {
             max-width: 100%;
             height: auto;
+            margin-bottom: 20px;
+        }
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
-    <h1>
+    <nav>
         <a href="https://dieclick.github.io/destinata/index.html">
             <img alt="Destinata" src="demo_hero_logo_white.png" width="510" height="130">
         </a>
@@ -56,6 +62,10 @@
         <a href="https://dieclick123.wixsite.com/dieclick">Commissions</a>
         <a href="https://dieclick.github.io/RNA_recourses/">ARN Translator</a>
         <a href="https://dieclick.github.io/TOP/">Terms of Privacy IG</a>
-    </h1>
+    </nav>
+    <div class="content">
+        <h1>Welcome to Dieclick</h1>
+        <p>Explore the links in the navigation bar to learn more about our projects and connect with us on various platforms.</p>
+    </div>
 </body>
 </html>
