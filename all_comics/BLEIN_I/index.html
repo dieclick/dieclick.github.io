@@ -10,14 +10,17 @@
             color: #FFEEFB; /* Text color */
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Hide horizontal scrollbar */
-            overflow-y: auto; /* Enable vertical scrolling */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            overflow-x: auto; /* Enable horizontal scrolling */
+            overflow-y: hidden; /* Hide vertical scrollbar */
             white-space: nowrap; /* Prevent images from wrapping */
-            text-align: center; /* Center images horizontally */
         }
         img {
-            max-width: 100%; /* Ensure images fit within viewport width */
-            height: auto;
+            height: 100vh; /* Ensure all images have the same height */
+            width: auto; /* Automatically adjust width */
             display: inline-block;
             vertical-align: middle; /* Vertically center images */
         }
