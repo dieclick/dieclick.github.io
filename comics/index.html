@@ -26,7 +26,7 @@
             display: block; /* Make links block-level elements */
         }
         .comic-entry {
-            text-align: center; /* Center align text */
+            text-align: left; /* Left align text */
             margin-bottom: 20px; /* Space between entries */
             position: relative; /* Position relative for absolute text */
             overflow: hidden; /* Hide overflow to contain absolute text */
@@ -36,6 +36,7 @@
             height: auto; /* Maintain aspect ratio */
             margin-bottom: 10px; /* Space between images */
             transition: transform 0.3s ease-in-out; /* Smooth hover transition */
+            float: left; /* Float image to the left */
         }
         .comic-entry:hover .comic-title {
             opacity: 1; /* Show title text on hover */
@@ -44,12 +45,12 @@
         .comic-title {
             position: absolute; /* Position text absolutely */
             bottom: 0; /* Align text to the bottom */
-            left: 0; /* Align text to the left */
+            left: 50%; /* Center align horizontally */
+            transform: translateX(-50%); /* Adjust horizontally centered text */
             width: 100%; /* Full width of container */
             background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
             padding: 10px; /* Padding around text */
             margin: 0; /* Remove default margin */
-            transform: translateY(100%); /* Start text below the image */
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */
             opacity: 0; /* Initially hidden */
         }
