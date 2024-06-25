@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BLEIN 1</title>
+    <title>Comic Viewer</title>
     <style>
         body {
             background-color: #ffffff; /* White background color */
@@ -14,22 +14,28 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh; /* Full viewport height */
-            flex-direction: column; /* Align elements in a column */
+            overflow: hidden; /* Prevent scrolling */
         }
-        .image-container {
+        .comic-container {
             text-align: center;
+            position: relative;
         }
-        .image-container img {
-            max-width: 100%; /* Ensure images fit within viewport */
+        .comic-container img {
+            max-width: 100%; /* Ensure images fit within viewport width */
             height: auto;
-            display: block;
-            margin-bottom: 20px; /* Space between images */
+            display: none; /* Hide all images initially */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .comic-container img.active {
+            display: block; /* Display only active image */
         }
         .navigation-buttons {
             margin-top: 20px;
         }
         .navigation-button {
-            background-color: #4CAF50;
+            background-color: #000000; /* Black background color */
             color: white;
             border: none;
             padding: 10px 20px;
@@ -44,10 +50,36 @@
     </style>
 </head>
 <body>
-    <div class="image-container">
-        <!-- Images for page 1 -->
-        <img id="image1" src="0.png">
-        <img id="image2" src="0_.png" style="display: none;"> <!-- Initially hidden -->
+    <div class="comic-container">
+        <!-- Replace src attributes with your actual image paths -->
+        <img src="0.png" class="comic-page active">
+        <img src="0_.png" class="comic-page">
+        <img src="01.png" class="comic-page">
+        <img src="02.png" class="comic-page">
+        <img src="03.png" class="comic-page">
+        <img src="04.png" class="comic-page">
+        <img src="05.png" class="comic-page">
+        <img src="06.png" class="comic-page">
+        <img src="07.png" class="comic-page">
+        <img src="08.png" class="comic-page">
+        <img src="09.png" class="comic-page">
+        <img src="10.png" class="comic-page">
+        <img src="11.png" class="comic-page">
+        <img src="12.png" class="comic-page">
+        <img src="13.png" class="comic-page">
+        <img src="14.png" class="comic-page">
+        <img src="15.png" class="comic-page">
+        <img src="16.png" class="comic-page">
+        <img src="17.png" class="comic-page">
+        <img src="18.png" class="comic-page">
+        <img src="19.png" class="comic-page">
+        <img src="20.png" class="comic-page">
+        <img src="21.png" class="comic-page">
+        <img src="22.png" class="comic-page">
+        <img src="23.png" class="comic-page">
+        <img src="24.png" class="comic-page">
+        <img src="25.png" class="comic-page">
+        <img src="25.2.png" class="comic-page">
     </div>
 
     <div class="navigation-buttons">
@@ -56,30 +88,19 @@
     </div>
 
     <script>
-        var currentImage = 1; // Variable to track currently displayed image
+        var currentImageIndex = 0; // Variable to track currently displayed image index
+        var images = document.querySelectorAll('.comic-page'); // Get all comic page images
 
         function showNext() {
-            if (currentImage === 1) {
-                document.getElementById("image1").style.display = "none";
-                document.getElementById("image2").style.display = "block";
-                currentImage = 2;
-            } else {
-                document.getElementById("image1").style.display = "block";
-                document.getElementById("image2").style.display = "none";
-                currentImage = 1;
-            }
+            images[currentImageIndex].classList.remove('active'); // Hide current image
+            currentImageIndex = (currentImageIndex + 1) % images.length; // Increment index with wrap-around
+            images[currentImageIndex].classList.add('active'); // Show next image
         }
 
         function showPrevious() {
-            if (currentImage === 1) {
-                document.getElementById("image1").style.display = "none";
-                document.getElementById("image2").style.display = "block";
-                currentImage = 2;
-            } else {
-                document.getElementById("image1").style.display = "block";
-                document.getElementById("image2").style.display = "none";
-                currentImage = 1;
-            }
+            images[currentImageIndex].classList.remove('active'); // Hide current image
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length; // Decrement index with wrap-around
+            images[currentImageIndex].classList.add('active'); // Show previous image
         }
     </script>
 </body>
