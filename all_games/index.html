@@ -22,7 +22,7 @@
             display: inline-block;
             margin: 20px;
             text-decoration: none;
-            color: #ffffff;
+            position: relative;
         }
         h1 img {
             width: 250px;
@@ -33,18 +33,49 @@
         h1 img:hover {
             transform: scale(1.1);
         }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 a:hover .overlay {
+            opacity: 1;
+        }
+        .overlay-text {
+            font-size: 1.5em;
+        }
     </style>
 </head>
 <body>
     <h1>
         <a href="https://gamejolt.com/games/PQQ/791701">
             <img alt="PQQ" src="pqqlogo.png">
+            <div class="overlay">
+                <div class="overlay-text">PQQ Game</div>
+            </div>
         </a>
         <a href="https://store.steampowered.com/app/1489160/Destinata_ROJO_COMPLETO/">
             <img alt="Destinata" src="imagen_2023-08-27_185632232.png">
+            <div class="overlay">
+                <div class="overlay-text">Destinata Game</div>
+            </div>
         </a>
         <a href="https://gamejolt.com/games/BLCKWK/860393">
             <img alt="Black_Wikia" src="imagen_2023-08-11_224220143.png">
+            <div class="overlay">
+                <div class="overlay-text">Black_Wikia Game</div>
+            </div>
         </a>
     </h1>
 </body>
