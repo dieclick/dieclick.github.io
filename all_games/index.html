@@ -24,10 +24,13 @@
             text-decoration: none;
             position: relative;
             overflow: hidden;
+            width: 500px; /* Double the width */
+            height: 500px; /* Double the height */
         }
         h1 img {
-            width: 250px;
-            height: 250px;
+            width: 100%; /* Ensure the image fills the container */
+            height: 100%; /* Ensure the image fills the container */
+            object-fit: cover; /* Maintain aspect ratio and cover container */
             border-radius: 10px;
             transition: transform 0.3s ease;
         }
