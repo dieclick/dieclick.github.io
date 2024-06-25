@@ -2,115 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Comic Viewer</title>
+    <title>BLEIN 1</title>
     <style>
         body {
-            background-color: #ffffff; /* White background color */
+            background-color: #000000; /* Black background color */
             font-family: Arial, sans-serif;
-            color: #000000; /* Text color */
+            color: #FFEEFB; /* Text color */
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Full viewport height */
-            overflow: hidden; /* Prevent scrolling */
+            height: 100vh; /* Full viewport height */
         }
-        .comic-container {
-            text-align: center;
-            position: relative;
-        }
-        .comic-container img {
-            max-width: 100%; /* Ensure images fit within viewport width */
+        img {
+            max-width: 100%; /* Ensure images fit within viewport */
             height: auto;
-            display: none; /* Hide all images initially */
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        .comic-container img.active {
-            display: block; /* Display only active image */
-        }
-        .navigation-buttons {
-            margin-top: 20px;
-        }
-        .navigation-button {
-            background-color: #000000; /* Black background color */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-right: 10px;
-            cursor: pointer;
-            border-radius: 50px; /* Rounded button */
+            display: block;
+            margin-bottom: 20px; /* Space between images */
         }
     </style>
 </head>
 <body>
-    <div class="comic-container">
-        <!-- Replace src attributes with your actual image paths -->
-        <img src="0.png" class="comic-page active">
-        <img src="0_.png" class="comic-page">
-        <img src="01.png" class="comic-page">
-        <img src="02.png" class="comic-page">
-        <img src="03.png" class="comic-page">
-        <img src="04.png" class="comic-page">
-        <img src="05.png" class="comic-page">
-        <img src="06.png" class="comic-page">
-        <img src="07.png" class="comic-page">
-        <img src="08.png" class="comic-page">
-        <img src="09.png" class="comic-page">
-        <img src="10.png" class="comic-page">
-        <img src="11.png" class="comic-page">
-        <img src="12.png" class="comic-page">
-        <img src="13.png" class="comic-page">
-        <img src="14.png" class="comic-page">
-        <img src="15.png" class="comic-page">
-        <img src="16.png" class="comic-page">
-        <img src="17.png" class="comic-page">
-        <img src="18.png" class="comic-page">
-        <img src="19.png" class="comic-page">
-        <img src="20.png" class="comic-page">
-        <img src="21.png" class="comic-page">
-        <img src="22.png" class="comic-page">
-        <img src="23.png" class="comic-page">
-        <img src="24.png" class="comic-page">
-        <img src="25.png" class="comic-page">
-        <img src="25.2.png" class="comic-page">
-    </div>
-
-    <div class="navigation-buttons">
-        <button class="navigation-button" onclick="showPrevious()">Previous</button>
-        <button class="navigation-button" onclick="showNext()">Next</button>
-    </div>
-
-    <script>
-        var currentImageIndex = 0; // Variable to track currently displayed image index
-        var images = document.querySelectorAll('.comic-page'); // Get all comic page images
-
-        function showNext() {
-            images[currentImageIndex].classList.remove('active'); // Hide current image
-            currentImageIndex = (currentImageIndex + 1) % images.length; // Increment index with wrap-around
-            images[currentImageIndex].classList.add('active'); // Show next image
-        }
-
-        function showPrevious() {
-            images[currentImageIndex].classList.remove('active'); // Hide current image
-            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length; // Decrement index with wrap-around
-            images[currentImageIndex].classList.add('active'); // Show previous image
-        }
-
-        // Preload all images to improve loading performance
-        window.onload = function() {
-            images.forEach(function(img) {
-                var src = img.getAttribute('src');
-                var preloadImg = new Image();
-                preloadImg.src = src;
-            });
-        };
-    </script>
+    <!-- Images with their respective src attributes -->
+    <img src="0.png">
+    <img src="0_.png">
+    <img src="01.png">
+    <img src="02.png">
+    <img src="03.png">
+    <img src="04.png">
+    <img src="05.png">
+    <img src="06.png">
+    <img src="07.png">
+    <img src="08.png">
+    <img src="09.png">
+    <img src="10.png">
+    <img src="11.png">
+    <img src="12.png">
+    <img src="13.png">
+    <img src="14.png">
+    <img src="15.png">
+    <img src="16.png">
+    <img src="17.png">
+    <img src="18.png">
+    <img src="19.png">
+    <img src="20.png">
+    <img src="21.png">
+    <img src="22.png">
+    <img src="23.png">
+    <img src="24.png">
+    <img src="25.png">
+    <img src="25.2.png">
 </body>
 </html>
