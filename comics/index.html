@@ -9,54 +9,34 @@
             background-repeat: no-repeat; /* No repeat */
             background-size: cover; /* Cover entire viewport */
             background-position: center center; /* Center the background image */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font style */
+            font-family: Arial, sans-serif; /* Font style */
             color: #FFFFFF; /* Text color */
             margin: 0; /* Remove default margin */
             padding: 20px; /* Add padding for spacing */
             display: flex; /* Use flexbox for layout */
             flex-direction: column; /* Stack elements vertically */
-            align-items: center; /* Center align items horizontally */
+            align-items: flex-start; /* Align items to the left */
             justify-content: center; /* Center align items vertically */
             height: 100vh; /* Ensure full viewport height */
         }
         a {
             text-decoration: none; /* Remove underline from links */
             color: #FFFFFF; /* Link color */
-            text-align: center; /* Center align text */
-            display: block; /* Make links block-level elements */
-        }
-        .comic-entry {
-            text-align: left; /* Left align text */
-            margin-bottom: 20px; /* Space between entries */
-            position: relative; /* Position relative for absolute text */
-            overflow: hidden; /* Hide overflow to contain absolute text */
-            width: 213px; /* Width of image */
         }
         img {
             max-width: 100%; /* Ensure images fit within container */
             height: auto; /* Maintain aspect ratio */
             margin-bottom: 10px; /* Space between images */
             transition: transform 0.3s ease-in-out; /* Smooth hover transition */
-            float: left; /* Float image to the left */
+            filter: brightness(100%); /* Initial brightness */
         }
-        .comic-entry:hover img {
-            transform: scale(1.1); /* Scale up image on hover */
+        img:hover {
+            transform: translateY(-8px) scale(1.05); /* Move image up and scale slightly on hover */
+            filter: brightness(80%); /* Reduce brightness on hover */
         }
-        .comic-title {
-            position: absolute; /* Position text absolutely */
-            bottom: -40px; /* Move text below image */
-            left: 50%; /* Center align horizontally */
-            transform: translateX(-50%); /* Adjust horizontally centered text */
-            width: 100%; /* Full width of container */
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-            padding: 10px; /* Padding around text */
-            margin: 0; /* Remove default margin */
-            transition: bottom 0.3s ease-in-out; /* Smooth transition */
-            opacity: 0; /* Initially hidden */
-        }
-        .comic-entry:hover .comic-title {
-            bottom: 0; /* Slide text in from bottom on hover */
-            opacity: 1; /* Show title text on hover */
+        .comic-entry {
+            text-align: left; /* Align text to the left */
+            margin-bottom: 20px; /* Space between entries */
         }
     </style>
 </head>
@@ -64,8 +44,9 @@
     <div class="comic-entry">
         <a href="axioma_uno/index.html">
             <img alt="Axioma Uno - SUMA MERTE" src="Destinata_green.png">
-            <span class="comic-title">Axioma Uno - SUMA MERTE</span>
         </a>
+        <br>
+        <a href="axioma_uno/index.html">Axioma Uno - SUMA MERTE</a>
     </div>
     <!-- Add more entries similarly with different links and images -->
 </body>
