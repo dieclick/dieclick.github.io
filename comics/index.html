@@ -23,13 +23,6 @@
             text-decoration: none; /* Remove underline from links */
             color: #FFFFFF; /* Link color */
         }
-        .comic-entry {
-            position: relative; /* Ensure relative positioning for absolute child */
-            text-align: left; /* Align text to the left */
-            margin-bottom: 20px; /* Space between entries */
-            overflow: hidden; /* Hide overflow to prevent text overflow */
-            max-width: 100%; /* Ensure maximum width for responsiveness */
-        }
         img {
             max-width: 100%; /* Ensure images fit within container */
             height: auto; /* Maintain aspect ratio */
@@ -37,34 +30,23 @@
             transition: transform 0.3s ease-in-out; /* Smooth hover transition */
             filter: brightness(100%); /* Initial brightness */
         }
-        .comic-entry a {
-            display: none; /* Initially hide the text */
-            position: absolute; /* Position text absolutely */
-            bottom: 0; /* Align text to the bottom */
-            left: 0; /* Align text to the left */
-            width: 100%; /* Full width */
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-            padding: 10px; /* Padding for text */
-            box-sizing: border-box; /* Include padding in width/height calculations */
-            text-align: center; /* Center text horizontally */
-        }
-        .comic-entry:hover a {
-            display: block; /* Display text when hovering over .comic-entry */
-        }
         img:hover {
             transform: translateY(-8px) scale(1.05); /* Move image up and scale slightly on hover */
             filter: brightness(80%); /* Reduce brightness on hover */
+        }
+        .comic-entry {
+            text-align: left; /* Align text to the left */
+            margin-bottom: 20px; /* Space between entries */
         }
     </style>
 </head>
 <body>
     <div class="comic-entry">
         <a href="axioma_uno/index.html">
-            Axioma Uno - SUMA MERTE
-        </a>
-        <a href="axioma_uno/index.html">
             <img alt="Axioma Uno - SUMA MERTE" src="Destinata_green.png">
         </a>
+        <br>
+        <a href="axioma_uno/index.html">Axioma Uno - SUMA MERTE</a>
     </div>
     <!-- Add more entries similarly with different links and images -->
 </body>
