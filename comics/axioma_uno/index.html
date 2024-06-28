@@ -1,86 +1,66 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title> DESTINATA Triplet A </title>
-<style>
- span {
-  background-color: #0F0F0F;
-  color:#FFEEFB;
-  position:fixed;
-}         
-</style>   
-   <body background="hm7.png" 
-    background-repeat: no-repeat;
-  background-attachment: fixed; 
-  style="width:1280px;height:720px;>
- 
-         
-    </head>
-         
-         
-<meta charset="UTF-8">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DESTINATA Triplet A</title>
+  <style>
+    body {
+      background-image: url('hm7.png');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      width: 1280px;
+      height: 720px;
+      margin: 0;
+      padding: 0;
+    }
 
-<span>
-                     
+    span {
+      background-color: #0F0F0F;
+      color: #FFEEFB;
+      position: fixed;
+    }
+  </style>
+</head>
+<body>
+  <span>
+    <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Vol 1</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">Vol 2</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Triplet A</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">Triplet B</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">Triplet C</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">Triplet D</a>
+  </span>
 
-  <a href="https://dieclick.github.io/comics/axioma_uno/index.html">
-  Vol 1
-  </a>    
-                                                                   
-  <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">
-  Vol 2
-  </a>    
-                        
- <a href="https://dieclick.github.io/comics/axioma_uno/index.html">
-  Triplet A
-  </a>                      
-                      
- <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">
-  Triplet B
-  </a>
+  <br><br><br>
 
- <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">
-  Triplet C
-  </a>   
-           
- <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">
-  Triplet D
-  </a>                               
-                          
-                               
-</span>.
+  <!-- Images with lazy loading -->
+  <img loading="lazy" src="pag 10.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 9.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 8.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 7.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 6.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 5.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 4.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 3.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 2.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 1.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 00.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="0mesages.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="prepagB.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="prepagA.png" style="width: 1280px; height: 720px;">
 
-<br>                                                       
-<br>       
-                                                       
-                                                  
-                                                       
-<br>
-                                                       
-       <img src="pag 10.png" style="width:1280px;height:720px;">    
-       <img src="pag 9.png" style="width:1280px;height:720px;">
-       <img src="pag 8.png" style="width:1280px;height:720px;">                                                              
-       <img src="pag 7.png" style="width:1280px;height:720px;">   
-       <img src="pag 6.png" style="width:1280px;height:720px;">   
-       <img src="pag 5.png" style="width:1280px;height:720px;">   
-       <img src="pag 4.png" style="width:1280px;height:720px;">   
-       <img src="pag 3.png" style="width:1280px;height:720px;">   
-       <img src="pag 2.png" style="width:1280px;height:720px;">   
-       <img src="pag 1.png" style="width:1280px;height:720px;">   
-       <img src="pag 00.png" style="width:1280px;height:720px;">     
-       <img src="0mesages.png" style="width:1280px;height:720px;">   
-       <img src="prepagB.png" style="width:1280px;height:720px;">
-       <img src="prepagA.png" style="width:1280px;height:720px;">                                                                 
-  
-                                                              
+  <!-- Script for scrolling to bottom -->
+  <script>
+    // Ensure DOM is fully loaded before executing
+    document.addEventListener('DOMContentLoaded', function() {
+      topFunction();
+    });
 
-<script>                                                              
-topFunction()                                                              
-function topFunction() {
-  document.body.scrollTop = 99000;
-  document.documentElement.scrollTop = 99000;
-}
-</script>                                                              
-                                                              
+    function topFunction() {
+      // Smooth scroll to the bottom of the page
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+  </script>
 </body>
-  </html>
+</html>
