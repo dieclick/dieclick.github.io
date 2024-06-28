@@ -1,83 +1,81 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title> DESTINATA Triplet B </title>
-<style>
- span {
-  background-color: #0F0F0F;
-  color:#FFEEFB;
-  position:fixed;
-}         
-</style>   
-   <body background="hm7.png" 
-    background-repeat: no-repeat;
-  background-attachment: fixed; 
-  style="width:1280px;height:720px;>
- 
-         
-    </head>
-         
-         
-<meta charset="UTF-8">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DESTINATA Triplet B</title>
+  <style>
+    body {
+      background-image: url('hm7.png');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      width: 1280px;
+      height: 720px;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-<span>
-                     
+    span {
+      background-color: #0F0F0F;
+      color: #FFEEFB;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 10px;
+      border-radius: 5px;
+    }
 
- <a href="https://dieclick.github.io/comics/axioma_uno/index.html">
- Vol 1
- </a>    
-                                                                   
- <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">
- Vol 2
- </a>    
-     
- <a href="https://dieclick.github.io/comics/axioma_uno/index.html">
-  Triplet A
-  </a>                      
-                      
- <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">
-  Triplet B
-  </a>
+    span a {
+      color: #FFEEFB;
+      text-decoration: none;
+      margin-right: 10px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      transition: background-color 0.3s ease;
+    }
 
- <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">
-  Triplet C
-  </a>                               
-           
- <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">
-  Triplet D
-  </a>                               
+    span a:hover {
+      background-color: #FFEEFB;
+      color: #0F0F0F;
+    }
+  </style>
+</head>
+<body>
+  <span>
+    <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Vol 1</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">Vol 2</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Triplet A</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">Triplet B</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">Triplet C</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">Triplet D</a>
+  </span>
 
-                               
-                               
-</span>.
+  <br><br><br>
 
-<br>                                                       
-<br>       
-                                                       
-                                                  
-                                                       
-<br>
-                                                       
-       <img src="pag 20.png" style="width:1280px;height:720px;">   
-       <img src="pag 19.png" style="width:1280px;height:720px;">   
-       <img src="pag 18.png" style="width:1280px;height:720px;">   
-       <img src="pag 17.png" style="width:1280px;height:720px;">   
-       <img src="pag 16.png" style="width:1280px;height:720px;">   
-       <img src="pag 15.png" style="width:1280px;height:720px;">   
-       <img src="pag 14.png" style="width:1280px;height:720px;">   
-       <img src="pag 13.png" style="width:1280px;height:720px;">   
-       <img src="pag 12.png" style="width:1280px;height:720px;">     
-       <img src="pag 11.png" style="width:1280px;height:720px;">   
-  
-                                                              
+  <!-- Images with lazy loading -->
+  <img loading="lazy" src="pag 20.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 19.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 18.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 17.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 16.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 15.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 14.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 13.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 12.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 11.png" style="width: 1280px; height: 720px;">
 
-<script>                                                              
-topFunction()                                                              
-function topFunction() {
-  document.body.scrollTop = 99000;
-  document.documentElement.scrollTop = 99000;
-}
-</script>                                                              
-                                                              
+  <!-- Script for scrolling to bottom -->
+  <script>
+    // Ensure DOM is fully loaded before executing
+    document.addEventListener('DOMContentLoaded', function() {
+      topFunction();
+    });
+
+    function topFunction() {
+      // Smooth scroll to the bottom of the page
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+  </script>
 </body>
-  </html>
+</html>
