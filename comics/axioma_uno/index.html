@@ -54,10 +54,10 @@
       position: relative;
     }
 
-    .vol2-link {
+    .vol2-link, .triplet-c-link, .triplet-d-link {
       display: none;
       position: absolute;
-      top: calc(100%); /* Added 5px spacing below Vol 1 link */
+      top: calc(100%); /* Added spacing below the link */
       left: 0;
       background-color: #0F0F0F;
       padding: 5px 15px; /* Increased padding for wider box */
@@ -66,17 +66,19 @@
       z-index: 1; /* Ensure it's above the images */
     }
 
-    .vol1-list li:hover .vol2-link {
+    .vol1-list li:hover .vol2-link,
+    .vol1-list li:hover .triplet-c-link,
+    .vol1-list li:hover .triplet-d-link {
       display: block;
     }
 
-    .vol2-link a {
+    .vol2-link a, .triplet-c-link a, .triplet-d-link a {
       color: #FFEEFB;
       text-decoration: none;
     }
 
-    .next-button {
-      position: fixed;
+    .next-button, .back-button {
+      position: absolute;
       bottom: 20px;
       left: 20px;
       background-color: #0F0F0F;
@@ -88,9 +90,13 @@
       transition: background-color 0.3s ease;
     }
 
-    .next-button:hover {
+    .next-button:hover, .back-button:hover {
       background-color: #FFEEFB;
       color: #0F0F0F;
+    }
+
+    .next-button {
+      top: 20px; /* Positioned at the top */
     }
   </style>
 </head>
@@ -98,22 +104,29 @@
   <span>
     <ul class="vol1-list">
       <li>
-        <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Vol 1</a>
+        <a href="#" onclick="loadTriplet('vol2')">Vol 1</a>
         <div class="vol2-link">
-          <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">Vol 2</a>
+          <span onclick="loadTriplet('vol2')">Vol 2</span>
         </div>
       </li>
-      <li><a href="https://dieclick.github.io/comics/axioma_uno/index.html">Triplet A</a></li>
-      <li><a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">Triplet B</a></li>
-      <li><a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">Triplet C</a></li>
-      <li><a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">Triplet D</a></li>
+      <li>
+        <a href="#" onclick="loadTriplet('triplet-c')">Triplet A</a>
+        <div class="triplet-c-link">
+          <span onclick="loadTriplet('triplet-c')">Triplet C</span>
+        </div>
+      </li>
+      <li>
+        <a href="#" onclick="loadTriplet('triplet-d')">Triplet B</a>
+        <div class="triplet-d-link">
+          <span onclick="loadTriplet('triplet-d')">Triplet D</span>
+        </div>
+      </li>
     </ul>
   </span>
 
-  <br><br><br>
-
-  <!-- Images with lazy loading -->
+  <!-- Images container -->
   <div id="image-container">
+    <!-- Initially load Triplet A images -->
     <img loading="lazy" src="pag 10.png" style="width: 1280px; height: 720px;">
     <img loading="lazy" src="pag 9.png" style="width: 1280px; height: 720px;">
     <img loading="lazy" src="pag 8.png" style="width: 1280px; height: 720px;">
@@ -125,24 +138,28 @@
     <img loading="lazy" src="pag 2.png" style="width: 1280px; height: 720px;">
     <img loading="lazy" src="pag 1.png" style="width: 1280px; height: 720px;">
     <img loading="lazy" src="pag 00.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="0mesages.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="prepagB.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="prepagA.png" style="width: 1280px; height: 720px;">
   </div>
 
-  <!-- Next button -->
-  <button class="next-button" onclick="loadNextImages()">Next Triplet</button>
+  <!-- Next and Back buttons -->
+  <button class="next-button" onclick="loadNextTriplet()">Next Triplet</button>
+  <button class="back-button" onclick="loadPreviousTriplet()">Back Triplet</button>
 
-  <!-- Script for loading next batch of images -->
+  <!-- Script for loading triplets -->
   <script>
-    var imageIndex = 20; // Start index for the next batch of images
+    var tripletIndex = {
+      'vol2': 11,
+      'triplet-c': 21,
+      'triplet-d': 31
+    };
 
-    function loadNextImages() {
+    function loadTriplet(triplet) {
       var imageContainer = document.getElementById('image-container');
       imageContainer.innerHTML = ''; // Clear existing images
 
-      // Load next batch of images from pag 11.png to pag 20.png
-      for (var i = imageIndex; i > imageIndex - 10; i--) {
+      var startIndex = tripletIndex[triplet];
+      var endIndex = startIndex - 10;
+
+      for (var i = startIndex; i > endIndex; i--) {
         var img = document.createElement('img');
         img.src = 'pag ' + i + '.png';
         img.style.width = '1280px';
@@ -150,8 +167,18 @@
         img.loading = 'lazy';
         imageContainer.appendChild(img);
       }
+    }
 
-      imageIndex += 10; // Increment index for the next batch
+    function loadNextTriplet() {
+      // Simulate click on next triplet link
+      // Here, loading Triplet C as an example (can be modified as needed)
+      loadTriplet('triplet-c');
+    }
+
+    function loadPreviousTriplet() {
+      // Simulate click on previous triplet link
+      // Here, loading Triplet A as an example (can be modified as needed)
+      loadTriplet('vol2');
     }
   </script>
 </body>
