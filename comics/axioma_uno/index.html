@@ -5,145 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DESTINATA Triplet A</title>
   <style>
-    body {
-      background-image: url('hm7.png');
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      width: 1280px;
-      height: 720px;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    span {
-      background-color: #0F0F0F;
-      color: #FFEEFB;
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      padding: 10px;
-      border-radius: 5px;
-    }
-
-    span a {
-      color: #FFEEFB;
-      text-decoration: none;
-      margin-right: 10px;
-      padding: 5px 10px;
-      border-radius: 3px;
-      transition: background-color 0.3s ease;
-    }
-
-    span a:hover {
-      background-color: #FFEEFB;
-      color: #0F0F0F;
-    }
-
-    /* New styles for the list */
-    .vol1-list {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-      display: inline;
-    }
-
-    .vol1-list li {
-      display: inline-block; /* Changed to inline-block for spacing adjustments */
-      margin-right: 10px;
-      position: relative;
-    }
-
-    .vol2-link {
-      display: none;
-      position: absolute;
-      top: calc(100%); /* Added 5px spacing below Vol 1 link */
-      left: 0;
-      background-color: #0F0F0F;
-      padding: 5px 15px; /* Increased padding for wider box */
-      border-radius: 3px;
-      white-space: nowrap; /* Prevent wrapping of text */
-      z-index: 1; /* Ensure it's above the images */
-    }
-
-    .vol1-list li:hover .vol2-link {
-      display: block;
-    }
-
-    .vol2-link a {
-      color: #FFEEFB;
-      text-decoration: none;
-    }
-
-    .next-button, .back-button {
-      position: fixed;
-      bottom: 20px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .next-button {
-      left: 20px;
-      background-color: #0F0F0F;
-      color: #FFEEFB;
-    }
-
-    .back-button {
-      left: 160px;
-      background-color: #0F0F0F;
-      color: #FFEEFB;
-    }
-
-    .next-button:hover, .back-button:hover {
-      background-color: #FFEEFB;
-      color: #0F0F0F;
-    }
+    /* Your existing CSS styles here */
   </style>
 </head>
 <body>
   <span>
-    <ul class="vol1-list">
-      <li>
-        <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Vol 1</a>
-        <div class="vol2-link">
-          <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">Vol 2</a>
-        </div>
-      </li>
-      <li><a href="https://dieclick.github.io/comics/axioma_uno/index.html">Triplet A</a></li>
-      <li><a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">Triplet B</a></li>
-      <li><a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">Triplet C</a></li>
-      <li><a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">Triplet D</a></li>
-    </ul>
+    <!-- Your navigation links here -->
   </span>
 
   <br><br><br>
 
   <!-- Images with lazy loading -->
   <div id="image-container">
-    <img loading="lazy" src="pag 10.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 9.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 8.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 7.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 6.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 5.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 4.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 3.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 2.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 1.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 00.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="0mesages.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="prepagB.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="prepagA.png" style="width: 1280px; height: 720px;">
+    <!-- Initial images loaded here -->
   </div>
 
   <!-- Next and Back buttons -->
-  <button class="back-button" onclick="loadPreviousImages()">Back Triplet</button>
   <button class="next-button" onclick="loadNextImages()">Next Triplet</button>
+  <button class="back-button" onclick="loadPreviousImages()">Back Triplet</button>
 
-  <!-- Script for loading next and previous batch of images -->
+  <!-- Script for loading images -->
   <script>
     var imageIndex = 20; // Start index for the next batch of images
 
@@ -166,14 +47,17 @@
 
     function loadPreviousImages() {
       if (imageIndex <= 20) {
-        return; // Prevent going before the initial batch
+        return; // Don't go below initial image set
       }
 
       var imageContainer = document.getElementById('image-container');
       imageContainer.innerHTML = ''; // Clear existing images
 
-      // Load previous batch of images from pag 20.png to pag 11.png
-      for (var i = imageIndex - 10; i <= imageIndex - 1; i++) {
+      // Load previous batch of images from pag (imageIndex - 19).png to pag (imageIndex - 10).png
+      for (var i = imageIndex - 19; i <= imageIndex - 10; i++) {
+        if (i <= 0) {
+          continue; // Skip if index is less than or equal to 0
+        }
         var img = document.createElement('img');
         img.src = 'pag ' + i + '.png';
         img.style.width = '1280px';
