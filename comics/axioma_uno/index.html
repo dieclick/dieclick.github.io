@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DESTINATA Triplet A</title>
+  <title>DESTINATA Triplet B</title>
   <style>
     body {
       background-image: url('hm7.png');
@@ -39,107 +39,42 @@
       background-color: #FFEEFB;
       color: #0F0F0F;
     }
-
-    /* New styles for the list */
-    .vol1-list {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-      display: inline;
-    }
-
-    .vol1-list li {
-      display: inline-block; /* Changed to inline-block for spacing adjustments */
-      margin-right: 10px;
-      position: relative;
-    }
-
-    .vol2-link {
-      display: none;
-      position: absolute;
-      top: calc(100% + 5px); /* Added 5px spacing below Vol 1 link */
-      left: 0;
-      background-color: #0F0F0F;
-      padding: 5px 15px; /* Increased padding for wider box */
-      border-radius: 3px;
-      white-space: nowrap; /* Prevent wrapping of text */
-      z-index: 1; /* Ensure it's above the images */
-    }
-
-    .vol1-list li:hover .vol2-link {
-      display: block;
-    }
-
-    .vol2-link a {
-      color: #FFEEFB;
-      text-decoration: none;
-    }
-
-    .next-button {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background-color: #0F0F0F;
-      color: #FFEEFB;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .next-button:hover {
-      background-color: #FFEEFB;
-      color: #0F0F0F;
-    }
   </style>
 </head>
 <body>
   <span>
-    <ul class="vol1-list">
-      <li>
-        <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Vol 1</a>
-        <div class="vol2-link">
-          <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">Vol 2</a>
-        </div>
-      </li>
-      <li><a href="https://dieclick.github.io/comics/axioma_uno/index.html">Triplet A</a></li>
-      <li><a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">Triplet B</a></li>
-      <li><a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">Triplet C</a></li>
-      <li><a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">Triplet D</a></li>
-    </ul>
+    <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Vol 1</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">Vol 2</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Triplet A</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">Triplet B</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">Triplet C</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">Triplet D</a>
   </span>
 
+  <br><br><br>
+
   <!-- Images with lazy loading -->
-  <div id="image-container">
-    <!-- Initial batch of images loaded directly in HTML -->
-    <img loading="lazy" src="pag 10.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 9.png" style="width: 1280px; height: 720px;">
-    <!-- ... Add the rest of the initial images similarly ... -->
-  </div>
+  <img loading="lazy" src="pag 10.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 09.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 08.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 07.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 06.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 05.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 04.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 03.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 02.png" style="width: 1280px; height: 720px;">
+  <img loading="lazy" src="pag 01.png" style="width: 1280px; height: 720px;">
 
-  <!-- Next button -->
-  <button class="next-button" onclick="loadNextImages()">Next Triplet</button>
-
-  <!-- Script for loading next batch of images -->
+  <!-- Script for scrolling to bottom -->
   <script>
-    var imageIndex = 20; // Start index for the next batch of images
+    // Ensure DOM is fully loaded before executing
+    document.addEventListener('DOMContentLoaded', function() {
+      topFunction();
+    });
 
-    function loadNextImages() {
-      var imageContainer = document.getElementById('image-container');
-      imageContainer.innerHTML = ''; // Clear existing images
-
-      // Load next batch of images from pag 11.png to pag 20.png
-      for (var i = imageIndex; i > imageIndex - 10; i--) {
-        var img = document.createElement('img');
-        img.src = 'pag ' + i + '.png';
-        img.style.width = '1280px';
-        img.style.height = '720px';
-        img.loading = 'lazy';
-        imageContainer.appendChild(img);
-      }
-
-      imageIndex += 10; // Increment index for the next batch
+    function topFunction() {
+      // Smooth scroll to the bottom of the page
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
   </script>
 </body>
