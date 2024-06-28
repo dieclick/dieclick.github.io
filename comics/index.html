@@ -5,38 +5,35 @@
     <title>Destinata Comics</title>
     <style>
         body {
-            background-image: url('hm6.png'); /* Background image */
-            background-repeat: no-repeat; /* No repeat */
-            background-size: cover; /* Cover entire viewport */
-            background-position: center center; /* Center the background image */
-            font-family: Arial, sans-serif; /* Font style */
-            color: #FFFFFF; /* Text color */
-            margin: 0; /* Remove default margin */
-            padding: 20px; /* Add padding for spacing */
-            display: flex; /* Use flexbox for layout */
-            flex-direction: column; /* Stack elements vertically */
-            align-items: flex-start; /* Align items to the left */
-            justify-content: center; /* Center align items vertically */
-            height: 100vh; /* Ensure full viewport height */
+            background: #000 url('hm6.png') no-repeat center center / cover;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            height: 100vh;
         }
         a {
-            text-decoration: none; /* Remove underline from links */
-            color: #FFFFFF; /* Link color */
-        }
-        img {
-            max-width: 100%; /* Ensure images fit within container */
-            height: auto; /* Maintain aspect ratio */
-            margin-bottom: 10px; /* Space between images */
-            transition: transform 0.3s ease-in-out; /* Smooth hover transition */
-            filter: brightness(100%); /* Initial brightness */
-        }
-        img:hover {
-            transform: translateY(-8px) scale(1.05); /* Move image up and scale slightly on hover */
-            filter: brightness(80%); /* Reduce brightness on hover */
+            text-decoration: none;
+            color: #fff;
         }
         .comic-entry {
-            text-align: left; /* Align text to the left */
-            margin-bottom: 20px; /* Space between entries */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .comic-entry a:hover img {
+            transform: translateY(-8px) scale(1.05);
+            filter: brightness(80%);
+        }
+        .comic-entry img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+            filter: brightness(100%);
         }
     </style>
 </head>
@@ -44,18 +41,17 @@
     <div class="comic-entry">
         <a href="axioma_uno/index.html">
             <img alt="Axioma Uno - SUMA MERTE" src="Destinata_green.png">
+            <br>
+            Axioma Uno - SUMA MERTE
         </a>
-        <br>
-        <a href="axioma_uno/index.html">Axioma Uno - SUMA MERTE</a>
     </div>
     
-    <!-- Duplicate entry for another comic -->
     <div class="comic-entry">
         <a href="axioma_dos/index.html">
             <img alt="Axioma Dos - GAMBETTO" src="Destinata_green.png">
+            <br>
+            Axioma Dos - GAMBETTO
         </a>
-        <br>
-        <a href="another_comic/index.html">Another Comic Title</a>
     </div>
     
     <!-- Add more entries similarly with different links and images -->
