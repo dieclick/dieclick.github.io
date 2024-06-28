@@ -39,6 +39,17 @@
       background-color: #FFEEFB;
       color: #0F0F0F;
     }
+
+    .image-container {
+      width: 1280px;
+      height: 720px;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      display: none; /* Initially hide all images */
+    }
   </style>
 </head>
 <body>
@@ -53,30 +64,54 @@
 
   <br><br><br>
 
-  <!-- Updated images with lazy loading -->
-  <img loading="lazy" src="pag 10.png" style="width: 1280px; height: 720px;">
-  <img loading="lazy" src="pag 9.png" style="width: 1280px; height: 720px;">
-  <img loading="lazy" src="pag 8.png" style="width: 1280px; height: 720px;">
-  <img loading="lazy" src="pag 7.png" style="width: 1280px; height: 720px;">
-  <img loading="lazy" src="pag 6.png" style="width: 1280px; height: 720px;">
-  <img loading="lazy" src="pag 5.png" style="width: 1280px; height: 720px;">
-  <img loading="lazy" src="pag 4.png" style="width: 1280px; height: 720px;">
-  <img loading="lazy" src="pag 3.png" style="width: 1280px; height: 720px;">
-  <img loading="lazy" src="pag 2.png" style="width: 1280px; height: 720px;">
-  <img loading="lazy" src="pag 1.png" style="width: 1280px; height: 720px;">
-  <img loading="lazy" src="pag 00.png" style="width: 1280px; height: 720px;">
+  <div class="image-container" id="imageContainer">
+    <!-- Images will be dynamically loaded here -->
+  </div>
+
+  <!-- Button to switch to the next triplet -->
+  <button onclick="loadNextTriplet()">Next Triplet</button>
 
   <!-- Script for scrolling to bottom -->
   <script>
-    // Ensure DOM is fully loaded before executing
-    document.addEventListener('DOMContentLoaded', function() {
-      topFunction();
-    });
+    let currentTriplet = 'B'; // Starting with Triplet B
+    let currentPage = 20; // Starting page for Triplet B
 
-    function topFunction() {
-      // Smooth scroll to the bottom of the page
+    // Function to load images for the next triplet
+    function loadNextTriplet() {
+      // Increment triplet and page number
+      switch (currentTriplet) {
+        case 'B':
+          currentTriplet = 'C';
+          currentPage = 11; // Starting page for Triplet C
+          break;
+        case 'C':
+          currentTriplet = 'D';
+          currentPage = 11; // Starting page for Triplet D
+          break;
+        // Add more cases for other triplets if needed
+        default:
+          return; // No more triplets to load
+      }
+
+      // Clear existing images
+      const container = document.getElementById('imageContainer');
+      container.innerHTML = '';
+
+      // Load images for the next triplet
+      for (let i = currentPage; i >= currentPage - 9 && i > 0; i--) {
+        const img = document.createElement('img');
+        img.src = `pag ${i}.png`;
+        img.alt = `Page ${i}`;
+        img.loading = 'lazy';
+        container.appendChild(img);
+      }
+
+      // Scroll to the bottom of the page
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
+
+    // Initially load images for Triplet B
+    loadNextTriplet();
   </script>
 </body>
 </html>
