@@ -61,75 +61,71 @@
 
   <button onclick="nextTriplet()">Next Triplet</button>
 
-  <!-- Image containers for triplets -->
-  <div class="image-container triplet" id="triplet-a">
-    <!-- Images for triplet A will be inserted programmatically -->
+  <div class="image-container triplet-a active">
+    <img loading="lazy" src="pag 10.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 9.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 8.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 7.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 6.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 5.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 4.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 3.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 2.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 1.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 00.png" style="width: 1280px; height: 720px;">
   </div>
 
-  <div class="image-container triplet" id="triplet-b">
-    <!-- Images for triplet B will be inserted programmatically -->
+  <div class="image-container triplet-b">
+    <img loading="lazy" src="pag 20.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 19.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 18.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 17.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 16.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 15.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 14.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 13.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 12.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 11.png" style="width: 1280px; height: 720px;">
   </div>
 
-  <div class="image-container triplet" id="triplet-c">
-    <!-- Images for triplet C will be inserted programmatically -->
+  <div class="image-container triplet-c">
+    <img loading="lazy" src="pag 30.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 29.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 28.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 27.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 26.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 25.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 24.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 23.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 22.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 21.png" style="width: 1280px; height: 720px;">
   </div>
 
-  <div class="image-container triplet" id="triplet-d">
-    <!-- Images for triplet D will be inserted programmatically -->
+  <div class="image-container triplet-d">
+    <img loading="lazy" src="pag 40.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 39.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 38.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 37.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 36.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 35.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 34.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 33.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 32.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 31.png" style="width: 1280px; height: 720px;">
   </div>
 
-  <!-- Script for loading images and switching triplets -->
+  <!-- Script for scrolling to bottom -->
   <script>
     // Ensure DOM is fully loaded before executing
     document.addEventListener('DOMContentLoaded', function() {
-      loadImages();
       topFunction();
     });
 
-    // Define image sources for each triplet
-    const tripletsData = {
-      'triplet-a': [
-        'pag 10.png', 'pag 9.png', 'pag 8.png', 'pag 7.png', 
-        'pag 6.png', 'pag 5.png', 'pag 4.png', 'pag 3.png', 
-        'pag 2.png', 'pag 1.png', 'pag 00.png'
-      ],
-      'triplet-b': [
-        'pag 20.png', 'pag 19.png', 'pag 18.png', 'pag 17.png', 
-        'pag 16.png', 'pag 15.png', 'pag 14.png', 'pag 13.png', 
-        'pag 12.png', 'pag 11.png'
-      ],
-      'triplet-c': [
-        'pag 30.png', 'pag 29.png', 'pag 28.png', 'pag 27.png', 
-        'pag 26.png', 'pag 25.png', 'pag 24.png', 'pag 23.png', 
-        'pag 22.png', 'pag 21.png'
-      ],
-      'triplet-d': [
-        'pag 40.png', 'pag 39.png', 'pag 38.png', 'pag 37.png', 
-        'pag 36.png', 'pag 35.png', 'pag 34.png', 'pag 33.png', 
-        'pag 32.png', 'pag 31.png'
-      ]
-    };
-
-    // Function to load images into each triplet container
-    function loadImages() {
-      for (let tripletId in tripletsData) {
-        if (tripletsData.hasOwnProperty(tripletId)) {
-          const images = tripletsData[tripletId];
-          const container = document.getElementById(tripletId);
-
-          images.forEach((imageSrc, index) => {
-            const img = document.createElement('img');
-            img.src = imageSrc;
-            img.style.width = '1280px';
-            img.style.height = '720px';
-            img.loading = 'lazy';
-            container.appendChild(img);
-          });
-        }
-      }
+    function topFunction() {
+      // Smooth scroll to the bottom of the page
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 
-    // Function to switch to the next triplet
     function nextTriplet() {
       const currentTriplet = document.querySelector('.image-container.active');
       const nextTriplet = currentTriplet.nextElementSibling || document.querySelector('.image-container:first-child');
@@ -138,11 +134,6 @@
       nextTriplet.classList.add('active');
       
       topFunction(); // Scroll to the bottom when changing triplets
-    }
-
-    // Function to scroll to the bottom of the page
-    function topFunction() {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
   </script>
 </body>
