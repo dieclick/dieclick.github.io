@@ -43,12 +43,36 @@
     .image-container {
       width: 1280px;
       height: 720px;
+      overflow: hidden; /* Ensure images don't overflow */
+      position: relative; /* Ensure images are positioned correctly */
     }
 
     .image-container img {
-      width: 100%;
-      height: 100%;
-      display: none; /* Initially hide all images */
+      width: 1280px;
+      height: 720px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none; /* Hide all images by default */
+    }
+
+    button {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background-color: #0F0F0F;
+      color: #FFEEFB;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #FFEEFB;
+      color: #0F0F0F;
     }
   </style>
 </head>
@@ -68,50 +92,59 @@
     <!-- Images will be dynamically loaded here -->
   </div>
 
-  <!-- Button to switch to the next triplet -->
   <button onclick="loadNextTriplet()">Next Triplet</button>
 
-  <!-- Script for scrolling to bottom -->
   <script>
-    let currentTriplet = 'B'; // Starting with Triplet B
-    let currentPage = 20; // Starting page for Triplet B
+    // Array to hold image sources for each triplet
+    const triplets = {
+      B: ['pag 20.png', 'pag 19.png', 'pag 18.png', 'pag 17.png', 'pag 16.png', 'pag 15.png', 'pag 14.png', 'pag 13.png', 'pag 12.png', 'pag 11.png'],
+      C: ['pag 30.png', 'pag 29.png', 'pag 28.png', 'pag 27.png', 'pag 26.png', 'pag 25.png', 'pag 24.png', 'pag 23.png', 'pag 22.png', 'pag 21.png'],
+      D: ['pag 40.png', 'pag 39.png', 'pag 38.png', 'pag 37.png', 'pag 36.png', 'pag 35.png', 'pag 34.png', 'pag 33.png', 'pag 32.png', 'pag 31.png']
+      // Add more triplets as needed
+    };
+
+    let currentTriplet = 'B'; // Initial triplet
+    let currentIndex = 0; // Index to track current page within triplet
 
     // Function to load images for the next triplet
     function loadNextTriplet() {
-      // Increment triplet and page number
+      currentIndex = 0; // Reset index when loading next triplet
+
+      // Update current triplet to the next one in sequence
       switch (currentTriplet) {
         case 'B':
           currentTriplet = 'C';
-          currentPage = 11; // Starting page for Triplet C
           break;
         case 'C':
           currentTriplet = 'D';
-          currentPage = 11; // Starting page for Triplet D
           break;
         // Add more cases for other triplets if needed
         default:
           return; // No more triplets to load
       }
 
-      // Clear existing images
-      const container = document.getElementById('imageContainer');
-      container.innerHTML = '';
+      // Load images for the new triplet
+      loadImages();
+    }
 
-      // Load images for the next triplet
-      for (let i = currentPage; i >= currentPage - 9 && i > 0; i--) {
+    // Function to load images based on currentTriplet and currentIndex
+    function loadImages() {
+      const container = document.getElementById('imageContainer');
+      container.innerHTML = ''; // Clear existing images
+
+      // Load images for the current triplet starting from currentIndex
+      for (let i = 0; i < triplets[currentTriplet].length; i++) {
         const img = document.createElement('img');
-        img.src = `pag ${i}.png`;
-        img.alt = `Page ${i}`;
+        img.src = triplets[currentTriplet][i];
+        img.alt = `Page ${i + 1}`;
         img.loading = 'lazy';
+        img.style.display = (i === currentIndex) ? 'block' : 'none'; // Show current image, hide others
         container.appendChild(img);
       }
-
-      // Scroll to the bottom of the page
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 
     // Initially load images for Triplet B
-    loadNextTriplet();
+    loadImages();
   </script>
 </body>
 </html>
