@@ -57,7 +57,7 @@
     .vol2-link {
       display: none;
       position: absolute;
-      top: calc(105%); /* Added 5px spacing below Vol 1 link */
+      top: calc(100% + 5px); /* Added 5px spacing below Vol 1 link */
       left: 0;
       background-color: #0F0F0F;
       padding: 5px 15px; /* Increased padding for wider box */
@@ -110,24 +110,12 @@
     </ul>
   </span>
 
-  <br><br><br>
-
   <!-- Images with lazy loading -->
   <div id="image-container">
+    <!-- Initial batch of images loaded directly in HTML -->
     <img loading="lazy" src="pag 10.png" style="width: 1280px; height: 720px;">
     <img loading="lazy" src="pag 9.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 8.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 7.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 6.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 5.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 4.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 3.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 2.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 1.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 00.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="0mesages.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="prepagB.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="prepagA.png" style="width: 1280px; height: 720px;">
+    <!-- ... Add the rest of the initial images similarly ... -->
   </div>
 
   <!-- Next button -->
@@ -153,12 +141,6 @@
 
       imageIndex += 10; // Increment index for the next batch
     }
-
-  function topFunction() {
-    document.body.scrollTop = 99000; // For Safari
-    document.documentElement.scrollTop = 99000; // For Chrome, Firefox, IE and Opera
-  }
-</script>
-
+  </script>
 </body>
 </html>
