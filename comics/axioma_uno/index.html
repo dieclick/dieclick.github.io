@@ -39,20 +39,60 @@
       background-color: #FFEEFB;
       color: #0F0F0F;
     }
+
+    /* New styles for the list */
+    .vol1-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: inline;
+    }
+
+    .vol1-list li {
+      display: inline;
+      margin-right: 10px;
+      position: relative;
+    }
+
+    .vol2-link {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #0F0F0F;
+      padding: 5px 10px;
+      border-radius: 3px;
+    }
+
+    .vol1-list li:hover .vol2-link {
+      display: block;
+    }
+
+    .vol2-link a {
+      color: #FFEEFB;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
   <span>
-    <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Vol 1</a>
-    <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">Vol 2</a>
-    <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Triplet A</a>
-    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">Triplet B</a>
-    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">Triplet C</a>
-    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">Triplet D</a>
+    <ul class="vol1-list">
+      <li>
+        <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Vol 1</a>
+        <div class="vol2-link">
+          <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">Vol 2</a>
+        </div>
+      </li>
+      <li><a href="https://dieclick.github.io/comics/axioma_uno/index.html">Triplet A</a></li>
+      <li><a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">Triplet B</a></li>
+      <li><a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">Triplet C</a></li>
+      <li><a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">Triplet D</a></li>
+    </ul>
   </span>
 
   <br><br><br>
 
+  <!-- Rest of your existing content -->
   <!-- Images with lazy loading -->
   <img loading="lazy" src="pag 10.png" style="width: 1280px; height: 720px;">
   <img loading="lazy" src="pag 9.png" style="width: 1280px; height: 720px;">
