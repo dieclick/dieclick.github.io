@@ -41,38 +41,11 @@
     }
 
     .image-container {
-      width: 1280px;
-      height: 720px;
-      overflow: hidden; /* Ensure images don't overflow */
-      position: relative; /* Ensure images are positioned correctly */
+      display: none; /* Hide all image containers by default */
     }
 
-    .image-container img {
-      width: 1280px;
-      height: 720px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: none; /* Hide all images by default */
-    }
-
-    button {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 10px 20px;
-      background-color: #0F0F0F;
-      color: #FFEEFB;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #FFEEFB;
-      color: #0F0F0F;
+    .image-container.active {
+      display: block; /* Show the active image container */
     }
   </style>
 </head>
@@ -86,65 +59,56 @@
     <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">Triplet D</a>
   </span>
 
-  <br><br><br>
+  <button onclick="nextTriplet()">Next Triplet</button>
 
-  <div class="image-container" id="imageContainer">
-    <!-- Images will be dynamically loaded here -->
+  <div class="image-container triplet-a active">
+    <img loading="lazy" src="pag 10.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 9.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 8.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 7.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 6.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 5.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 4.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 3.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 2.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 1.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 00.png" style="width: 1280px; height: 720px;">
   </div>
 
-  <button onclick="loadNextTriplet()">Next Triplet</button>
+  <div class="image-container triplet-b">
+    <img loading="lazy" src="pag 20.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 19.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 18.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 17.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 16.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 15.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 14.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 13.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 12.png" style="width: 1280px; height: 720px;">
+    <img loading="lazy" src="pag 11.png" style="width: 1280px; height: 720px;">
+  </div>
 
+  <!-- Script for scrolling to bottom -->
   <script>
-    // Array to hold image sources for each triplet
-    const triplets = {
-      B: ['pag 20.png', 'pag 19.png', 'pag 18.png', 'pag 17.png', 'pag 16.png', 'pag 15.png', 'pag 14.png', 'pag 13.png', 'pag 12.png', 'pag 11.png'],
-      C: ['pag 30.png', 'pag 29.png', 'pag 28.png', 'pag 27.png', 'pag 26.png', 'pag 25.png', 'pag 24.png', 'pag 23.png', 'pag 22.png', 'pag 21.png'],
-      D: ['pag 40.png', 'pag 39.png', 'pag 38.png', 'pag 37.png', 'pag 36.png', 'pag 35.png', 'pag 34.png', 'pag 33.png', 'pag 32.png', 'pag 31.png']
-      // Add more triplets as needed
-    };
+    // Ensure DOM is fully loaded before executing
+    document.addEventListener('DOMContentLoaded', function() {
+      topFunction();
+    });
 
-    let currentTriplet = 'B'; // Initial triplet
-    let currentIndex = 0; // Index to track current page within triplet
-
-    // Function to load images for the next triplet
-    function loadNextTriplet() {
-      currentIndex = 0; // Reset index when loading next triplet
-
-      // Update current triplet to the next one in sequence
-      switch (currentTriplet) {
-        case 'B':
-          currentTriplet = 'C';
-          break;
-        case 'C':
-          currentTriplet = 'D';
-          break;
-        // Add more cases for other triplets if needed
-        default:
-          return; // No more triplets to load
-      }
-
-      // Load images for the new triplet
-      loadImages();
+    function topFunction() {
+      // Smooth scroll to the bottom of the page
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 
-    // Function to load images based on currentTriplet and currentIndex
-    function loadImages() {
-      const container = document.getElementById('imageContainer');
-      container.innerHTML = ''; // Clear existing images
-
-      // Load images for the current triplet starting from currentIndex
-      for (let i = 0; i < triplets[currentTriplet].length; i++) {
-        const img = document.createElement('img');
-        img.src = triplets[currentTriplet][i];
-        img.alt = `Page ${i + 1}`;
-        img.loading = 'lazy';
-        img.style.display = (i === currentIndex) ? 'block' : 'none'; // Show current image, hide others
-        container.appendChild(img);
-      }
+    function nextTriplet() {
+      const currentTriplet = document.querySelector('.image-container.active');
+      const nextTriplet = currentTriplet.nextElementSibling || document.querySelector('.image-container:first-child');
+      
+      currentTriplet.classList.remove('active');
+      nextTriplet.classList.add('active');
+      
+      topFunction(); // Scroll to the bottom when changing triplets
     }
-
-    // Initially load images for Triplet B
-    loadImages();
   </script>
 </body>
 </html>
