@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Comic Title</title>
+    <title>Blein I</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,26 +33,46 @@
             position: fixed; /* Fix position on the screen */
             top: 50%; /* Center vertically */
             transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-            border: 1px solid #ccc; /* Light border */
-            padding: 10px 15px; /* Button padding */
+            background-color: rgba(128, 128, 128, 0.7); /* Semi-transparent gray background */
+            border: none; /* No border */
+            border-radius: 50%; /* Circular shape */
+            width: 50px; /* Width of button */
+            height: 50px; /* Height of button */
             cursor: pointer; /* Pointer cursor */
             z-index: 1; /* Ensure buttons are above images */
             font-weight: bold; /* Make text bold */
             transition: background-color 0.3s; /* Smooth background transition */
+            display: flex; /* Flexbox for centering arrow */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
         }
         .button.left {
-            left: 10px; /* Position to the left */
+            left: 20px; /* Position to the left */
         }
         .button.right {
-            right: 10px; /* Position to the right */
+            right: 20px; /* Position to the right */
         }
         .button:hover {
-            background-color: rgba(255, 255, 255, 1); /* Change color on hover */
+            background-color: rgba(128, 128, 128, 1); /* Change color on hover */
+        }
+        .button::before {
+            content: ''; /* Arrow using pseudo-element */
+            display: block;
+            width: 0; 
+            height: 0; 
+            border-left: 10px solid white; /* Arrow color */
+            border-top: 5px solid transparent; /* Top triangle */
+            border-bottom: 5px solid transparent; /* Bottom triangle */
+        }
+        .button.left::before {
+            transform: rotate(180deg); /* Rotate for left arrow */
         }
         .zoomed {
-            transform: scale(2); /* Scale up the image */
+            position: fixed; /* Use fixed positioning */
+            transform: scale(1); /* Adjusted scale for zoom */
             z-index: 2; /* Bring the zoomed image above others */
+            transition: transform 0.3s; /* Smooth transition for zooming */
+            pointer-events: none; /* Disable pointer events until fully rendered */
         }
     </style>
 </head>
@@ -60,26 +80,71 @@
     <div class="comic-container" id="comic-container">
         <div class="comic" id="comic-content"></div>
     </div>
-    <div class="button left" id="prev-button">Previous</div>
-    <div class="button right" id="next-button">Next</div>
+    <button class="button left" id="prev-button"></button>
+    <button class="button right" id="next-button"></button>
 
     <script>
         const container = document.getElementById('comic-content');
 
         // Add the cover image
         const coverImg = document.createElement('img');
-        coverImg.src = 'cover.webp'; // Cover image in webp format
+        coverImg.src = 'cover.png'; // Cover image in webp format
         coverImg.alt = 'Cover';
         container.appendChild(coverImg);
 
         // Add the numbered images using a for loop
-        for (let i = 0; i <= 25; i++) {
+        for (let i = 0; i <= 26; i++) {
             const img = document.createElement('img');
-            img.src = `${i.toString().padStart(2, '0')}.webp`; // 00.webp, 01.webp, etc.
+            img.src = `${i.toString().padStart(2, '0')}.png`; // 00.webp, 01.webp, etc.
             img.alt = `Comic Panel ${i}`;
+
             img.addEventListener('click', () => {
-                img.classList.toggle('zoomed'); // Toggle zoom class on click
+                const existingZoomedImg = document.querySelector('.zoomed');
+                if (existingZoomedImg) {
+                    existingZoomedImg.classList.remove('zoomed'); // Remove zoom from existing image
+                    document.body.removeChild(existingZoomedImg); // Remove it from the DOM
+                }
+
+                const zoomedImg = document.createElement('img');
+                zoomedImg.src = img.src; // Use the same source
+                zoomedImg.classList.add('zoomed');
+
+                document.body.appendChild(zoomedImg);
+
+                // Center the zoomed image
+                const centerZoomedImg = () => {
+                    const offsetX = (window.innerWidth - zoomedImg.clientWidth * 1.5) / 2; // Adjust for scale
+                    const offsetY = (window.innerHeight - zoomedImg.clientHeight * 1.5) / 2;
+                    zoomedImg.style.left = `${offsetX}px`;
+                    zoomedImg.style.top = `${offsetY}px`;
+                    zoomedImg.style.pointerEvents = 'auto'; // Enable pointer events
+                };
+                centerZoomedImg();
+
+                // Update zoomed image position based on mouse movement with slight parallax effect
+                const updateZoomedImgPosition = (e) => {
+                    const parallaxFactor = 5; // Adjust this value for parallax effect
+                    const offsetX = (window.innerWidth / 2 - e.clientX) * parallaxFactor/4;
+                    const offsetY = (window.innerHeight / 2 - e.clientY) * parallaxFactor;
+
+                    zoomedImg.style.left = `${(window.innerWidth - zoomedImg.clientWidth * 1.5) / 2 + offsetX}px`;
+                    zoomedImg.style.top = `${(window.innerHeight - zoomedImg.clientHeight * 1.5) / 2 + offsetY}px`;
+                };
+
+                document.addEventListener('mousemove', updateZoomedImgPosition);
+
+                // Click to remove zoom
+                zoomedImg.addEventListener('click', () => {
+                    zoomedImg.classList.remove('zoomed');
+                    document.body.removeChild(zoomedImg);
+                    document.removeEventListener('mousemove', updateZoomedImgPosition);
+                    img.style.pointerEvents = 'auto'; // Restore pointer events on the original image
+                });
+
+                // Prevent clicks on the original image while zoomed
+                img.style.pointerEvents = 'none';
             });
+
             container.appendChild(img);
         }
 
