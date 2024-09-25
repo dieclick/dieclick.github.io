@@ -2,59 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BLEIN 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Comic Title</title>
     <style>
         body {
-            background-color: #000000; /* Black background color */
             font-family: Arial, sans-serif;
-            color: #FFEEFB; /* Text color */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: flex-start; /* Align images to the left */
-            align-items: center;
-            height: 100vh; /* Full viewport height */
-            overflow-x: auto; /* Enable horizontal scrolling */
-            overflow-y: hidden; /* Hide vertical scrollbar */
-            white-space: nowrap; /* Prevent images from wrapping */
+            text-align: center;
+            margin: 0; /* Remove default margin */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
-        img {
-            height: 100vh; /* Ensure all images have the same height */
-            width: auto; /* Automatically adjust width */
-            display: inline-block;
-            vertical-align: middle; /* Vertically center images */
+        .comic-container {
+            position: relative; /* For button positioning */
+            height: calc(100vh - 30px); /* Adjust height to account for title */
+            white-space: nowrap; /* Prevent wrapping of images */
+        }
+        .comic {
+            display: inline-flex; /* Use inline-flex for horizontal layout */
+            height: 100%; /* Full height of the container */
+            box-sizing: border-box; /* Include padding in height */
+        }
+        .comic img {
+            max-height: 100%; /* Fit images to the height of the viewport */
+            width: auto; /* Maintain aspect ratio */
+            margin: 10px; /* Space between images */
+            object-fit: contain; /* Ensure the image is contained within the box */
+            cursor: pointer; /* Pointer cursor for images */
+            transition: transform 0.3s; /* Smooth transition for zooming */
+        }
+        .button {
+            position: fixed; /* Fix position on the screen */
+            top: 50%; /* Center vertically */
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            border: 1px solid #ccc; /* Light border */
+            padding: 10px 15px; /* Button padding */
+            cursor: pointer; /* Pointer cursor */
+            z-index: 1; /* Ensure buttons are above images */
+            font-weight: bold; /* Make text bold */
+            transition: background-color 0.3s; /* Smooth background transition */
+        }
+        .button.left {
+            left: 10px; /* Position to the left */
+        }
+        .button.right {
+            right: 10px; /* Position to the right */
+        }
+        .button:hover {
+            background-color: rgba(255, 255, 255, 1); /* Change color on hover */
+        }
+        .zoomed {
+            transform: scale(2); /* Scale up the image */
+            z-index: 2; /* Bring the zoomed image above others */
         }
     </style>
 </head>
 <body>
-    <!-- Images with their respective src attributes -->
-    <img src="0.png">
-    <img src="0_.png">
-    <img src="01.png">
-    <img src="02.png">
-    <img src="03.png">
-    <img src="04.png">
-    <img src="05.png">
-    <img src="06.png">
-    <img src="07.png">
-    <img src="08.png">
-    <img src="09.png">
-    <img src="10.png">
-    <img src="11.png">
-    <img src="12.png">
-    <img src="13.png">
-    <img src="14.png">
-    <img src="15.png">
-    <img src="16.png">
-    <img src="17.png">
-    <img src="18.png">
-    <img src="19.png">
-    <img src="20.png">
-    <img src="21.png">
-    <img src="22.png">
-    <img src="23.png">
-    <img src="24.png">
-    <img src="25.png">
-    <img src="25.2.png">
+    <div class="comic-container" id="comic-container">
+        <div class="comic" id="comic-content"></div>
+    </div>
+    <div class="button left" id="prev-button">Previous</div>
+    <div class="button right" id="next-button">Next</div>
+
+    <script>
+        const container = document.getElementById('comic-content');
+
+        // Add the cover image
+        const coverImg = document.createElement('img');
+        coverImg.src = 'cover.webp'; // Cover image in webp format
+        coverImg.alt = 'Cover';
+        container.appendChild(coverImg);
+
+        // Add the numbered images using a for loop
+        for (let i = 0; i <= 25; i++) {
+            const img = document.createElement('img');
+            img.src = `${i.toString().padStart(2, '0')}.webp`; // 00.webp, 01.webp, etc.
+            img.alt = `Comic Panel ${i}`;
+            img.addEventListener('click', () => {
+                img.classList.toggle('zoomed'); // Toggle zoom class on click
+            });
+            container.appendChild(img);
+        }
+
+        // Calculate the width of one comic page
+        const comicImages = container.querySelectorAll('img');
+        const pageWidth = comicImages[0].offsetWidth + 20; // Width of image + margin (10px on each side)
+
+        // Scroll functions
+        document.getElementById('next-button').addEventListener('click', () => {
+            window.scrollBy({ left: pageWidth, behavior: 'smooth' });
+        });
+
+        document.getElementById('prev-button').addEventListener('click', () => {
+            window.scrollBy({ left: -pageWidth, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
