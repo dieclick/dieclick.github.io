@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('hm5.png') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+}
+
+nav {
+    width: 400px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    position: fixed;
+    top: 0; bottom: 0;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+nav a {
+    display: block;
+    margin: 20px 0;
+    font-size: 1.8em;
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.content {
+    margin-left: 420px;
+    padding: 40px;
+    color: #fff;
+    text-align: center;
+}
+
+.highlight a {
+    display: block;
+    margin: 40px auto;
+}
+
+.highlight img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.highlight img:hover {
+    transform: scale(1.05);
+}
