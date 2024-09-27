@@ -85,16 +85,8 @@
     <button class="button right" id="next-button"></button>
 
     <script>
-const container = document.getElementById('comic-content');
-
-// Add the cover image with lazy loading
-const coverImg = document.createElement('img');
-coverImg.src = 'cover.png'; // Cover image in webp format
-coverImg.alt = 'Cover';
-coverImg.loading = 'lazy'; // Lazy load cover image
-coverImg.style.maxWidth = '100%'; // Ensure responsive
-container.appendChild(coverImg);
-
+            const container = document.getElementById('comic-content');
+            
 // Add the numbered images using a for loop with lazy loading
 for (let i = 0; i <= 26; i++) {
     const img = document.createElement('img');
@@ -103,56 +95,54 @@ for (let i = 0; i <= 26; i++) {
     img.loading = 'lazy'; // Lazy load images
     img.style.maxWidth = '100%'; // Ensure responsive
     container.appendChild(img);
+
+    img.addEventListener('click', () => {
+        const existingZoomedImg = document.querySelector('.zoomed');
+        if (existingZoomedImg) {
+            existingZoomedImg.classList.remove('zoomed'); // Remove zoom from existing image
+            document.body.removeChild(existingZoomedImg); // Remove it from the DOM
+        }
+
+        const zoomedImg = document.createElement('img');
+        zoomedImg.src = img.src; // Use the same source
+        zoomedImg.classList.add('zoomed');
+
+        document.body.appendChild(zoomedImg);
+
+        // Center the zoomed image
+        const centerZoomedImg = () => {
+            const offsetX = (window.innerWidth - zoomedImg.clientWidth * 1.5) / 2; // Adjust for scale
+            const offsetY = (window.innerHeight - zoomedImg.clientHeight * 1.5) / 2;
+            zoomedImg.style.left = `${offsetX}px`;
+            zoomedImg.style.top = `${offsetY}px`;
+            zoomedImg.style.pointerEvents = 'auto'; // Enable pointer events
+        };
+        centerZoomedImg();
+
+        // Update zoomed image position based on mouse movement with slight parallax effect
+        const updateZoomedImgPosition = (e) => {
+            const parallaxFactor = 5; // Adjust this value for parallax effect
+            const offsetX = (window.innerWidth / 2 - e.clientX) * parallaxFactor / 4;
+            const offsetY = (window.innerHeight / 2 - e.clientY) * parallaxFactor;
+
+            zoomedImg.style.left = `${(window.innerWidth - zoomedImg.clientWidth * 1.5) / 2 + offsetX}px`;
+            zoomedImg.style.top = `${(window.innerHeight - zoomedImg.clientHeight * 1.5) / 2 + offsetY}px`;
+        };
+
+        document.addEventListener('mousemove', updateZoomedImgPosition);
+
+        // Click to remove zoom
+        zoomedImg.addEventListener('click', () => {
+            zoomedImg.classList.remove('zoomed');
+            document.body.removeChild(zoomedImg);
+            document.removeEventListener('mousemove', updateZoomedImgPosition);
+            img.style.pointerEvents = 'auto'; // Restore pointer events on the original image
+        });
+
+        // Prevent clicks on the original image while zoomed
+        img.style.pointerEvents = 'none';
+    });
 }
-
-
-            img.addEventListener('click', () => {
-                const existingZoomedImg = document.querySelector('.zoomed');
-                if (existingZoomedImg) {
-                    existingZoomedImg.classList.remove('zoomed'); // Remove zoom from existing image
-                    document.body.removeChild(existingZoomedImg); // Remove it from the DOM
-                }
-
-                const zoomedImg = document.createElement('img');
-                zoomedImg.src = img.src; // Use the same source
-                zoomedImg.classList.add('zoomed');
-
-                document.body.appendChild(zoomedImg);
-
-                // Center the zoomed image
-                const centerZoomedImg = () => {
-                    const offsetX = (window.innerWidth - zoomedImg.clientWidth * 1.5) / 2; // Adjust for scale
-                    const offsetY = (window.innerHeight - zoomedImg.clientHeight * 1.5) / 2;
-                    zoomedImg.style.left = `${offsetX}px`;
-                    zoomedImg.style.top = `${offsetY}px`;
-                    zoomedImg.style.pointerEvents = 'auto'; // Enable pointer events
-                };
-                centerZoomedImg();
-
-                // Update zoomed image position based on mouse movement with slight parallax effect
-                const updateZoomedImgPosition = (e) => {
-                    const parallaxFactor = 5; // Adjust this value for parallax effect
-                    const offsetX = (window.innerWidth / 2 - e.clientX) * parallaxFactor/4;
-                    const offsetY = (window.innerHeight / 2 - e.clientY) * parallaxFactor;
-
-                    zoomedImg.style.left = `${(window.innerWidth - zoomedImg.clientWidth * 1.5) / 2 + offsetX}px`;
-                    zoomedImg.style.top = `${(window.innerHeight - zoomedImg.clientHeight * 1.5) / 2 + offsetY}px`;
-                };
-
-                document.addEventListener('mousemove', updateZoomedImgPosition);
-
-                // Click to remove zoom
-                zoomedImg.addEventListener('click', () => {
-                    zoomedImg.classList.remove('zoomed');
-                    document.body.removeChild(zoomedImg);
-                    document.removeEventListener('mousemove', updateZoomedImgPosition);
-                    img.style.pointerEvents = 'auto'; // Restore pointer events on the original image
-                });
-
-                // Prevent clicks on the original image while zoomed
-                img.style.pointerEvents = 'none';
-            });
-
             container.appendChild(img);
         }
 
