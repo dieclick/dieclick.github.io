@@ -85,19 +85,26 @@
     <button class="button right" id="next-button"></button>
 
     <script>
-        const container = document.getElementById('comic-content');
+const container = document.getElementById('comic-content');
 
-        // Add the cover image
-        const coverImg = document.createElement('img');
-        coverImg.src = 'cover.png'; // Cover image in webp format
-        coverImg.alt = 'Cover';
-        container.appendChild(coverImg);
+// Add the cover image with lazy loading
+const coverImg = document.createElement('img');
+coverImg.src = 'cover.png'; // Cover image in webp format
+coverImg.alt = 'Cover';
+coverImg.loading = 'lazy'; // Lazy load cover image
+coverImg.style.maxWidth = '100%'; // Ensure responsive
+container.appendChild(coverImg);
 
-        // Add the numbered images using a for loop
-        for (let i = 0; i <= 26; i++) {
-            const img = document.createElement('img');
-            img.src = ${i.toString().padStart(2, '0')}.png; // 00.webp, 01.webp, etc.
-            img.alt = Comic Panel ${i};
+// Add the numbered images using a for loop with lazy loading
+for (let i = 0; i <= 26; i++) {
+    const img = document.createElement('img');
+    img.src = `${i.toString().padStart(2, '0')}.png`; // 00.png, 01.png, etc.
+    img.alt = `Comic Panel ${i}`;
+    img.loading = 'lazy'; // Lazy load images
+    img.style.maxWidth = '100%'; // Ensure responsive
+    container.appendChild(img);
+}
+
 
             img.addEventListener('click', () => {
                 const existingZoomedImg = document.querySelector('.zoomed');
