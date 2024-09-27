@@ -91,7 +91,6 @@
         const coverImg = document.createElement('img');
         coverImg.src = 'cover.png'; // Cover image in webp format
         coverImg.alt = 'Cover';
-        img.loading = 'lazy'; // Lazy load
         container.appendChild(coverImg);
 
         // Add the numbered images using a for loop
@@ -99,7 +98,6 @@
             const img = document.createElement('img');
             img.src = ${i.toString().padStart(2, '0')}.png; // 00.webp, 01.webp, etc.
             img.alt = Comic Panel ${i};
-            img.loading = 'lazy'; // Lazy load
 
             img.addEventListener('click', () => {
                 const existingZoomedImg = document.querySelector('.zoomed');
