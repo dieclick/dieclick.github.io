@@ -70,7 +70,7 @@
         }
         .zoomed {
             position: fixed; /* Use fixed positioning */
-            transform: scale(1); /* Adjusted scale for zoom */
+            transform: scale(0.9); /* Adjusted scale for zoom */
             z-index: 2; /* Bring the zoomed image above others */
             transition: transform 0.3s; /* Smooth transition for zooming */
             pointer-events: none; /* Disable pointer events until fully rendered */
@@ -127,7 +127,7 @@
 
         // Update zoomed image position based on mouse movement with slight parallax effect
         const updateZoomedImgPosition = (e) => {
-            const parallaxFactor = 5; // Adjust this value for parallax effect
+            const parallaxFactor = 6; // Adjust this value for parallax effect
             const offsetX = (window.innerWidth / 2 - e.clientX) * parallaxFactor / 2;
             const offsetY = (window.innerHeight / 2 - e.clientY) * parallaxFactor;
 
