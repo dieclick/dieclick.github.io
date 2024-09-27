@@ -128,7 +128,7 @@
         // Update zoomed image position based on mouse movement with slight parallax effect
         const updateZoomedImgPosition = (e) => {
             const parallaxFactor = 5; // Adjust this value for parallax effect
-            const offsetX = (window.innerWidth / 2 - e.clientX) * parallaxFactor / 4;
+            const offsetX = (window.innerWidth / 2 - e.clientX) * parallaxFactor / 3;
             const offsetY = (window.innerHeight / 2 - e.clientY) * parallaxFactor;
 
             zoomedImg.style.left = `${(window.innerWidth - zoomedImg.clientWidth * 1.5) / 2 + offsetX}px`;
