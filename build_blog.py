@@ -59,22 +59,20 @@ for filename in os.listdir(POSTS_DIR):
         with open(post_path, "r", encoding="utf-8") as f:
             content = f.read().strip()
 
-        # Prepend date automatically
+        # Add post date
         date_html = ""
         if date:
             date_html = f'<p><em>Posted on {date.strftime("%B %d, %Y")}</em></p>\n'
         content = date_html + content
 
         # Wrap in post-content
-        if 'class="post-content"' not in content:
-            content = f'<div class="post-content">\n{content}\n</div>'
+        content = f'<div class="post-content">\n{content}\n</div>'
 
-        # Add back-to-home link if missing
+        # Add back-to-home link
         back_link = '<p><a href="../index.html">← Back to blog homepage</a></p>\n'
-        if back_link not in content:
-            content += "\n" + back_link
+        content += "\n" + back_link
 
-        # Build full HTML with particles
+        # Build full HTML
         full_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,22 +88,21 @@ for filename in os.listdir(POSTS_DIR):
 </html>
 """
 
-        # Overwrite the post file
         with open(post_path, "w", encoding="utf-8") as f:
             f.write(full_html)
 
-# Rebuild index.html
+# Build index.html
 html = f"""<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>DEVlog</title>
+  <title>My Blog</title>
   <link rel="stylesheet" href="{CSS_FILE}">
 </head>
 <body>
   <div id="tsparticles"></div>
   <header>
-    <h1>DevLog</h1>
+    <h1>My Blog</h1>
   </header>
   <main>
     <ul>
@@ -125,4 +122,4 @@ html += f"""    </ul>
 with open(INDEX_FILE, "w", encoding="utf-8") as f:
     f.write(html)
 
-print(f"Updated {len(posts)} posts and index with dates, back links, and particles background.")
+print(f"Updated {len(posts)} posts and index successfully.")
