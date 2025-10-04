@@ -23,20 +23,31 @@ for filename in os.listdir(POSTS_DIR):
 
 posts.sort(key=lambda p: p["date"], reverse=True)
 
+# Build HTML
 html = """<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>My Blog</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>My Blog</h1>
-  <ul>
+  <header>
+    <h1>My Blog</h1>
+    <nav>
+      <a href="../index.html">Home</a> | 
+      <a href="../projects/">Projects</a>
+    </nav>
+  </header>
+  <main>
+    <ul>
 """
-for post in posts:
-    html += f'    <li><a href="posts/{post["file"]}">{post["title"]}</a> <small>({post["date"]})</small></li>\n'
 
-html += """  </ul>
+for post in posts:
+    html += f'      <li><a href="posts/{post["file"]}">{post["title"]}</a> <small>({post["date"]})</small></li>\n'
+
+html += """    </ul>
+  </main>
 </body>
 </html>
 """
