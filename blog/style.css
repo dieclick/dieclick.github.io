@@ -45,12 +45,16 @@ h1, h2, h3 {
 p {
     margin-bottom: 1rem;
     color: #ddd;
+        margin: 2rem auto;
+    padding: 2rem;
 }
 
 /* ===== Links ===== */
 a {
     color: #1e90ff; /* light blue */
     text-decoration: none;
+        margin: 2rem auto;
+    padding: 2rem;
 }
 
 a:hover {
