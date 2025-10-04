@@ -4,9 +4,9 @@ from datetime import datetime
 POSTS_DIR = "blog/posts"
 INDEX_FILE = "blog/index.html"
 CSS_FILE = "style.css"
+INCLUDE_PARTICLES = True  # Toggle triangles background
 
 def format_title(filename):
-    """Convert filename to a human-readable title."""
     try:
         parts = filename.split("-", 3)
         if len(parts) < 4:
@@ -16,14 +16,12 @@ def format_title(filename):
         return filename.replace(".html", "")
 
 def extract_date(filename):
-    """Extract date from filename."""
     try:
         year, month, day, _ = filename.split("-", 3)
         return datetime(int(year), int(month), int(day))
     except Exception:
         return None
 
-# Collect posts
 posts = []
 for filename in os.listdir(POSTS_DIR):
     if filename.endswith(".html"):
@@ -37,10 +35,8 @@ for filename in os.listdir(POSTS_DIR):
         if not date:
             print(f"Warning: '{filename}' does not follow YYYY-MM-DD-title.html format.")
 
-# Sort posts newest first
 posts.sort(key=lambda p: p["date"] or datetime.min, reverse=True)
 
-# Update each post: CSS link, auto date, back link
 for post in posts:
     post_path = os.path.join(POSTS_DIR, post["file"])
     with open(post_path, "r", encoding="utf-8") as f:
@@ -61,7 +57,41 @@ for post in posts:
     if back_link not in content:
         content += "\n" + back_link
 
-    # Write updated post
+    # Inject tsParticles triangles background if enabled
+    if INCLUDE_PARTICLES:
+        particles_code = """
+<!-- Triangles Background -->
+<div id="tsparticles"></div>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<script>
+tsParticles.load("tsparticles", {
+  fullScreen: { enable: true, zIndex: -1 },
+  particles: {
+    number: { value: 80 },
+    color: { value: "#ffffff" },
+    shape: { type: "circle" },
+    opacity: { value: 0.2 },
+    size: { value: 2 },
+    links: { enable: true, distance: 120, color: "#ffffff", opacity: 0.4, width: 1 },
+    move: { enable: true, speed: 0.5, direction: "none", outModes: { default: "bounce" } }
+  },
+  interactivity: {
+    events: {
+      onHover: { enable: true, mode: "repulse" },
+      onClick: { enable: true, mode: "push" }
+    },
+    modes: {
+      repulse: { distance: 50 },
+      push: { quantity: 2 }
+    }
+  },
+  detectRetina: true
+});
+</script>
+"""
+        if "<div id=\"tsparticles\">" not in content:
+            content = particles_code + "\n" + content
+
     with open(post_path, "w", encoding="utf-8") as f:
         f.write(content)
 
