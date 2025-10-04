@@ -23,14 +23,13 @@ body, html {
 /* ===== Post Container ===== */
 .post-content {
     position: relative;
-    z-index: 1; /* above particles */
-    background: rgba(0, 0, 0, 0.5); /* semi-transparent to see particles */
+    z-index: 1;
+    background: transparent; /* let particles show through */
     margin: 2rem auto;
     padding: 2rem;
     max-width: 800px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.7);
 }
+
 
 /* ===== Headings ===== */
 h1, h2, h3 {
