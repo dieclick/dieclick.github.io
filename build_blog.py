@@ -35,15 +35,14 @@ window.addEventListener('DOMContentLoaded', function() {
 
 def format_title(filename):
     try:
-        parts = filename.split("-", 3)
-        return parts[3].replace(".html", "").replace("-", " ").title()
+        return filename.split("-", 3)[3].replace(".html", "").replace("-", " ").title()
     except Exception:
         return filename.replace(".html", "")
 
 def extract_date(filename):
     try:
-        year, month, day, _ = filename.split("-", 3)
-        return datetime(int(year), int(month), int(day))
+        y, m, d, _ = filename.split("-", 3)
+        return datetime(int(y), int(m), int(d))
     except Exception:
         return None
 
@@ -55,35 +54,27 @@ for filename in os.listdir(POSTS_DIR):
         date = extract_date(filename)
         title = format_title(filename)
 
-        posts.append({
-            "file": filename,
-            "title": title,
-            "date": date
-        })
+        posts.append({"file": filename, "title": title, "date": date})
 
         with open(post_path, "r", encoding="utf-8") as f:
             content = f.read().strip()
 
-        # Add CSS if missing
-        if f'href="{CSS_FILE}"' not in content:
-            content = f'<link rel="stylesheet" href="../{CSS_FILE}">\n{content}'
-
-        # Add post date
+        # Prepend date automatically
+        date_html = ""
         if date:
-            date_line = f'<p><em>Posted on {date.strftime("%B %d, %Y")}</em></p>\n'
-            if date_line not in content:
-                content = date_line + content
+            date_html = f'<p><em>Posted on {date.strftime("%B %d, %Y")}</em></p>\n'
+        content = date_html + content
 
-        # Add back-to-home link
+        # Wrap in post-content
+        if 'class="post-content"' not in content:
+            content = f'<div class="post-content">\n{content}\n</div>'
+
+        # Add back-to-home link if missing
         back_link = '<p><a href="../index.html">← Back to blog homepage</a></p>\n'
         if back_link not in content:
             content += "\n" + back_link
 
-        # Wrap content in post-content div if not already
-        if 'class="post-content"' not in content:
-            content = f'<div class="post-content">\n{content}\n</div>'
-
-        # Build final HTML with particles
+        # Build full HTML with particles
         full_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,19 +83,18 @@ for filename in os.listdir(POSTS_DIR):
   <link rel="stylesheet" href="../{CSS_FILE}">
 </head>
 <body>
-  <!-- Particles background container -->
   <div id="tsparticles"></div>
-
   {content}
-
   {PARTICLES_SCRIPT}
 </body>
 </html>
 """
+
+        # Overwrite the post file
         with open(post_path, "w", encoding="utf-8") as f:
             f.write(full_html)
 
-# Build blog index.html
+# Rebuild index.html
 html = f"""<!DOCTYPE html>
 <html>
 <head>
@@ -113,9 +103,7 @@ html = f"""<!DOCTYPE html>
   <link rel="stylesheet" href="{CSS_FILE}">
 </head>
 <body>
-  <!-- Particles background container -->
   <div id="tsparticles"></div>
-
   <header>
     <h1>DevLog</h1>
   </header>
@@ -127,10 +115,9 @@ for post in sorted(posts, key=lambda p: p["date"] or datetime.min, reverse=True)
     date_str = post["date"].strftime("%Y-%m-%d") if post["date"] else "Unknown"
     html += f'      <li><a href="posts/{post["file"]}">{post["title"]}</a> <small>({date_str})</small></li>\n'
 
-html += """    </ul>
+html += f"""    </ul>
   </main>
-
-  """ + PARTICLES_SCRIPT + """
+  {PARTICLES_SCRIPT}
 </body>
 </html>
 """
@@ -138,4 +125,4 @@ html += """    </ul>
 with open(INDEX_FILE, "w", encoding="utf-8") as f:
     f.write(html)
 
-print(f"Blog index and {len(posts)} posts updated with particles background.")
+print(f"Updated {len(posts)} posts and index with dates, back links, and particles background.")
