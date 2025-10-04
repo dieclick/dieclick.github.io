@@ -65,12 +65,12 @@ html = f"""<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>My Blog</title>
+  <title>DevLog</title>
   <link rel="stylesheet" href="{CSS_FILE}">
 </head>
 <body>
   <header>
-    <h1>My Blog</h1>
+    <h1>DevLog</h1>
     <nav>
       <a href="../index.html">Home</a>
     </nav>
@@ -94,4 +94,5 @@ with open(INDEX_FILE, "w", encoding="utf-8") as f:
     f.write(html)
 
 print(f"Blog index updated with {len(posts)} posts.")
+
 
