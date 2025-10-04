@@ -38,6 +38,7 @@ h1, h2, h3 {
     color: #fff;
     text-shadow: 0 0 5px rgba(255,255,255,0.5);
     text-align: left;
+    margin-left: 1rem;
 }
 
 /* ===== Paragraphs ===== */
