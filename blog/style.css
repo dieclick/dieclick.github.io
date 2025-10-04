@@ -1,55 +1,92 @@
-/* Reset some defaults */
-body, ul, li, h1, nav {
-  margin: 0;
-  padding: 0;
+/* ===== Global Styles ===== */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #111; /* dark background */
+    color: #eee; /* light text */
+    line-height: 1.6;
 }
 
-body {
-  background-color: #121212;
-  color: #e0e0e0;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  padding: 20px;
+/* ===== tsParticles canvas stays behind everything ===== */
+#tsparticles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* behind content */
 }
 
+/* ===== Post Container ===== */
+.post-content {
+    position: relative;
+    z-index: 1; /* above particles */
+    background: rgba(0, 0, 0, 0.5); /* semi-transparent to see particles */
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+}
+
+/* ===== Headings ===== */
+h1, h2, h3 {
+    color: #fff;
+    text-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
+
+/* ===== Paragraphs ===== */
+p {
+    margin-bottom: 1rem;
+    color: #ddd;
+}
+
+/* ===== Links ===== */
+a {
+    color: #1e90ff; /* light blue */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Lists in index.html ===== */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 0.8rem;
+}
+
+/* ===== Header for blog index ===== */
 header {
-  margin-bottom: 20px;
+    text-align: center;
+    margin: 2rem 0;
 }
 
 header h1 {
-  font-size: 2em;
-  margin-bottom: 5px;
+    font-size: 3rem;
 }
 
-nav a {
-  color: #90caf9;
-  text-decoration: none;
-  margin-right: 10px;
-}
-
-nav a:hover {
-  text-decoration: underline;
-}
-
-ul {
-  list-style-type: none;
-}
-
-li {
-  margin-bottom: 10px;
-}
-
-li a {
-  color: #bb86fc;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-li a:hover {
-  text-decoration: underline;
-}
-
+/* ===== Optional: smaller text for dates ===== */
 small {
-  color: #b0b0b0;
-  margin-left: 5px;
+    color: #aaa;
+}
+
+/* ===== Responsive tweaks ===== */
+@media (max-width: 600px) {
+    .post-content {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
 }
