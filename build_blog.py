@@ -40,7 +40,7 @@ for filename in os.listdir(POSTS_DIR):
 # Sort posts newest first
 posts.sort(key=lambda p: p["date"] or datetime.min, reverse=True)
 
-# Ensure each post has CSS link and auto date
+# Update each post: CSS link, auto date, back link
 for post in posts:
     post_path = os.path.join(POSTS_DIR, post["file"])
     with open(post_path, "r", encoding="utf-8") as f:
@@ -56,7 +56,12 @@ for post in posts:
         if date_line not in content:
             content = date_line + content
 
-    # Write back updated post
+    # Append back-to-home link if missing
+    back_link = '<p><a href="../index.html">← Back to blog homepage</a></p>\n'
+    if back_link not in content:
+        content += "\n" + back_link
+
+    # Write updated post
     with open(post_path, "w", encoding="utf-8") as f:
         f.write(content)
 
@@ -65,7 +70,7 @@ html = f"""<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>DevLog</title>
+  <title>DEVlog</title>
   <link rel="stylesheet" href="{CSS_FILE}">
 </head>
 <body>
@@ -89,10 +94,7 @@ html += """    </ul>
 </html>
 """
 
-# Write index.html
 with open(INDEX_FILE, "w", encoding="utf-8") as f:
     f.write(html)
 
 print(f"Blog index updated with {len(posts)} posts.")
-
-
