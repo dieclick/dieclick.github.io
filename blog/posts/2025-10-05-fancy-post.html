@@ -1,86 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Fancy Blog Post</title>
-  <link rel="stylesheet" href="../style.css">
-  <style>
-    /* Additional post-specific quirks */
-    .dropcap {
-      float: left;
-      font-size: 3em;
-      line-height: 1;
-      margin-right: 8px;
-      color: #bb86fc;
-    }
+<h1>My First Fancy Post</h1>
 
-    .pull-quote {
-      font-size: 1.5em;
-      font-style: italic;
-      margin: 20px 0;
-      border-left: 4px solid #90caf9;
-      padding-left: 10px;
-      color: #90caf9;
-    }
+<p>Welcome to my first post! This blog will explore interesting topics, share ideas, and experiment with web projects.</p>
 
-    pre { 
-      background: #1e1e1e; 
-      padding: 10px; 
-      border-radius: 5px; 
-      overflow-x: auto; 
-    }
-
-    code { 
-      font-family: monospace; 
-      color: #c792ea; 
-    }
-
-    .spoiler { display: none; color: #bb86fc; }
-    .spoiler-btn {
-      background: #333;
-      color: #90caf9;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-      margin-bottom: 10px;
-      border-radius: 3px;
-    }
-
-    .post-img { max-width: 100%; border-radius: 10px; display: block; margin: 15px auto; }
-  </style>
-</head>
-<body>
-  <p><em>Posted on October 5, 2025</em></p>
-
-  <h1>Fancy Blog Post</h1>
-
-  <p><span class="dropcap">W</span>elcome to this fancy blog post! Here we will explore some interesting content with a few visual quirks to make reading more enjoyable.</p>
-
-  <div class="pull-quote">"This is a standout pull quote to emphasize a key idea."</div>
-
-  <p>Here’s a snippet of code you might like:</p>
-  <pre><code>def hello_world():
+<p>Here’s a snippet of code:</p>
+<pre><code>def hello_world():
     print("Hello, world!")</code></pre>
 
-  <p>And here’s an image for effect:</p>
-  <img src="../example-image.png" alt="Example" class="post-img">
+<p>Some tips, notes, or highlights:</p>
+<div class="note">This is a note box with extra information.</div>
 
-  <p>Want to see a hidden secret?</p>
-  <button class="spoiler-btn">Show secret</button>
-  <p class="spoiler">This is the hidden spoiler text!</p>
+<p>End of the post. Stay tuned for more content!</p>
 
-  <p>End of the post. Hope you enjoyed the styling and interactive quirks!</p>
-
-  <p><a href="../index.html">← Back to blog homepage</a></p>
-
-  <script>
-    // Spoiler toggle
-    document.querySelectorAll('.spoiler-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const spoiler = btn.nextElementSibling;
-        spoiler.style.display = spoiler.style.display === 'block' ? 'none' : 'block';
-      });
-    });
-  </script>
-</body>
-</html>
+<p><a href="../index.html">← Back to blog homepage</a></p>
