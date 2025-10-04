@@ -42,23 +42,27 @@ for post in posts:
     with open(post_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Prepend CSS link if missing
+    # Ensure CSS link
     if f'href="{CSS_FILE}"' not in content:
         content = f'<link rel="stylesheet" href="../{CSS_FILE}">\n{content}'
 
-    # Prepend date if missing
+    # Add auto date
     if post["date"]:
         date_line = f'<p><em>Posted on {post["date"].strftime("%B %d, %Y")}</em></p>\n'
         if date_line not in content:
             content = date_line + content
 
-    # Append back-to-home link if missing
+    # Back-to-home link
     back_link = '<p><a href="../index.html">← Back to blog homepage</a></p>\n'
     if back_link not in content:
         content += "\n" + back_link
 
-    # Inject tsParticles triangles background if enabled
-    if INCLUDE_PARTICLES:
+    # Wrap post content in container
+    if 'class="post-content"' not in content:
+        content = f'<div class="post-content">\n{content}\n</div>'
+
+    # Inject tsParticles background at the very top (outside post-content)
+    if INCLUDE_PARTICLES and "<div id=\"tsparticles\">" not in content:
         particles_code = """
 <!-- Triangles Background -->
 <div id="tsparticles"></div>
@@ -89,26 +93,22 @@ tsParticles.load("tsparticles", {
 });
 </script>
 """
-        if "<div id=\"tsparticles\">" not in content:
-            content = particles_code + "\n" + content
+        content = particles_code + "\n" + content
 
     with open(post_path, "w", encoding="utf-8") as f:
         f.write(content)
 
-# Build index.html
+# Build blog index
 html = f"""<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>DEVlog</title>
+  <title>My Blog</title>
   <link rel="stylesheet" href="{CSS_FILE}">
 </head>
 <body>
   <header>
-    <h1>DevLog</h1>
-    <nav>
-      <a href="../index.html">Home</a>
-    </nav>
+    <h1>My Blog</h1>
   </header>
   <main>
     <ul>
