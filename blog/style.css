@@ -64,11 +64,15 @@ a:hover {
 /* ===== Lists in index.html ===== */
 ul {
     list-style: none;
-    padding: 0;
+    margin: 2rem auto;
+    padding: 2rem;
+    
 }
 
 ul li {
     margin-bottom: 0.8rem;
+        margin: 2rem auto;
+    padding: 2rem;
 }
 
 /* ===== Header for blog index ===== */
