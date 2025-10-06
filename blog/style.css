@@ -62,6 +62,9 @@ a:hover {
 /* Small / Em text (dates) */
 small, em {
   color: #aaa;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: normal; /* Override browser defaults */
+  letter-spacing: -0.5px; /* Optional: tighten spacing for better readability */
 }
 
 /* Lists */
