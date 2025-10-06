@@ -1,0 +1,4 @@
+# Disable GitHub’s default Minima theme
+theme: null
+markdown: kramdown
+plugins: []
