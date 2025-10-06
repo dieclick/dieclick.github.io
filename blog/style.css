@@ -1,12 +1,16 @@
-/* ===== Global Styles ===== */
+/* --- Base setup --- */
 html, body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden; /* no horizontal scroll */
     background: #000;
     color: #fff;
+    font-family: Arial, sans-serif;
 }
 
+/* --- Fixed particles background --- */
 #tsparticles {
     position: fixed;
     top: 0;
@@ -16,34 +20,45 @@ html, body {
     z-index: -1;
 }
 
-.post-content {
-    position: relative; /* keep above particles */
+/* --- Content containers --- */
+header, main, .post-content {
+    position: relative; /* stay above particles */
     max-width: 800px;
     margin: 2em auto;
     padding: 1em 2em;
-    background: rgba(0, 0, 0, 0.6); /* optional semi-transparent background */
-    border-radius: 8px;
 }
 
-/* ===== Headings ===== */
+/* Optional: slightly translucent post-content for subtle contrast */
+.post-content {
+    background: rgba(0,0,0,0.0); /* fully transparent, no black box */
+}
+
+/* --- Headings and text --- */
 h1, h2, h3 {
-    color: #fff;
-    text-shadow: 0 0 5px rgba(255,255,255,0.5);
-    text-align: left;
-    margin-left: 1rem;
+    text-align: center;
+    text-shadow: 0 0 5px rgba(0,0,0,0.7); /* readable over background */
+    margin-bottom: 0.5em;
 }
 
-/* ===== Paragraphs ===== */
 p {
-    margin-bottom: 1rem;
-    color: #ddd;
-    margin: 2rem auto;
-    padding: 2rem;
+    line-height: 1.6;
+    margin-bottom: 1em;
 }
 
-/* ===== Links ===== */
+/* --- Lists --- */
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* --- Links --- */
 a {
-    color: #1e90ff; /* light blue */
+    color: #00f;
     text-decoration: none;
 }
 
@@ -51,41 +66,21 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ===== Lists in index.html ===== */
-ul {
-    list-style: none;
-    margin: 2rem auto;
-    padding: 2rem;
-    
-}
-
-ul li {
-    margin-bottom: 0.8rem;
-}
-
-/* ===== Header for blog index ===== */
-header {
-    text-align: center;
-    margin: 2rem 0;
-}
-
-header h1 {
-    font-size: 3rem;
-}
-
-/* ===== Optional: smaller text for dates ===== */
+/* --- Small text --- */
 small {
-    color: #aaa;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.85em;
+    color: #ccc;
 }
 
-/* ===== Responsive tweaks ===== */
-@media (max-width: 600px) {
-    .post-content {
-        margin: 1rem;
-        padding: 1rem;
-    }
+/* --- Back link styling --- */
+a[href$="index.html"] {
+    display: inline-block;
+    margin-top: 1em;
+    color: #0ff;
+}
 
-    header h1 {
-        font-size: 2rem;
-    }
+/* --- Optional: smooth scroll behavior --- */
+html {
+    scroll-behavior: smooth;
 }
