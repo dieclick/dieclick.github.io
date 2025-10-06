@@ -3,165 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blein I</title>
+    <title>Blein I - Improved Navigation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 0; /* Remove default margin */
-            overflow-x: hidden; /* Prevent horizontal scrolling */
+            margin: 0;
+            overflow-x: hidden;
         }
         .comic-container {
-            position: relative; /* For button positioning */
-            height: calc(100vh - 30px); /* Adjust height to account for title */
-            white-space: nowrap; /* Prevent wrapping of images */
+            position: relative;
+            height: calc(100vh - 30px);
+            white-space: nowrap;
         }
         .comic {
-            display: inline-flex; /* Use inline-flex for horizontal layout */
-            height: 100%; /* Full height of the container */
-            box-sizing: border-box; /* Include padding in height */
+            display: inline-flex;
+            height: 100%;
+            box-sizing: border-box;
         }
         .comic img {
-            max-height: 100%; /* Fit images to the height of the viewport */
-            width: auto; /* Maintain aspect ratio */
-            margin: 10px; /* Space between images */
-            object-fit: contain; /* Ensure the image is contained within the box */
-            cursor: pointer; /* Pointer cursor for images */
-            transition: transform 0.3s; /* Smooth transition for zooming */
+            max-height: 100%;
+            width: auto;
+            margin: 10px;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
         .button {
-            position: fixed; /* Fix position on the screen */
-            top: 50%; /* Center vertically */
+            position: fixed;
+            top: 50%;
             transform: translateY(-50%);
-            background-color: #3A3A3A30; /* 50% transparent gray on hover */
-            border: none; /* No border */
-            border-radius: 50%; /* Circular shape */
-            width: 50px; /* Width of button */
-            height: 50px; /* Height of button */
-            cursor: pointer; /* Pointer cursor */
-            z-index: 1; /* Ensure buttons are above images */
-            font-weight: bold; /* Make text bold */
-            transition: background-color 0.3s; /* Smooth background transition */
-            display: flex; /* Flexbox for centering arrow */
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
+            background-color: #3A3A3A30;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 1;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .button.left {
-            left: 20px; /* Position to the left */
+            left: 20px;
         }
         .button.right {
-            right: 20px; /* Position to the right */
+            right: 20px;
         }
         .button:hover {
-            background-color: #3A3A3A80; /* 50% transparent gray on hover */
+            background-color: #3A3A3A80;
         }
-
         .button::before {
-            content: ''; /* Arrow using pseudo-element */
+            content: '';
             display: block;
             width: 0; 
             height: 0; 
-            border-left: 10px solid white; /* Arrow color */
-            border-top: 5px solid transparent; /* Top triangle */
-            border-bottom: 5px solid transparent; /* Bottom triangle */
+            border-left: 10px solid white;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
         }
         .button.left::before {
-            transform: rotate(180deg); /* Rotate for left arrow */
+            transform: rotate(180deg);
         }
         .zoomed {
-            position: fixed; /* Use fixed positioning */
-            transform: scale(0.9); /* Adjusted scale for zoom */
-            z-index: 2; /* Bring the zoomed image above others */
-            transition: transform 0.3s; /* Smooth transition for zooming */
-            pointer-events: none; /* Disable pointer events until fully rendered */
+            position: fixed;
+            transform: scale(0.9);
+            z-index: 2;
+            transition: transform 0.3s;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
     <div class="comic-container" id="comic-container">
-        <div class="comic" id="comic-content"></div>
+        <div class="comic" id="comic-content">
+            <img src="cover.png" alt="Cover" loading="lazy">
+            <img src="00.png" alt="Comic Panel 0" loading="lazy">
+            <img src="01.png" alt="Comic Panel 1" loading="lazy">
+            <img src="02.png" alt="Comic Panel 2" loading="lazy">
+            <img src="03.png" alt="Comic Panel 3" loading="lazy">
+            <img src="04.png" alt="Comic Panel 4" loading="lazy">
+            <img src="05.png" alt="Comic Panel 5" loading="lazy">
+            <img src="06.png" alt="Comic Panel 6" loading="lazy">
+            <img src="07.png" alt="Comic Panel 7" loading="lazy">
+            <img src="08.png" alt="Comic Panel 8" loading="lazy">
+            <img src="09.png" alt="Comic Panel 9" loading="lazy">
+            <img src="10.png" alt="Comic Panel 10" loading="lazy">
+            <img src="11.png" alt="Comic Panel 11" loading="lazy">
+            <img src="12.png" alt="Comic Panel 12" loading="lazy">
+            <img src="13.png" alt="Comic Panel 13" loading="lazy">
+            <img src="14.png" alt="Comic Panel 14" loading="lazy">
+            <img src="15.png" alt="Comic Panel 15" loading="lazy">
+            <img src="16.png" alt="Comic Panel 16" loading="lazy">
+            <img src="17.png" alt="Comic Panel 17" loading="lazy">
+            <img src="18.png" alt="Comic Panel 18" loading="lazy">
+            <img src="19.png" alt="Comic Panel 19" loading="lazy">
+            <img src="20.png" alt="Comic Panel 20" loading="lazy">
+            <img src="21.png" alt="Comic Panel 21" loading="lazy">
+            <img src="22.png" alt="Comic Panel 22" loading="lazy">
+            <img src="23.png" alt="Comic Panel 23" loading="lazy">
+            <img src="24.png" alt="Comic Panel 24" loading="lazy">
+            <img src="25.png" alt="Comic Panel 25" loading="lazy">
+            <img src="26.png" alt="Comic Panel 26" loading="lazy">
+        </div>
     </div>
     <button class="button left" id="prev-button"></button>
     <button class="button right" id="next-button"></button>
 
     <script>
         const container = document.getElementById('comic-content');
+        const images = container.querySelectorAll('img');
         
-        // Add the cover image with lazy loading
-        const coverImg = document.createElement('img');
-        coverImg.src = 'cover.png'; // Cover image in webp format
-        coverImg.alt = 'Cover';
-        coverImg.loading = 'lazy'; // Lazy load cover image
-        container.appendChild(coverImg);
+        // Track current page index
+        let currentPageIndex = 0;
+        
+        // Function to calculate page width
+        function getPageWidth() {
+            if (images.length === 0) return 0;
+            return images[0].offsetWidth + 20; // Width + margin
+        }
+        
+        // Function to scroll to a specific page
+        function scrollToPage(index) {
+            if (index < 0) index = 0;
+            if (index >= images.length) index = images.length - 1;
             
-        // Add the numbered images using a for loop with lazy loading
-        for (let i = 0; i <= 26; i++) {
-            const img = document.createElement('img');
-            img.src = `${i.toString().padStart(2, '0')}.png`; // 00.png, 01.png, etc.
-            img.alt = `Comic Panel ${i}`;
-            img.loading = 'lazy'; // Lazy load images
-            container.appendChild(img);
+            currentPageIndex = index;
+            
+            // Calculate scroll position
+            const scrollPosition = index * getPageWidth();
+            
+            // Scroll to the position
+            window.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        }
         
+        // Next button click handler
+        document.getElementById('next-button').addEventListener('click', () => {
+            scrollToPage(currentPageIndex + 1);
+        });
+        
+        // Previous button click handler
+        document.getElementById('prev-button').addEventListener('click', () => {
+            scrollToPage(currentPageIndex - 1);
+        });
+        
+        // Update current page index on scroll
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollX;
+            const pageWidth = getPageWidth();
+            
+            if (pageWidth > 0) {
+                currentPageIndex = Math.round(scrollPosition / pageWidth);
+            }
+        });
+        
+        // Add click-to-zoom functionality
+        images.forEach(img => {
             img.addEventListener('click', () => {
                 const existingZoomedImg = document.querySelector('.zoomed');
                 if (existingZoomedImg) {
-                    existingZoomedImg.classList.remove('zoomed'); // Remove zoom from existing image
-                    document.body.removeChild(existingZoomedImg); // Remove it from the DOM
+                    existingZoomedImg.classList.remove('zoomed');
+                    document.body.removeChild(existingZoomedImg);
                 }
         
                 const zoomedImg = document.createElement('img');
-                zoomedImg.src = img.src; // Use the same source
+                zoomedImg.src = img.src;
                 zoomedImg.classList.add('zoomed');
         
                 document.body.appendChild(zoomedImg);
         
                 // Center the zoomed image
                 const centerZoomedImg = () => {
-                    const offsetX = (window.innerWidth - zoomedImg.clientWidth * 1.5) / 2; // Adjust for scale
+                    const offsetX = (window.innerWidth - zoomedImg.clientWidth * 1.5) / 2;
                     const offsetY = (window.innerHeight - zoomedImg.clientHeight * 1.5) / 2;
                     zoomedImg.style.left = `${offsetX}px`;
                     zoomedImg.style.top = `${offsetY}px`;
-                    zoomedImg.style.pointerEvents = 'auto'; // Enable pointer events
+                    zoomedImg.style.pointerEvents = 'auto';
                 };
-        centerZoomedImg();
-
-        // Update zoomed image position based on mouse movement with slight parallax effect
-        const updateZoomedImgPosition = (e) => {
-            const parallaxFactor = 6; // Adjust this value for parallax effect
-            const offsetX = (window.innerWidth / 2 - e.clientX) * parallaxFactor / 2;
-            const offsetY = (window.innerHeight / 2 - e.clientY) * parallaxFactor;
-
-            zoomedImg.style.left = `${(window.innerWidth - zoomedImg.clientWidth * 1.5) / 2 + offsetX}px`;
-            zoomedImg.style.top = `${(window.innerHeight - zoomedImg.clientHeight * 1.5) / 2 + offsetY}px`;
-        };
-
-        document.addEventListener('mousemove', updateZoomedImgPosition);
-
-        // Click to remove zoom
-        zoomedImg.addEventListener('click', () => {
-            zoomedImg.classList.remove('zoomed');
-            document.body.removeChild(zoomedImg);
-            document.removeEventListener('mousemove', updateZoomedImgPosition);
-            img.style.pointerEvents = 'auto'; // Restore pointer events on the original image
-        });
-
-        // Prevent clicks on the original image while zoomed
-        img.style.pointerEvents = 'none';
-    });
-            container.appendChild(img);
-        }
-
-        // Calculate the width of one comic page
-        const comicImages = container.querySelectorAll('img');
-        const pageWidth = comicImages[0].offsetWidth + 20; // Width of image + margin (10px on each side)
-
-        // Scroll functions
-        document.getElementById('next-button').addEventListener('click', () => {
-            window.scrollBy({ left: pageWidth, behavior: 'smooth' });
-        });
-
-        document.getElementById('prev-button').addEventListener('click', () => {
-            window.scrollBy({ left: -pageWidth, behavior: 'smooth' });
+                
+                centerZoomedImg();
+        
+                // Update zoomed image position based on mouse movement
+                const updateZoomedImgPosition = (e) => {
+                    const parallaxFactor = 6;
+                    const offsetX = (window.innerWidth / 2 - e.clientX) * parallaxFactor / 2;
+                    const offsetY = (window.innerHeight / 2 - e.clientY) * parallaxFactor;
+        
+                    zoomedImg.style.left = `${(window.innerWidth - zoomedImg.clientWidth * 1.5) / 2 + offsetX}px`;
+                    zoomedImg.style.top = `${(window.innerHeight - zoomedImg.clientHeight * 1.5) / 2 + offsetY}px`;
+                };
+        
+                document.addEventListener('mousemove', updateZoomedImgPosition);
+        
+                // Click to remove zoom
+                zoomedImg.addEventListener('click', () => {
+                    zoomedImg.classList.remove('zoomed');
+                    document.body.removeChild(zoomedImg);
+                    document.removeEventListener('mousemove', updateZoomedImgPosition);
+                });
+            });
         });
     </script>
 </body>
