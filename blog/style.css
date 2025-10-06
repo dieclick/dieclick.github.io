@@ -3,7 +3,7 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: #000;
+    background: transparent;
     color: #fff;
 }
 
@@ -77,6 +77,7 @@ header h1 {
 
 /* ===== Optional: smaller text for dates ===== */
 small {
+    font-family: 'Courier New', Courier, monospace;
     color: #aaa;
 }
 
