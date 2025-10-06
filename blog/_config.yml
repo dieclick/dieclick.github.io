@@ -1,4 +1,4 @@
-# Disable GitHub’s default Minima theme
-theme: null
-markdown: kramdown
-plugins: []
+# blog/_config.yml
+
+title: My Blog
+baseurl: "/blog"   # important because your site is hosted at dieclick.github.io/blog
