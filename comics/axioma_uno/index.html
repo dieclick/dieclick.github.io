@@ -1,141 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DESTINATA Triplet B</title>
-  <style>
-    body {
-      background-image: url('hm7.png');
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      width: 1280px;
-      height: 720px;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<meta charset="UTF-8">
+<title>DESTINATA Triplet B</title>
 
-    span {
-      background-color: #0F0F0F;
-      color: #FFEEFB;
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      padding: 10px;
-      border-radius: 5px;
-    }
+<style>
+body {
+    margin: 0;
+    background: #000;
+    overflow: hidden;
+    font-family: Arial;
+    color: white;
+}
 
-    span a {
-      color: #FFEEFB;
-      text-decoration: none;
-      margin-right: 10px;
-      padding: 5px 10px;
-      border-radius: 3px;
-      transition: background-color 0.3s ease;
-    }
+/* viewer */
+.viewer {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    position: relative;
+}
 
-    span a:hover {
-      background-color: #FFEEFB;
-      color: #0F0F0F;
-    }
+/* images */
+img {
+    width: 100%;
+    max-width: 1280px;
+    display: block;
+    margin: 0 auto;
+}
 
-    .image-container {
-      display: none; /* Hide all image containers by default */
-    }
+/* UI */
+.ui {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    background: rgba(0,0,0,0.6);
+    padding: 10px;
+    border-radius: 8px;
+}
 
-    .image-container.active {
-      display: block; /* Show the active image container */
-    }
-  </style>
+button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+</style>
 </head>
+
 <body>
-  <span>
-    <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Vol 1</a>
-    <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">Vol 2</a>
-    <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Triplet A</a>
-    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">Triplet B</a>
-    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">Triplet C</a>
-    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">Triplet D</a>
-  </span>
 
-  <button onclick="nextTriplet()">Next Triplet</button>
+<div class="ui">
+    <button onclick="prev()">◀</button>
+    <span id="label">1 / 4</span>
+    <button onclick="next()">▶</button>
+</div>
 
-  <div class="image-container triplet-a active">
-    <img loading="lazy" src="pag 10.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 9.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 8.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 7.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 6.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 5.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 4.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 3.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 2.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 1.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 00.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="prepagB.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="prepagA.png" style="width: 1280px; height: 720px;">
-  </div>
+<div class="viewer" id="viewer"></div>
 
-  <div class="image-container triplet-b">
-    <img loading="lazy" src="pag 20.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 19.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 18.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 17.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 16.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 15.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 14.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 13.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 12.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 11.png" style="width: 1280px; height: 720px;">
-  </div>
-  
-  <div class="image-container triplet-c">
-    <img loading="lazy" src="pag 30.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 29.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 28.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 27.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 26.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 25.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 24.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 23.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 22.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 21.png" style="width: 1280px; height: 720px;">
-  </div>
+<script>
+/* =========================
+   DEFINE YOUR TRIPLETS HERE
+========================= */
+const triplets = [
+  ["prepagA.png","prepagB.png","pag 00.png","pag 1.png","pag 2.png","pag 3.png","pag 4.png","pag 5.png","pag 6.png","pag 7.png","pag 8.png","pag 9.png","pag 10.png"],
+  ["pag 11.png","pag 12.png","pag 13.png","pag 14.png","pag 15.png","pag 16.png","pag 17.png","pag 18.png","pag 19.png","pag 20.png"],
+  ["pag 21.png","pag 22.png","pag 23.png","pag 24.png","pag 25.png","pag 26.png","pag 27.png","pag 28.png","pag 29.png","pag 30.png"],
+  ["pag 31.png","pag 32.png","pag 33.png","pag 34.png","pag 35.png","pag 36.png","pag 37.png","pag 38.png","pag 39.png","pag 40.png"]
+];
 
-  <div class="image-container triplet-d">
-    <img loading="lazy" src="pag 40.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 39.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 38.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 37.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 36.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 35.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 34.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 33.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 32.png" style="width: 1280px; height: 720px;">
-    <img loading="lazy" src="pag 31.png" style="width: 1280px; height: 720px;">
-  </div>
-  <!-- Script for scrolling to bottom -->
-  <script>
-    // Ensure DOM is fully loaded before executing
-    document.addEventListener('DOMContentLoaded', function() {
-      topFunction();
+let current = 0;
+
+const viewer = document.getElementById("viewer");
+const label = document.getElementById("label");
+
+/* render triplet */
+function render() {
+    viewer.innerHTML = "";
+
+    triplets[current].forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.loading = "lazy";
+        viewer.appendChild(img);
     });
 
-    function topFunction() {
-      // Smooth scroll to the bottom of the page
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
+    label.textContent = `${current + 1} / ${triplets.length}`;
 
-    function nextTriplet() {
-      const currentTriplet = document.querySelector('.image-container.active');
-      const nextTriplet = currentTriplet.nextElementSibling || document.querySelector('.image-container:first-child');
-      
-      currentTriplet.classList.remove('active');
-      nextTriplet.classList.add('active');
-      
-      topFunction(); // Scroll to the bottom when changing triplets
-    }
-  </script>
+    viewer.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* navigation */
+function next() {
+    if (current < triplets.length - 1) current++;
+    render();
+}
+
+function prev() {
+    if (current > 0) current--;
+    render();
+}
+
+/* init */
+render();
+</script>
+
 </body>
 </html>
