@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -21,14 +20,12 @@ body {
     overflow: hidden;
 }
 
-/* Horizontal track */
 .track {
     display: flex;
     height: 100%;
     transition: transform 0.35s ease;
 }
 
-/* Vertical mode */
 .viewer.vertical {
     overflow-y: auto;
     overflow-x: hidden;
@@ -39,12 +36,6 @@ body {
     transform: none !important;
 }
 
-.viewer.vertical img {
-    width: 100%;
-    height: auto;
-}
-
-/* Pages */
 .track img {
     width: 100vw;
     height: 100vh;
@@ -61,11 +52,8 @@ body {
     transition: opacity 0.3s;
 }
 
-.ui.hidden {
-    opacity: 0;
-}
+.ui.hidden { opacity: 0; }
 
-/* Buttons */
 .button {
     position: absolute;
     top: 50%;
@@ -84,11 +72,8 @@ body {
 .left { left: 20px; }
 .right { right: 20px; }
 
-.button:hover {
-    background: rgba(255,255,255,0.35);
-}
+.button:hover { background: rgba(255,255,255,0.35); }
 
-/* Counter */
 .counter {
     position: absolute;
     top: 15px;
@@ -98,7 +83,6 @@ body {
     opacity: 0.8;
 }
 
-/* Toggle */
 .toggle {
     position: absolute;
     top: 15px;
@@ -112,7 +96,6 @@ body {
     pointer-events: auto;
 }
 
-/* Progress bar */
 .progress {
     position: fixed;
     bottom: 0;
@@ -122,7 +105,6 @@ body {
     width: 0%;
 }
 
-/* Zoom */
 .zoomed {
     position: fixed;
     top: 50%;
@@ -134,7 +116,6 @@ body {
     cursor: zoom-out;
 }
 </style>
-
 </head>
 
 <body>
@@ -142,27 +123,21 @@ body {
 <div class="viewer" id="viewer">
     <div class="track" id="track"></div>
 
-```
-<div class="ui" id="ui">
-    <button class="button left" id="prev">❮</button>
-    <button class="button right" id="next">❯</button>
-
-    <div class="counter" id="counter">1 / 1</div>
-    <button class="toggle" id="toggle">VERTICAL</button>
-</div>
-```
-
+    <div class="ui" id="ui">
+        <button class="button left" id="prev">❮</button>
+        <button class="button right" id="next">❯</button>
+        <div class="counter" id="counter"></div>
+        <button class="toggle" id="toggle">VERTICAL</button>
+    </div>
 </div>
 
 <div class="progress" id="progress"></div>
 
 <script>
-/* ===== CONFIG ===== */
 const comicName = "Blein I";
 const totalPages = 27;
 const prefix = "";
 const extension = ".png";
-/* ================== */
 
 document.title = comicName;
 
@@ -176,56 +151,61 @@ let current = 0;
 let vertical = false;
 let hideTimer;
 
-/* Generate images */
+/* ===== build pages ===== */
+const pages = [];
+
 for (let i = 0; i < totalPages; i++) {
-    let num = i.toString().padStart(2, '0');
     let img = document.createElement('img');
+    let num = i.toString().padStart(2, '0');
 
     img.src = (i === 0) ? "cover" + extension : prefix + num + extension;
-    track.appendChild(img);
 
-    /* Zoom */
     img.onclick = () => {
         const zoom = document.createElement('img');
         zoom.src = img.src;
         zoom.className = 'zoomed';
         document.body.appendChild(zoom);
-        zoom.onclick = () => zoom.remove();
+
+        const close = (e) => {
+            if (e.type === "click" || e.key === "Escape") {
+                zoom.remove();
+                document.removeEventListener('keydown', close);
+            }
+        };
+
+        zoom.onclick = close;
+        document.addEventListener('keydown', close);
     };
+
+    pages.push(img);
+    track.appendChild(img);
 }
 
-/* 🔥 Preload function */
-function preloadAround(index) {
-    const range = [-1, 1, 2];
-
-    range.forEach(offset => {
-        let i = index + offset;
-
-        if (i >= 0 && i < totalPages) {
-            let num = i.toString().padStart(2, '0');
-            let src = (i === 0)
-                ? "cover" + extension
-                : prefix + num + extension;
-
-            const img = new Image();
-            img.src = src;
+/* ===== preload ===== */
+function preload(i) {
+    [-2, -1, 1, 2].forEach(o => {
+        let n = i + o;
+        if (n >= 0 && n < totalPages) {
+            let img = new Image();
+            let num = n.toString().padStart(2, '0');
+            img.src = (n === 0) ? "cover" + extension : prefix + num + extension;
         }
     });
 }
 
-/* Update */
+/* ===== update ===== */
 function update() {
     if (!vertical) {
         track.style.transform = `translateX(-${current * 100}vw)`;
     }
 
-    counter.textContent = (current + 1) + " / " + totalPages;
-    progress.style.width = (current / (totalPages - 1)) * 100 + "%";
+    counter.textContent = `${current + 1} / ${totalPages}`;
+    progress.style.width = `${(current / (totalPages - 1)) * 100}%`;
 
-    preloadAround(current);
+    preload(current);
 }
 
-/* Navigation */
+/* ===== navigation ===== */
 function next() {
     if (current < totalPages - 1) current++;
     update();
@@ -239,63 +219,69 @@ function prev() {
 document.getElementById('next').onclick = next;
 document.getElementById('prev').onclick = prev;
 
-/* Keyboard */
+/* ===== keyboard ===== */
 document.addEventListener('keydown', e => {
     if (e.key === "ArrowRight") next();
     if (e.key === "ArrowLeft") prev();
 });
 
-/* Swipe */
+/* ===== swipe ===== */
 let startX = 0;
 
 document.addEventListener('touchstart', e => {
+    if (vertical) return;
     startX = e.touches[0].clientX;
 });
 
 document.addEventListener('touchend', e => {
+    if (vertical) return;
+
     let dx = e.changedTouches[0].clientX - startX;
 
-    if (!vertical) {
-        if (dx < -50) next();
-        if (dx > 50) prev();
-    }
+    if (dx < -50) next();
+    if (dx > 50) prev();
 });
 
-/* Vertical mode */
+/* ===== vertical toggle ===== */
 document.getElementById('toggle').onclick = () => {
     vertical = !vertical;
     viewer.classList.toggle('vertical');
-
-    document.getElementById('toggle').textContent =
-        vertical ? "HORIZONTAL" : "VERTICAL";
+    document.getElementById('toggle').textContent = vertical ? "HORIZONTAL" : "VERTICAL";
+    update();
 };
 
-/* Scroll tracking (vertical) */
+/* ===== scroll sync (fixed) ===== */
 viewer.addEventListener('scroll', () => {
-    if (vertical) {
-        let scroll = viewer.scrollTop;
-        let height = viewer.clientHeight;
-        current = Math.round(scroll / height);
-        update();
-    }
+    if (!vertical) return;
+
+    let closest = 0;
+    let min = Infinity;
+
+    pages.forEach((img, i) => {
+        const dist = Math.abs(img.getBoundingClientRect().top);
+        if (dist < min) {
+            min = dist;
+            closest = i;
+        }
+    });
+
+    current = closest;
+    update();
 });
 
-/* Auto-hide UI */
+/* ===== UI auto-hide ===== */
 function showUI() {
     ui.classList.remove('hidden');
-
     clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => {
-        ui.classList.add('hidden');
-    }, 2000);
+    hideTimer = setTimeout(() => ui.classList.add('hidden'), 2000);
 }
 
 document.addEventListener('mousemove', showUI);
 document.addEventListener('touchstart', showUI);
 
-/* Init */
+/* init */
 update();
-preloadAround(0);
+preload(0);
 showUI();
 </script>
 
