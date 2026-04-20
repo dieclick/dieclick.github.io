@@ -1,37 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>TROUBLE SPOT</title>
-    <style>
-        body {
-            background-color: #000000; /* Black background color */
-            font-family: Arial, sans-serif;
-            color: #FFFFFF; /* Text color */
-            margin: 0;
-            padding: 0;
-            width: 1280px; /* Set fixed width */
-            height: 720px; /* Set fixed height */
-            overflow-y: scroll; /* Enable vertical scrolling if content exceeds viewport */
-            text-align: center; /* Center align content horizontally */
-        }
-        img {
-            display: block;
-            margin: 10px auto; /* Center images horizontally with some margin */
-            max-height: 100%; /* Ensure images fit within the viewport height */
-            width: auto; /* Maintain aspect ratio */
-        }
-    </style>
+<meta charset="UTF-8">
+<title>TROUBLE SPOT</title>
+
+<style>
+body {
+    margin: 0;
+    background: #000;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* Viewer */
+.viewer {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Track */
+.track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.35s ease;
+}
+
+/* DEFAULT = VERTICAL */
+.viewer {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.viewer.vertical .track {
+    flex-direction: column;
+    transform: none !important;
+}
+
+.track img {
+    width: 100vw;
+    height: auto;
+    max-height: 100vh;
+    object-fit: contain;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: block;
+}
+
+/* UI */
+.ui {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.ui.hidden { opacity: 0; }
+
+.button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55px;
+    height: 55px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.left { left: 20px; }
+.right { right: 20px; }
+
+.button:hover { background: rgba(255,255,255,0.35); }
+
+.counter {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.toggle {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.progress {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: #fff;
+    width: 0%;
+}
+
+/* Zoom */
+.zoomed {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.5);
+    max-width: 90vw;
+    max-height: 90vh;
+    z-index: 50;
+    cursor: zoom-out;
+}
+</style>
 </head>
+
 <body>
-    <script>
-        // Load images using a for loop
-        for (let i = 1; i <= 85; i++) {
-            const img = document.createElement('img');
-            img.src = `${i}.png`; // Construct the image source
-            img.loading = 'lazy'; // Set lazy loading
-            document.body.appendChild(img); // Append the image to the body
+
+<div class="viewer vertical" id="viewer">
+    <div class="track" id="track"></div>
+
+    <div class="ui" id="ui">
+        <button class="button left" id="prev">❮</button>
+        <button class="button right" id="next">❯</button>
+        <div class="counter" id="counter"></div>
+        <button class="toggle" id="toggle">HORIZONTAL</button>
+    </div>
+</div>
+
+<div class="progress" id="progress"></div>
+
+<script>
+const totalPages = 85;
+const prefix = "";
+const extension = ".png";
+
+document.title = "TROUBLE SPOT";
+
+const viewer = document.getElementById("viewer");
+const track = document.getElementById("track");
+const counter = document.getElementById("counter");
+const progress = document.getElementById("progress");
+const ui = document.getElementById("ui");
+
+let current = 0;
+let vertical = true; // ✅ DEFAULT VERTICAL
+let hideTimer;
+
+const pages = [];
+
+/* ===== build pages ===== */
+for (let i = 1; i <= totalPages; i++) {
+    const img = document.createElement("img");
+    img.src = `${i}${extension}`;
+    img.loading = "lazy";
+
+    img.onclick = () => {
+        const zoom = document.createElement("img");
+        zoom.src = img.src;
+        zoom.className = "zoomed";
+        document.body.appendChild(zoom);
+
+        const close = (e) => {
+            if (e.type === "click" || e.key === "Escape") {
+                zoom.remove();
+                document.removeEventListener("keydown", close);
+            }
+        };
+
+        zoom.onclick = close;
+        document.addEventListener("keydown", close);
+    };
+
+    pages.push(img);
+    track.appendChild(img);
+}
+
+/* ===== preload ===== */
+function preload(i) {
+    [-2, -1, 1, 2].forEach(o => {
+        const n = i + o;
+        if (n >= 1 && n <= totalPages) {
+            const img = new Image();
+            img.src = `${n}${extension}`;
         }
-    </script>
+    });
+}
+
+/* ===== update ===== */
+function update() {
+    if (!vertical) {
+        track.style.transform = `translateX(-${current * 100}vw)`;
+    }
+
+    counter.textContent = `${current + 1} / ${totalPages}`;
+    progress.style.width = `${(current / (totalPages - 1)) * 100}%`;
+
+    preload(current + 1);
+}
+
+/* ===== navigation ===== */
+function next() {
+    if (current < totalPages - 1) current++;
+    update();
+}
+
+function prev() {
+    if (current > 0) current--;
+    update();
+}
+
+document.getElementById("next").onclick = next;
+document.getElementById("prev").onclick = prev;
+
+/* ===== keyboard ===== */
+document.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") next();
+    if (e.key === "ArrowLeft") prev();
+});
+
+/* ===== swipe (horizontal only) ===== */
+let startX = 0;
+
+document.addEventListener("touchstart", e => {
+    if (vertical) return;
+    startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchend", e => {
+    if (vertical) return;
+
+    let dx = e.changedTouches[0].clientX - startX;
+
+    if (dx < -50) next();
+    if (dx > 50) prev();
+});
+
+/* ===== vertical sync ===== */
+viewer.addEventListener("scroll", () => {
+    if (!vertical) return;
+
+    let closest = 0;
+    let min = Infinity;
+
+    pages.forEach((img, i) => {
+        const d = Math.abs(img.getBoundingClientRect().top);
+        if (d < min) {
+            min = d;
+            closest = i;
+        }
+    });
+
+    current = closest;
+    update();
+});
+
+/* ===== toggle mode ===== */
+document.getElementById("toggle").onclick = () => {
+    vertical = !vertical;
+    viewer.classList.toggle("vertical");
+
+    document.getElementById("toggle").textContent =
+        vertical ? "HORIZONTAL" : "VERTICAL";
+
+    update();
+};
+
+/* ===== UI hide ===== */
+function showUI() {
+    ui.classList.remove("hidden");
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => ui.classList.add("hidden"), 2000);
+}
+
+document.addEventListener("mousemove", showUI);
+document.addEventListener("touchstart", showUI);
+
+/* init */
+update();
+preload(1);
+showUI();
+</script>
+
 </body>
 </html>
