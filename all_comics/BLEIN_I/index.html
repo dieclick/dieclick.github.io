@@ -4,8 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title id="page-title">Comic</title>
+<title>Comic</title>
 
 <style>
 body {
@@ -15,19 +14,34 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Viewer */
 .viewer {
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
 }
 
-/* Track */
+/* Horizontal track */
 .track {
     display: flex;
     height: 100%;
     transition: transform 0.35s ease;
+}
+
+/* Vertical mode */
+.viewer.vertical {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.viewer.vertical .track {
+    flex-direction: column;
+    transform: none !important;
+}
+
+.viewer.vertical img {
+    width: 100%;
+    height: auto;
 }
 
 /* Pages */
@@ -37,6 +51,18 @@ body {
     object-fit: contain;
     flex-shrink: 0;
     cursor: pointer;
+}
+
+/* UI */
+.ui {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.ui.hidden {
+    opacity: 0;
 }
 
 /* Buttons */
@@ -52,7 +78,7 @@ body {
     color: white;
     font-size: 22px;
     cursor: pointer;
-    z-index: 10;
+    pointer-events: auto;
 }
 
 .left { left: 20px; }
@@ -60,6 +86,30 @@ body {
 
 .button:hover {
     background: rgba(255,255,255,0.35);
+}
+
+/* Counter */
+.counter {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: white;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Toggle */
+.toggle {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    pointer-events: auto;
 }
 
 /* Progress bar */
@@ -70,7 +120,6 @@ body {
     height: 3px;
     background: white;
     width: 0%;
-    z-index: 20;
 }
 
 /* Zoom */
@@ -81,7 +130,7 @@ body {
     transform: translate(-50%, -50%) scale(1.5);
     max-width: 90vw;
     max-height: 90vh;
-    z-index: 30;
+    z-index: 50;
     cursor: zoom-out;
 }
 </style>
@@ -90,12 +139,17 @@ body {
 
 <body>
 
-<div class="viewer">
+<div class="viewer" id="viewer">
     <div class="track" id="track"></div>
 
 ```
-<button class="button left" id="prev">❮</button>
-<button class="button right" id="next">❯</button>
+<div class="ui" id="ui">
+    <button class="button left" id="prev">❮</button>
+    <button class="button right" id="next">❯</button>
+
+    <div class="counter" id="counter">1 / 1</div>
+    <button class="toggle" id="toggle">VERTICAL</button>
+</div>
 ```
 
 </div>
@@ -103,35 +157,31 @@ body {
 <div class="progress" id="progress"></div>
 
 <script>
-/* =========================
-   CONFIG (EDIT THIS ONLY)
-========================= */
+/* ===== CONFIG ===== */
 const comicName = "Blein I";
 const totalPages = 27;
-const prefix = "";     // example: "page_"
+const prefix = "";
 const extension = ".png";
-
-/* ========================= */
+/* ================== */
 
 document.title = comicName;
 
 const track = document.getElementById('track');
+const viewer = document.getElementById('viewer');
 const progress = document.getElementById('progress');
+const counter = document.getElementById('counter');
+const ui = document.getElementById('ui');
 
 let current = 0;
+let vertical = false;
+let hideTimer;
 
 /* Generate images */
 for (let i = 0; i < totalPages; i++) {
-    let num = i.toString().padStart(2, '0'); // 00, 01...
+    let num = i.toString().padStart(2, '0');
     let img = document.createElement('img');
 
-    // Cover logic (optional)
-    if (i === 0) {
-        img.src = "cover" + extension;
-    } else {
-        img.src = prefix + num + extension;
-    }
-
+    img.src = (i === 0) ? "cover" + extension : prefix + num + extension;
     track.appendChild(img);
 
     /* Zoom */
@@ -144,14 +194,38 @@ for (let i = 0; i < totalPages; i++) {
     };
 }
 
-/* Navigation */
-function update() {
-    track.style.transform = `translateX(-${current * 100}vw)`;
+/* 🔥 Preload function */
+function preloadAround(index) {
+    const range = [-1, 1, 2];
 
-    let percent = (current / (totalPages - 1)) * 100;
-    progress.style.width = percent + "%";
+    range.forEach(offset => {
+        let i = index + offset;
+
+        if (i >= 0 && i < totalPages) {
+            let num = i.toString().padStart(2, '0');
+            let src = (i === 0)
+                ? "cover" + extension
+                : prefix + num + extension;
+
+            const img = new Image();
+            img.src = src;
+        }
+    });
 }
 
+/* Update */
+function update() {
+    if (!vertical) {
+        track.style.transform = `translateX(-${current * 100}vw)`;
+    }
+
+    counter.textContent = (current + 1) + " / " + totalPages;
+    progress.style.width = (current / (totalPages - 1)) * 100 + "%";
+
+    preloadAround(current);
+}
+
+/* Navigation */
 function next() {
     if (current < totalPages - 1) current++;
     update();
@@ -166,12 +240,12 @@ document.getElementById('next').onclick = next;
 document.getElementById('prev').onclick = prev;
 
 /* Keyboard */
-document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', e => {
     if (e.key === "ArrowRight") next();
     if (e.key === "ArrowLeft") prev();
 });
 
-/* Touch swipe (smooth, no lag) */
+/* Swipe */
 let startX = 0;
 
 document.addEventListener('touchstart', e => {
@@ -181,12 +255,48 @@ document.addEventListener('touchstart', e => {
 document.addEventListener('touchend', e => {
     let dx = e.changedTouches[0].clientX - startX;
 
-    if (dx < -50) next();
-    if (dx > 50) prev();
+    if (!vertical) {
+        if (dx < -50) next();
+        if (dx > 50) prev();
+    }
 });
+
+/* Vertical mode */
+document.getElementById('toggle').onclick = () => {
+    vertical = !vertical;
+    viewer.classList.toggle('vertical');
+
+    document.getElementById('toggle').textContent =
+        vertical ? "HORIZONTAL" : "VERTICAL";
+};
+
+/* Scroll tracking (vertical) */
+viewer.addEventListener('scroll', () => {
+    if (vertical) {
+        let scroll = viewer.scrollTop;
+        let height = viewer.clientHeight;
+        current = Math.round(scroll / height);
+        update();
+    }
+});
+
+/* Auto-hide UI */
+function showUI() {
+    ui.classList.remove('hidden');
+
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+        ui.classList.add('hidden');
+    }, 2000);
+}
+
+document.addEventListener('mousemove', showUI);
+document.addEventListener('touchstart', showUI);
 
 /* Init */
 update();
+preloadAround(0);
+showUI();
 </script>
 
 </body>
