@@ -6,7 +6,7 @@
 <title>Dieclick</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&family=UnifrakturMaguntia&family=MedievalSharp&family=Cinzel+Decorative:wght@900&family=Pirata+One&family=Lovers+Quarrel&family=Uncial+Antiqua&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -247,17 +247,23 @@
 
   const gothicFonts = [
     "'UnifrakturMaguntia', cursive",
-    "'MedievalSharp', serif",
+    "'Cinzel Decorative', cursive",
+    "'Pirata One', cursive",
+    "'Lovers Quarrel', cursive",
+    "'Uncial Antiqua', cursive",
     "fantasy",
   ];
 
+  function pick() { return gothicFonts[Math.floor(Math.random() * gothicFonts.length)]; }
+
   const frames = [
     { text: 'DIECLICK', font: "'Bebas Neue', sans-serif", spacing: '2px' },
-    { text: 'DIECLICK', font: "'UnifrakturMaguntia', cursive", spacing: '-2px' },
-    { text: 'NEFAIS',   font: gothicFonts[Math.floor(Math.random()*gothicFonts.length)], spacing: '-1px' },
-    { text: 'DIECLICK', font: "fantasy", spacing: '1px' },
-    { text: 'NEFAIS',   font: "'UnifrakturMaguntia', cursive", spacing: '-3px' },
-    { text: 'DIECLICK', font: "'UnifrakturMaguntia', cursive", spacing: '0px' },
+    { text: 'DIECLICK', font: pick(), spacing: '-2px' },
+    { text: 'NEFAIS',   font: pick(), spacing: '-1px' },
+    { text: 'DIECLICK', font: pick(), spacing: '1px' },
+    { text: 'NEFAIS',   font: pick(), spacing: '-3px' },
+    { text: 'NEFAIS',   font: pick(), spacing: '0px' },
+    { text: 'DIECLICK', font: pick(), spacing: '-1px' },
     { text: 'DIECLICK', font: "'Bebas Neue', sans-serif", spacing: '2px' },
   ];
 
@@ -270,6 +276,14 @@
   }
 
   function burst() {
+    // re-roll the middle frames' fonts each burst
+    frames[1].font = pick();
+    frames[2].font = pick();
+    frames[3].font = pick();
+    frames[4].font = pick();
+    frames[5].font = pick();
+    frames[6].font = pick();
+
     // pick a random subset of frames, always starting and ending on DIECLICK/Bebas
     const base = frames[0];
     const middle = frames.slice(1, frames.length - 1);
