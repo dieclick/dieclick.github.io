@@ -1,6 +1,0 @@
-GYFM3.exe Information: 0 : Version: 3.2.0.0
-SyncControlsToFontDetails-IN
-UpdateWindow-IN
-Void InvokeHandler(System.Delegate, System.Object),Void UpdateWindow(),DrawToBitmap(Uber Move,Bold,72,<~>,~,500,1000,1,1,1,1)
-UpdateWindow-OUT
-SyncControlsToFontDetails-OUT
