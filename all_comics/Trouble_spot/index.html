@@ -2,292 +2,202 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>TROUBLE SPOT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trouble Spot — Chapters</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-    margin: 0;
-    background: #000;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-    color: #fff;
+  background: url('TS_cover.png') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Barlow', sans-serif;
+  color: white;
+  overflow-x: hidden;
 }
 
-/* Viewer */
-.viewer {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
+/* dark transmission overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Track */
-.track {
-    display: flex;
-    height: 100%;
-    transition: transform 0.35s ease;
+/* NOISE / STATIC */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  animation: flicker 0.12s infinite;
 }
 
-/* DEFAULT = VERTICAL */
-.viewer {
-    overflow-y: auto;
-    overflow-x: hidden;
+@keyframes flicker {
+  0% { opacity: 0.08; }
+  50% { opacity: 0.14; }
+  100% { opacity: 0.1; }
 }
 
-.viewer.vertical .track {
-    flex-direction: column;
-    transform: none !important;
+/* BACK BUTTON */
+.topbar {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
 }
 
-.track img {
-    width: 100vw;
-    height: auto;
-    max-height: 100vh;
-    object-fit: contain;
-    flex-shrink: 0;
-    cursor: pointer;
-    display: block;
+.back {
+  font-size: 12px;
+  text-decoration: none;
+  color: rgba(255,255,255,0.7);
 }
 
-/* UI */
-.ui {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
+.back:hover {
+  color: #ff0059;
 }
 
-.ui.hidden { opacity: 0; }
-
-.button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 55px;
-    height: 55px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-    font-size: 22px;
-    cursor: pointer;
-    pointer-events: auto;
+/* PAGE */
+.page {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  padding: 80px 60px;
 }
 
-.left { left: 20px; }
-.right { right: 20px; }
-
-.button:hover { background: rgba(255,255,255,0.35); }
-
-.counter {
-    position: absolute;
-    top: 15px;
-    left: 20px;
-    font-size: 14px;
-    opacity: 0.8;
+/* HEADER */
+.header {
+  max-width: 700px;
+  margin-bottom: 60px;
 }
 
-.toggle {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: rgba(255,255,255,0.15);
-    border: none;
-    color: #fff;
-    padding: 6px 10px;
-    font-size: 12px;
-    cursor: pointer;
-    pointer-events: auto;
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(60px, 8vw, 120px);
+  letter-spacing: 2px;
 }
 
-.progress {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    background: #fff;
-    width: 0%;
+.desc {
+  margin-top: 10px;
+  font-size: 13px;
+  max-width: 520px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
 }
 
-/* Zoom */
-.zoomed {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.5);
-    max-width: 90vw;
-    max-height: 90vh;
-    z-index: 50;
-    cursor: zoom-out;
+/* CHAPTERS */
+.chapters {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 900px;
+}
+
+/* CHAPTER ENTRY */
+.chapter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: white;
+
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(6px);
+
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+/* unstable “signal drift” */
+.chapter:nth-child(odd) { transform: translateX(8px); }
+.chapter:nth-child(even) { transform: translateX(-6px); }
+
+.chapter:hover {
+  transform: translateX(0px) scale(1.02);
+  background: rgba(255,0,89,0.25);
+  border-color: rgba(255,0,89,0.5);
+}
+
+/* thumbnail */
+.chapter-thumb {
+  width: 64px;
+  height: 64px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* text */
+.chapter-title {
+  font-size: 15px;
+}
+
+.chapter-sub {
+  font-size: 11px;
+  opacity: 0.6;
+  margin-top: 2px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="viewer vertical" id="viewer">
-    <div class="track" id="track"></div>
-
-    <div class="ui" id="ui">
-        <button class="button left" id="prev">❮</button>
-        <button class="button right" id="next">❯</button>
-        <div class="counter" id="counter"></div>
-        <button class="toggle" id="toggle">HORIZONTAL</button>
-    </div>
+<div class="topbar">
+  <a class="back" href="https://dieclick.github.io">← BACK</a>
 </div>
 
-<div class="progress" id="progress"></div>
+<div class="page">
+
+  <div class="header">
+    <div class="title">TROUBLE SPOT</div>
+    <div class="desc">
+      A fragmented narrative reconstructed from unstable records.  
+      Each chapter is a detected signal fragment from the system.
+    </div>
+  </div>
+
+  <div class="chapters"></div>
+
+</div>
 
 <script>
-const totalPages = 85;
-const prefix = "";
-const extension = ".png";
+fetch("chapters.json")
+  .then(res => res.json())
+  .then(data => {
+    const container = document.querySelector(".chapters");
+    container.innerHTML = "";
 
-document.title = "TROUBLE SPOT";
+    data.forEach(ch => {
+      const a = document.createElement("a");
+      a.className = "chapter";
+      a.href = `${ch.folder}/index.html`;
 
-const viewer = document.getElementById("viewer");
-const track = document.getElementById("track");
-const counter = document.getElementById("counter");
-const progress = document.getElementById("progress");
-const ui = document.getElementById("ui");
+      a.innerHTML = `
+        <div class="chapter-thumb"></div>
+        <div>
+          <div class="chapter-title">${ch.name}</div>
+          <div class="chapter-sub">${ch.desc}</div>
+        </div>
+      `;
 
-let current = 0;
-let vertical = true; // ✅ DEFAULT VERTICAL
-let hideTimer;
-
-const pages = [];
-
-/* ===== build pages ===== */
-for (let i = 1; i <= totalPages; i++) {
-    const img = document.createElement("img");
-    img.src = `${i}${extension}`;
-    img.loading = "lazy";
-
-    img.onclick = () => {
-        const zoom = document.createElement("img");
-        zoom.src = img.src;
-        zoom.className = "zoomed";
-        document.body.appendChild(zoom);
-
-        const close = (e) => {
-            if (e.type === "click" || e.key === "Escape") {
-                zoom.remove();
-                document.removeEventListener("keydown", close);
-            }
-        };
-
-        zoom.onclick = close;
-        document.addEventListener("keydown", close);
-    };
-
-    pages.push(img);
-    track.appendChild(img);
-}
-
-/* ===== preload ===== */
-function preload(i) {
-    [-2, -1, 1, 2].forEach(o => {
-        const n = i + o;
-        if (n >= 1 && n <= totalPages) {
-            const img = new Image();
-            img.src = `${n}${extension}`;
-        }
+      container.appendChild(a);
     });
-}
-
-/* ===== update ===== */
-function update() {
-    if (!vertical) {
-        track.style.transform = `translateX(-${current * 100}vw)`;
-    }
-
-    counter.textContent = `${current + 1} / ${totalPages}`;
-    progress.style.width = `${(current / (totalPages - 1)) * 100}%`;
-
-    preload(current + 1);
-}
-
-/* ===== navigation ===== */
-function next() {
-    if (current < totalPages - 1) current++;
-    update();
-}
-
-function prev() {
-    if (current > 0) current--;
-    update();
-}
-
-document.getElementById("next").onclick = next;
-document.getElementById("prev").onclick = prev;
-
-/* ===== keyboard ===== */
-document.addEventListener("keydown", e => {
-    if (e.key === "ArrowRight") next();
-    if (e.key === "ArrowLeft") prev();
-});
-
-/* ===== swipe (horizontal only) ===== */
-let startX = 0;
-
-document.addEventListener("touchstart", e => {
-    if (vertical) return;
-    startX = e.touches[0].clientX;
-});
-
-document.addEventListener("touchend", e => {
-    if (vertical) return;
-
-    let dx = e.changedTouches[0].clientX - startX;
-
-    if (dx < -50) next();
-    if (dx > 50) prev();
-});
-
-/* ===== vertical sync ===== */
-viewer.addEventListener("scroll", () => {
-    if (!vertical) return;
-
-    let closest = 0;
-    let min = Infinity;
-
-    pages.forEach((img, i) => {
-        const d = Math.abs(img.getBoundingClientRect().top);
-        if (d < min) {
-            min = d;
-            closest = i;
-        }
-    });
-
-    current = closest;
-    update();
-});
-
-/* ===== toggle mode ===== */
-document.getElementById("toggle").onclick = () => {
-    vertical = !vertical;
-    viewer.classList.toggle("vertical");
-
-    document.getElementById("toggle").textContent =
-        vertical ? "HORIZONTAL" : "VERTICAL";
-
-    update();
-};
-
-/* ===== UI hide ===== */
-function showUI() {
-    ui.classList.remove("hidden");
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => ui.classList.add("hidden"), 2000);
-}
-
-document.addEventListener("mousemove", showUI);
-document.addEventListener("touchstart", showUI);
-
-/* init */
-update();
-preload(1);
-showUI();
+  })
+  .catch(err => {
+    console.error("Chapter load failed:", err);
+  });
 </script>
 
 </body>
