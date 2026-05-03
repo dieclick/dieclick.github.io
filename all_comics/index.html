@@ -13,8 +13,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: #ff0059; /* inverted main tone */
-  color: #0d0d0d;
+  background: #ff0059;
   font-family: 'Barlow', sans-serif;
 }
 
@@ -25,86 +24,83 @@ body {
   grid-template-columns: 1fr 2fr;
 }
 
-/* LEFT — inverted panel */
+/* LEFT */
 .left {
   background: #0d0d0d;
-  color: #f0ede8;
+  color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 32px;
 }
 
-/* title */
 .title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(80px, 10vw, 140px);
-  line-height: 0.9;
   color: #ff0059;
+  line-height: 0.9;
 }
 
-/* description */
 .desc {
-  max-width: 360px;
   font-size: 13px;
+  max-width: 320px;
   color: rgba(255,255,255,0.5);
 }
 
-/* RIGHT — comic shelf */
+/* RIGHT — shelf */
 .right {
-  padding: 40px;
   display: flex;
-  flex-direction: column;
-  gap: 18px;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 60px;
+  align-items: flex-start;
+  perspective: 1200px;
 }
 
-/* COMIC BOOK ITEM */
+/* BOOK (upright) */
 .comic {
   position: relative;
-  height: 140px;
-  display: flex;
-  align-items: center;
+  width: 180px;
+  height: 260px;
   text-decoration: none;
-  border: 1px solid rgba(0,0,0,0.15);
-  background: rgba(255,255,255,0.15);
-  overflow: hidden;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease;
 }
 
-/* subtle “stacked book” feel */
+/* depth stack behind */
 .comic::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.05);
-  transform: translate(6px, 6px);
+  background: rgba(255,255,255,0.15);
+  transform: translate(10px, 10px) rotateY(-6deg);
   z-index: 0;
 }
 
-/* cover image */
+/* second layer */
+.comic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.08);
+  transform: translate(5px, 5px) rotateY(-3deg);
+  z-index: 1;
+}
+
+/* COVER */
 .comic-bg {
-  width: 110px;
+  position: relative;
+  width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
-  filter: contrast(110%);
-  z-index: 2;
+  z-index: 3;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
 }
 
-/* text area */
-.comic-name {
-  padding: 0 20px;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  z-index: 2;
-  color: #0d0d0d;
-}
-
-/* hover */
+/* hover = physical movement */
 .comic:hover {
-  transform: translateY(-4px);
-  background: rgba(255,255,255,0.25);
+  transform: rotateY(-12deg) rotateX(6deg) translateY(-10px) scale(1.03);
 }
 
 /* back */
@@ -121,21 +117,18 @@ body {
 }
 
 .back:hover {
-  color: white;
+  color: #fff;
 }
 
 /* mobile */
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .page {
     grid-template-columns: 1fr;
   }
 
-  .left {
-    min-height: 220px;
-  }
-
-  .comic {
-    height: 120px;
+  .right {
+    justify-content: center;
+    padding: 30px;
   }
 }
 </style>
@@ -144,7 +137,7 @@ body {
 <body>
 
 <div class="topbar">
-  <a class="back" href="index.html">← BACK</a>
+  <a class="back" href="https://dieclick.github.io">← BACK</a>
 </div>
 
 <div class="page">
@@ -153,7 +146,7 @@ body {
   <div class="left">
     <div class="title">COMICS</div>
     <div class="desc">
-      Physical-style illustrated works. Covers first, stories inside.
+      A comic is a form of graphic storytelling that combines sequenced images with text to tell a story, wether real or not.
     </div>
   </div>
 
@@ -162,17 +155,14 @@ body {
 
     <a class="comic" href="BLEIN_I/index.html">
       <div class="comic-bg" style="background-image:url('comic_blein_cover.png')"></div>
-      <div class="comic-name">BLEIN I</div>
     </a>
 
     <a class="comic" href="https://dieclick.github.io/comics/index.html">
       <div class="comic-bg" style="background-image:url('desgreencover.png')"></div>
-      <div class="comic-name">DESTINATA GREEN</div>
     </a>
 
     <a class="comic" href="Trouble_spot/index.html">
       <div class="comic-bg" style="background-image:url('TS_cover.png')"></div>
-      <div class="comic-name">TROUBLE SPOT</div>
     </a>
 
   </div>
