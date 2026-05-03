@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PersistableFontDetails xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Letterset>AÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZaábcdeéfghiíjklmnñoópqrstuúvwxyz0123456789.,;:?!-_~#"'&amp;{}()[]|`\/@°+=*$£€&lt;&gt;%АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪэЮюЯя</Letterset>
+  <AdjustHeight>1</AdjustHeight>
+  <AdjustWidth>1</AdjustWidth>
+  <SampleText>AÁÑñópБбВвДдЕеЁёЖжЗзИ</SampleText>
+  <ShiftHorz>1</ShiftHorz>
+  <ShiftVert>1</ShiftVert>
+  <ShowGrid>true</ShowGrid>
+  <ShowBoundary>false</ShowBoundary>
+  <Size>72</Size>
+  <StrikeOut>false</StrikeOut>
+  <Underline>false</Underline>
+  <IsFill>true</IsFill>
+  <IsOutlineOne>true</IsOutlineOne>
+  <IsOutlineTwo>false</IsOutlineTwo>
+  <IsShadow>false</IsShadow>
+  <OutlineOneWidth>3</OutlineOneWidth>
+  <OutlineTwoWidth>2</OutlineTwoWidth>
+  <ShadowWidth>4</ShadowWidth>
+  <ShadowOffsetX>5</ShadowOffsetX>
+  <ShadowOffsetY>5</ShadowOffsetY>
+  <FontStyleDisplayName>Bold</FontStyleDisplayName>
+  <Height>92</Height>
+  <Width>80</Width>
+  <FontFamilyName>Uber Move</FontFamilyName>
+  <FontStyleName>Normal</FontStyleName>
+  <FontStretchName>Normal</FontStretchName>
+  <FontWeightName>Bold</FontWeightName>
+  <FillColourName>#FFFFFFFF</FillColourName>
+  <OutlineOneColourName>#FF000000</OutlineOneColourName>
+  <OutlineTwoColourName>#642300FF</OutlineTwoColourName>
+  <ShadowColourName>#5A000000</ShadowColourName>
+  <SampleBackgroundColourName>#FF2E263D</SampleBackgroundColourName>
+</PersistableFontDetails>
