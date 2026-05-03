@@ -22,14 +22,39 @@ body {
 .page {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 2fr 1fr; /* flipped */
 }
 
-/* LEFT */
+/* LEFT (now text area) */
 .left {
+  background: #ff0059;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 32px;
+}
+
+/* Title */
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 10vw, 140px);
+  line-height: 0.9;
+  color: #0d0d0d;
+}
+
+/* Description */
+.desc {
+  max-width: 360px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.5);
+}
+
+/* RIGHT (now grid) */
+.right {
   display: grid;
   grid-template-columns: 1fr;
-  border-right: 1px solid #1a1a1a;
+  border-left: 1px solid #1a1a1a;
 }
 
 /* Game item */
@@ -42,7 +67,6 @@ body {
   border-bottom: 1px solid #161616;
   text-decoration: none;
   color: #f0ede8;
-  transition: background 0.15s;
 }
 
 /* Background image */
@@ -90,33 +114,6 @@ body {
   color: #0d0d0d;
 }
 
-/* RIGHT */
-.right {
-  background: #ff0059;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 32px;
-}
-
-/* Title */
-.title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(80px, 10vw, 140px);
-  line-height: 0.9;
-  color: #0d0d0d;
-  text-align: right;
-}
-
-/* Description */
-.desc {
-  max-width: 360px;
-  text-align: right;
-  font-size: 13px;
-  color: rgba(0,0,0,0.5);
-}
-
 /* Back */
 .topbar {
   position: absolute;
@@ -127,11 +124,11 @@ body {
 .back {
   font-size: 12px;
   text-decoration: none;
-  color: #555;
+  color: rgba(0,0,0,0.5);
 }
 
 .back:hover {
-  color: #ff0059;
+  color: #0d0d0d;
 }
 
 /* Mobile */
@@ -140,7 +137,7 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .right {
+  .left {
     min-height: 220px;
   }
 
@@ -154,13 +151,22 @@ body {
 <body>
 
 <div class="topbar">
-  <a class="back" href="/">← BACK</a>
+  <a class="back" href="index.html">← BACK</a>
 </div>
 
 <div class="page">
 
-  <!-- LEFT -->
+  <!-- LEFT (TEXT) -->
   <div class="left">
+    <div class="title">GAMES</div>
+
+    <div class="desc">
+      Released projects. Experiments, systems, and fragments of larger worlds.
+    </div>
+  </div>
+
+  <!-- RIGHT (GRID) -->
+  <div class="right">
 
     <a class="game" href="https://gamejolt.com/games/PQQ/791701" target="_blank">
       <div class="game-bg" style="background-image: url('pqqlogo.png');"></div>
@@ -177,15 +183,6 @@ body {
       <span class="game-name">BLACK_WIKIA</span>
     </a>
 
-  </div>
-
-  <!-- RIGHT -->
-  <div class="right">
-    <div class="title">GAMES</div>
-
-    <div class="desc">
-      Released projects. Experiments, systems, and fragments of larger worlds.
-    </div>
   </div>
 
 </div>
