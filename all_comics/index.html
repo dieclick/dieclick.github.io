@@ -57,6 +57,8 @@ body {
   perspective: 1200px;
 }
 
+
+/* BOOK WRAPPER */
 .comic {
   position: relative;
   width: 180px;
@@ -66,78 +68,56 @@ body {
   transition: transform 0.25s ease;
 }
 
-/* BACK pages */
-.comic::before {
-  content: "";
+/* BACK PAGES (behind everything) */
+.comic-pages {
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.15);
-  transform: translate(10px, 10px) rotateY(-6deg);
+  background: rgba(255,255,255,0.12);
+  transform: translate(14px, 14px) rotateY(-6deg);
   z-index: 0;
 }
 
-.comic::after {
+.comic-pages::after {
   content: "";
   position: absolute;
   inset: 0;
   background: rgba(255,255,255,0.08);
-  transform: translate(5px, 5px) rotateY(-3deg);
-  z-index: 1;
+  transform: translate(6px, 6px) rotateY(-3deg);
 }
 
-/* COVER wrapper MUST be above pseudo elements */
-.comic-bg {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  z-index: 5; /*  key fix */
-  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-}
-
-.comic-bg {
-  position: relative;
-  width: 100%;
-  height: 100%;
+/* COVER (true front layer) */
+.comic-cover {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: center;
   z-index: 2;
   box-shadow: 0 20px 40px rgba(0,0,0,0.35);
 }
 
-/* spine highlight (left edge light) */
-.comic-bg::before {
+/* spine light */
+.comic-cover::before {
   content: "";
   position: absolute;
   left: 0;
   top: 0;
   width: 6px;
   height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(255,255,255,0.25),
-    rgba(255,255,255,0)
-  );
-  pointer-events: none;
+  background: linear-gradient(to right, rgba(255,255,255,0.25), transparent);
 }
 
-/* paper thickness shadow (right edge) */
-.comic-bg::after {
+/* edge shadow */
+.comic-cover::after {
   content: "";
   position: absolute;
   right: 0;
   top: 0;
   width: 8px;
   height: 100%;
-  background: linear-gradient(
-    to left,
-    rgba(0,0,0,0.25),
-    rgba(0,0,0,0)
-  );
-  pointer-events: none;
+  background: linear-gradient(to left, rgba(0,0,0,0.25), transparent);
 }
-/* hover = physical movement */
+
+/* hover motion */
 .comic:hover {
   transform: rotateY(-12deg) rotateX(6deg) translateY(-10px) scale(1.03);
 }
