@@ -1,37 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dieclick</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dieclick</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0d0d0d;
+    color: #f0ede8;
+    font-family: 'Barlow', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .page {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* LEFT — link grid */
+  .left {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    border-right: 1px solid #1a1a1a;
+  }
+
+  .link-item {
+    border-bottom: 1px solid #161616;
+    border-right: 1px solid #161616;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    text-decoration: none;
+    color: #f0ede8;
+    transition: background 0.15s;
+  }
+
+  .link-item:hover { background: #ff0059; }
+  .link-item:hover .link-name { color: #0d0d0d; }
+  .link-item:hover .link-arrow { color: #0d0d0d; transform: translate(2px, -2px); }
+  .link-item:hover .link-cat { color: rgba(0,0,0,0.45); }
+
+  .link-inner { display: flex; flex-direction: column; gap: 3px; }
+
+  .link-name {
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  .link-cat {
+    font-family: 'Barlow', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #444;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+
+  .link-arrow {
+    font-size: 14px;
+    color: #333;
+    transition: color 0.15s, transform 0.15s;
+  }
+
+  .link-item.featured {
+    grid-column: 1 / -1;
+    background: #111;
+    border-bottom: 1px solid #222;
+  }
+
+  .link-item.featured .link-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  .link-item.featured:hover { background: #ff0059; }
+  .link-item.featured:hover .link-name { color: #0d0d0d; }
+  .link-item.featured:hover .link-arrow { color: #0d0d0d; transform: translate(2px, -2px); }
+  .link-item.featured:hover .link-cat { color: rgba(0,0,0,0.45); }
+
+  /* RIGHT — big title */
+  .right {
+    background: #ff0059;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 32px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .big-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 12vw, 160px);
+    line-height: 0.88;
+    letter-spacing: 2px;
+    color: #0d0d0d;
+    cursor: default;
+    user-select: none;
+    transition: letter-spacing 0.08s;
+  }
+
+  .big-title.gothic {
+    font-family: 'UnifrakturMaguntia', cursive;
+    letter-spacing: -2px;
+  }
+
+  .big-title.nefais {
+    font-family: 'UnifrakturMaguntia', cursive;
+    letter-spacing: -2px;
+  }
+
+  .bio {
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(0,0,0,0.5);
+    font-weight: 500;
+    max-width: 320px;
+  }
+
+  .bio strong { color: #0d0d0d; font-weight: 600; }
+
+  @media (max-width: 700px) {
+    body { overflow-y: auto; }
+    .page {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      height: auto;
+    }
+    .right {
+      min-height: 280px;
+      padding: 24px;
+    }
+    .big-title { font-size: 18vw; }
+    .bio { max-width: 100%; }
+    .left {
+      border-right: none;
+      grid-template-rows: auto;
+    }
+  }
+</style>
 </head>
 <body>
-<nav>
-    <a href="https://dieclick.framer.website/">Portfolio</a>
-    <a href="https://www.artstation.com/dieclick">Art Station</a>
-    <a href="https://dieclick.github.io/all_comics">COMICS</a>
-    <a href="https://dieclick.github.io/all_games">Games</a>
-    <a href="https://dieclick.github.io/blog">Blog</a>
-    <a href="https://dieclick.github.io/RNA_recourses/">ARN Translator</a>
-    <a href="https://dieclick123.wixsite.com/dieclick">Commissions</a>
-    <a href="https://www.instagram.com/dieclick/">Instagram</a>
-    <a href="https://dieclick.github.io/TOP/">Terms of Privacy IG</a>
-</nav>
+<div class="page">
 
-    <div class="content">
-        <div class="highlight">
-            <a href="https://dieclick.github.io/destinata/index.html">
-                <img alt="Destinata" src="demo_hero_logo_white.png">
-            </a>
-            <a href="https://dieclick.github.io/aleph/index.html">
-                <img alt="Alef" src="logo130.png">
-            </a>
-        </div>
-        <footer>
-            <h1>Hello to Dieclick</h1>
-            <p>This is my outlet, please explore and enjoy your stay.</p>
-        </footer>
-    </div>
+  <div class="left">
+    <a class="link-item featured" href="https://dieclick.framer.website/portfolio" target="_blank">
+      <div class="link-inner">
+        <span class="link-name">PROFESSIONAL PORTFOLIO</span>
+        <span class="link-cat">Full showcase — games, art, UI</span>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <a class="link-item" href="https://dieclick.github.io/all_games" target="_blank">
+      <div class="link-inner"><span class="link-name">Games</span><span class="link-cat">Releases</span></div>
+      <span class="link-arrow">↗</span>
+    </a>
+    <a class="link-item" href="https://dieclick.github.io/all_comics" target="_blank">
+      <div class="link-inner"><span class="link-name">Comics</span><span class="link-cat">Archive</span></div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <a class="link-item" href="https://www.artstation.com/dieclick" target="_blank">
+      <div class="link-inner"><span class="link-name">Art Station</span><span class="link-cat">Illustration</span></div>
+      <span class="link-arrow">↗</span>
+    </a>
+    <a class="link-item" href="https://dieclick.github.io/blog" target="_blank">
+      <div class="link-inner"><span class="link-name">Blog</span><span class="link-cat">Writing</span></div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <a class="link-item" href="https://www.instagram.com/dieclick/" target="_blank">
+      <div class="link-inner"><span class="link-name">Instagram</span><span class="link-cat">Social</span></div>
+      <span class="link-arrow">↗</span>
+    </a>
+    <a class="link-item" href="https://dieclick123.wixsite.com/dieclick" target="_blank">
+      <div class="link-inner"><span class="link-name">Commissions</span><span class="link-cat">Hire me</span></div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <a class="link-item" href="https://dieclick.github.io/RNA_recourses/" target="_blank">
+      <div class="link-inner"><span class="link-name">ARN Translator</span><span class="link-cat">Tool</span></div>
+      <span class="link-arrow">↗</span>
+    </a>
+    <a class="link-item" href="https://dieclick.github.io/TOP/" target="_blank">
+      <div class="link-inner"><span class="link-name">Privacy Terms</span><span class="link-cat">Legal</span></div>
+      <span class="link-arrow">↗</span>
+    </a>
+  </div>
+
+  <div class="right">
+    <div class="big-title" id="title">DIECLICK</div>
+    <p class="bio">
+      Self-taught since 2018. Making games, making comics, making movies. All that can be done and none that can't be told.
+    </p>
+  </div>
+
+</div>
+<script>
+  const el = document.getElementById('title');
+  const states = [
+    { text: 'DIECLICK', cls: '' },
+    { text: 'DIECLICK', cls: 'gothic' },
+    { text: 'NEFAIS',   cls: 'nefais' },
+    { text: 'DIECLICK', cls: 'gothic' },
+    { text: 'DIECLICK', cls: '' },
+  ];
+
+  function burst() {
+    let i = 0;
+    const timings = [0, 80, 200, 360, 520];
+
+    timings.forEach((t, idx) => {
+      setTimeout(() => {
+        const s = states[idx];
+        el.textContent = s.text;
+        el.className = 'big-title ' + s.cls;
+      }, t);
+    });
+
+    // schedule next burst: random 3–7s
+    const next = 2000 + Math.random() * 4000;
+    setTimeout(burst, next);
+  }
+
+  // first burst after a short delay
+  setTimeout(burst, 1800);
+</script>
 </body>
 </html>
