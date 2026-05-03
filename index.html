@@ -25,7 +25,6 @@
     grid-template-columns: 1fr 2fr;
   }
 
-  /* LEFT — link grid */
   .left {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -38,41 +37,28 @@
     border-right: 1px solid #161616;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 20px;
     text-decoration: none;
     color: #f0ede8;
     transition: background 0.15s;
+    text-align: center;
   }
 
   .link-item:hover { background: #ff0059; }
   .link-item:hover .link-name { color: #0d0d0d; }
-  .link-item:hover .link-arrow { color: #0d0d0d; transform: translate(2px, -2px); }
-  .link-item:hover .link-cat { color: rgba(0,0,0,0.45); }
 
-  .link-inner { display: flex; flex-direction: column; gap: 3px; }
+  .link-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .link-name {
     font-family: 'Barlow', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-  }
-
-  .link-cat {
-    font-family: 'Barlow', sans-serif;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #444;
-    font-weight: 500;
-    transition: color 0.15s;
-  }
-
-  .link-arrow {
     font-size: 14px;
-    color: #333;
-    transition: color 0.15s, transform 0.15s;
+    font-weight: 600;
+    letter-spacing: 0.5px;
   }
 
   .link-item.featured {
@@ -83,16 +69,13 @@
 
   .link-item.featured .link-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
+    font-size: 24px;
     letter-spacing: 2px;
   }
 
   .link-item.featured:hover { background: #ff0059; }
   .link-item.featured:hover .link-name { color: #0d0d0d; }
-  .link-item.featured:hover .link-arrow { color: #0d0d0d; transform: translate(2px, -2px); }
-  .link-item.featured:hover .link-cat { color: rgba(0,0,0,0.45); }
 
-  /* RIGHT — big title */
   .right {
     background: #ff0059;
     display: flex;
@@ -106,7 +89,10 @@
 
   .big-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(80px, 10vw, 160px); text-align: right; position: relative; z-index: 1;
+    font-size: clamp(80px, 10vw, 160px);
+    text-align: right;
+    position: relative;
+    z-index: 1;
     line-height: 0.88;
     letter-spacing: 2px;
     color: #0d0d0d;
@@ -115,23 +101,16 @@
     transition: letter-spacing 0.08s;
   }
 
-  .big-title.gothic {
-    font-family: 'UnifrakturMaguntia', cursive;
-    letter-spacing: -2px;
-  }
-
-  .big-title.nefais {
-    font-family: 'UnifrakturMaguntia', cursive;
-    letter-spacing: -2px;
-  }
-
   .bio {
     font-family: 'Barlow', sans-serif;
     font-size: 13px;
     line-height: 1.8;
     color: rgba(0,0,0,0.5);
     font-weight: 500;
-    max-width: 360px; text-align: right; position: relative; z-index: 1;
+    max-width: 360px;
+    text-align: right;
+    position: relative;
+    z-index: 1;
   }
 
   .bio strong { color: #0d0d0d; font-weight: 600; }
@@ -173,50 +152,40 @@
     <a class="link-item featured" href="https://dieclick.framer.website/portfolio" target="_blank">
       <div class="link-inner">
         <span class="link-name">PROFESSIONAL PORTFOLIO</span>
-        <span class="link-cat">Full showcase — games, art, UI</span>
       </div>
-      <span class="link-arrow">↗</span>
     </a>
 
     <a class="link-item" href="https://dieclick.github.io/all_games" target="_blank">
-      <div class="link-inner"><span class="link-name">Games</span><span class="link-cat">Releases</span></div>
-      <span class="link-arrow">↗</span>
+      <div class="link-inner"><span class="link-name">Games</span></div>
     </a>
     <a class="link-item" href="https://dieclick.github.io/all_comics" target="_blank">
-      <div class="link-inner"><span class="link-name">Comics</span><span class="link-cat">Archive</span></div>
-      <span class="link-arrow">↗</span>
+      <div class="link-inner"><span class="link-name">Comics</span></div>
     </a>
 
     <a class="link-item" href="https://www.artstation.com/dieclick" target="_blank">
-      <div class="link-inner"><span class="link-name">Art Station</span><span class="link-cat">Illustration</span></div>
-      <span class="link-arrow">↗</span>
+      <div class="link-inner"><span class="link-name">Art Station</span></div>
     </a>
     <a class="link-item" href="https://dieclick.github.io/blog" target="_blank">
-      <div class="link-inner"><span class="link-name">Blog</span><span class="link-cat">Writing</span></div>
-      <span class="link-arrow">↗</span>
+      <div class="link-inner"><span class="link-name">Blog</span></div>
     </a>
 
     <a class="link-item" href="https://www.instagram.com/dieclick/" target="_blank">
-      <div class="link-inner"><span class="link-name">Instagram</span><span class="link-cat">Social</span></div>
-      <span class="link-arrow">↗</span>
+      <div class="link-inner"><span class="link-name">Instagram</span></div>
     </a>
     <a class="link-item" href="https://dieclick123.wixsite.com/dieclick" target="_blank">
-      <div class="link-inner"><span class="link-name">Commissions</span><span class="link-cat">Hire me</span></div>
-      <span class="link-arrow">↗</span>
+      <div class="link-inner"><span class="link-name">Commissions</span></div>
     </a>
 
     <a class="link-item" href="https://dieclick.github.io/RNA_recourses/" target="_blank">
-      <div class="link-inner"><span class="link-name">ARN Translator</span><span class="link-cat">Tool</span></div>
-      <span class="link-arrow">↗</span>
+      <div class="link-inner"><span class="link-name">ARN Translator</span></div>
     </a>
     <a class="link-item" href="https://dieclick.github.io/TOP/" target="_blank">
-      <div class="link-inner"><span class="link-name">Privacy Terms</span><span class="link-cat">Legal</span></div>
-      <span class="link-arrow">↗</span>
+      <div class="link-inner"><span class="link-name">Privacy Terms</span></div>
     </a>
   </div>
 
   <div class="right">
-    <canvas id="grain" aria-hidden="true"></canvas>
+    <canvas id="grain"></canvas>
     <div class="big-title" id="title">DIECLICK</div>
     <p class="bio">
       Self-taught since 2018. Making games, making comics, making movies. All that can be done and none that can't be told.
@@ -224,10 +193,11 @@
   </div>
 
 </div>
+
 <script>
-  // grain
   const canvas = document.getElementById('grain');
   const ctx = canvas.getContext('2d');
+
   function drawGrain() {
     const w = canvas.width = canvas.offsetWidth;
     const h = canvas.height = canvas.offsetHeight;
@@ -239,10 +209,10 @@
     }
     ctx.putImageData(img, 0, 0);
   }
+
   drawGrain();
   setInterval(drawGrain, 80);
 
-  // title glitch
   const el = document.getElementById('title');
 
   const gothicFonts = [
@@ -276,7 +246,6 @@
   }
 
   function burst() {
-    // re-roll the middle frames' fonts each burst
     frames[1].font = pick();
     frames[2].font = pick();
     frames[3].font = pick();
@@ -284,21 +253,17 @@
     frames[5].font = pick();
     frames[6].font = pick();
 
-    // pick a random subset of frames, always starting and ending on DIECLICK/Bebas
     const base = frames[0];
     const middle = frames.slice(1, frames.length - 1);
 
-    // shuffle middle frames
     for (let i = middle.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [middle[i], middle[j]] = [middle[j], middle[i]];
     }
 
-    // pick 2–5 middle frames randomly
     const count = 2 + Math.floor(Math.random() * 4);
     const picked = [base, ...middle.slice(0, count), base];
 
-    // assign random short durations to each frame: 40–250ms
     let t = 0;
     picked.forEach((f, i) => {
       const duration = i === 0 ? 0 : Math.floor(rand(40, 250));
@@ -306,10 +271,9 @@
       setTimeout(() => applyFrame(f), t);
     });
 
-    // next burst: very unpredictable — sometimes quick (800ms), sometimes long (8s)
     const next = Math.random() < 0.3
-      ? rand(600, 1500)   // 30% chance: rapid fire
-      : rand(2500, 8000); // 70% chance: long wait
+      ? rand(600, 1500)
+      : rand(2500, 8000);
 
     setTimeout(burst, t + next);
   }
