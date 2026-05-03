@@ -240,38 +240,67 @@
     ctx.putImageData(img, 0, 0);
   }
   drawGrain();
-  // redraw grain every 80ms for animated film grain feel
   setInterval(drawGrain, 80);
 
   // title glitch
   const el = document.getElementById('title');
-  const states = [
-    { text: 'DIECLICK', cls: '' },
-    { text: 'DIECLICK', cls: 'gothic' },
-    { text: 'NEFAIS',   cls: 'nefais' },
-    { text: 'DIECLICK', cls: 'gothic' },
-    { text: 'DIECLICK', cls: '' },
+
+  const gothicFonts = [
+    "'UnifrakturMaguntia', cursive",
+    "'MedievalSharp', serif",
+    "fantasy",
   ];
 
-  function burst() {
-    let i = 0;
-    const timings = [0, 80, 200, 360, 520];
+  const frames = [
+    { text: 'DIECLICK', font: "'Bebas Neue', sans-serif", spacing: '2px' },
+    { text: 'DIECLICK', font: "'UnifrakturMaguntia', cursive", spacing: '-2px' },
+    { text: 'NEFAIS',   font: gothicFonts[Math.floor(Math.random()*gothicFonts.length)], spacing: '-1px' },
+    { text: 'DIECLICK', font: "fantasy", spacing: '1px' },
+    { text: 'NEFAIS',   font: "'UnifrakturMaguntia', cursive", spacing: '-3px' },
+    { text: 'DIECLICK', font: "'UnifrakturMaguntia', cursive", spacing: '0px' },
+    { text: 'DIECLICK', font: "'Bebas Neue', sans-serif", spacing: '2px' },
+  ];
 
-    timings.forEach((t, idx) => {
-      setTimeout(() => {
-        const s = states[idx];
-        el.textContent = s.text;
-        el.className = 'big-title ' + s.cls;
-      }, t);
-    });
+  function rand(min, max) { return min + Math.random() * (max - min); }
 
-    // schedule next burst: random 3–7s
-    const next = 2000 + Math.random() * 4000;
-    setTimeout(burst, next);
+  function applyFrame(f) {
+    el.textContent = f.text;
+    el.style.fontFamily = f.font;
+    el.style.letterSpacing = f.spacing;
   }
 
-  // first burst after a short delay
-  setTimeout(burst, 1800);
+  function burst() {
+    // pick a random subset of frames, always starting and ending on DIECLICK/Bebas
+    const base = frames[0];
+    const middle = frames.slice(1, frames.length - 1);
+
+    // shuffle middle frames
+    for (let i = middle.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [middle[i], middle[j]] = [middle[j], middle[i]];
+    }
+
+    // pick 2–5 middle frames randomly
+    const count = 2 + Math.floor(Math.random() * 4);
+    const picked = [base, ...middle.slice(0, count), base];
+
+    // assign random short durations to each frame: 40–250ms
+    let t = 0;
+    picked.forEach((f, i) => {
+      const duration = i === 0 ? 0 : Math.floor(rand(40, 250));
+      t += duration;
+      setTimeout(() => applyFrame(f), t);
+    });
+
+    // next burst: very unpredictable — sometimes quick (800ms), sometimes long (8s)
+    const next = Math.random() < 0.3
+      ? rand(600, 1500)   // 30% chance: rapid fire
+      : rand(2500, 8000); // 70% chance: long wait
+
+    setTimeout(burst, t + next);
+  }
+
+  setTimeout(burst, rand(800, 2500));
 </script>
 </body>
 </html>
