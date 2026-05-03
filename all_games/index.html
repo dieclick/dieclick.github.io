@@ -3,108 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIECLICK — Games</title>
 
-<title>Dieclick Games</title>
-
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background: url('bgal.png') no-repeat center center fixed;
-    background-size: cover;
-    color: white;
+  background: #0d0d0d;
+  color: #f0ede8;
+  font-family: 'Barlow', sans-serif;
+}
+
+/* Layout */
+.page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+/* LEFT */
+.left {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-right: 1px solid #1a1a1a;
+}
+
+/* Game item */
+.game {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid #161616;
+  text-decoration: none;
+  color: #f0ede8;
+  transition: background 0.15s;
+}
+
+/* Background image */
+.game-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  filter: grayscale(100%) contrast(110%);
+  transition: opacity 0.25s ease;
+  z-index: 0;
+}
+
+/* Red overlay */
+.game::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ff0059;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 1;
+}
+
+/* Text */
+.game-name {
+  position: relative;
+  z-index: 2;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+}
+
+/* Hover */
+.game:hover .game-bg {
+  opacity: 0.4;
+}
+
+.game:hover::after {
+  opacity: 0.85;
+}
+
+.game:hover {
+  color: #0d0d0d;
+}
+
+/* RIGHT */
+.right {
+  background: #ff0059;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 32px;
 }
 
 /* Title */
-header {
-    text-align: center;
-    padding: 40px 20px 10px;
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 10vw, 140px);
+  line-height: 0.9;
+  color: #0d0d0d;
+  text-align: right;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
+/* Description */
+.desc {
+  max-width: 360px;
+  text-align: right;
+  font-size: 13px;
+  color: rgba(0,0,0,0.5);
 }
 
-/* Grid Layout */
-.games {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    padding: 40px;
+/* Back */
+.topbar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 
-/* Card */
-.card {
-    width: 280px;
-    height: 280px;
-    position: relative;
-    border-radius: 15px;
-    overflow: hidden;
-    text-decoration: none;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.back {
+  font-size: 12px;
+  text-decoration: none;
+  color: #555;
 }
 
-.card:hover {
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+.back:hover {
+  color: #ff0059;
 }
 
-/* Image */
-.card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+/* Mobile */
+@media (max-width: 700px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
 
-/* Overlay */
-.overlay {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 15px;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    text-align: center;
-    font-weight: 500;
-    font-size: 1.1rem;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-}
+  .right {
+    min-height: 220px;
+  }
 
-.card:hover .overlay {
-    opacity: 1;
-    transform: translateY(0);
+  .title {
+    font-size: 18vw;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<div class="topbar">
+  <a class="back" href="/">← BACK</a>
+</div>
 
-<section class="games">
+<div class="page">
 
-    <a class="card" href="https://gamejolt.com/games/PQQ/791701">
-        <img src="pqqlogo.png" alt="PQQ">
-        <div class="overlay">PQQ Game</div>
+  <!-- LEFT -->
+  <div class="left">
+
+    <a class="game" href="https://gamejolt.com/games/PQQ/791701" target="_blank">
+      <div class="game-bg" style="background-image: url('pqqlogo.png');"></div>
+      <span class="game-name">PQQ</span>
     </a>
 
-    <a class="card" href="https://store.steampowered.com/app/1489160/Destinata_ROJO_COMPLETO/">
-        <img src="imagen_2023-08-27_185632232.png" alt="Destinata">
-        <div class="overlay">Destinata Red</div>
+    <a class="game" href="https://store.steampowered.com/app/1489160/Destinata_ROJO_COMPLETO/" target="_blank">
+      <div class="game-bg" style="background-image: url('imagen_2023-08-27_185632232.png');"></div>
+      <span class="game-name">DESTINATA ROJO</span>
     </a>
 
-    <a class="card" href="https://gamejolt.com/games/BLCKWK/860393">
-        <img src="imagen_2023-08-11_224220143.png" alt="Black_Wikia">
-        <div class="overlay">Black_Wikia</div>
+    <a class="game" href="https://gamejolt.com/games/BLCKWK/860393" target="_blank">
+      <div class="game-bg" style="background-image: url('imagen_2023-08-11_224220143.png');"></div>
+      <span class="game-name">BLACK_WIKIA</span>
     </a>
 
-</section>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <div class="title">GAMES</div>
+
+    <div class="desc">
+      Released projects. Experiments, systems, and fragments of larger worlds.
+    </div>
+  </div>
+
+</div>
 
 </body>
 </html>
