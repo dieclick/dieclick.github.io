@@ -120,16 +120,22 @@ fetch(base + "pages.json")
     document.title = data.title || "Comic";
 
     data.pages.forEach((src, i) => {
-        const img = new Image();
 
-        img.loading = "eager"; // faster first render
-        img.decoding = "async";
+    const img = document.createElement("img");
 
+    img.loading = "eager"; // current gets priority
+    img.decoding = "async";
+
+    img.dataset.src = base + src; // store real path
+
+    // only set src for first 2 pages
+    if (i <= 1) {
         img.src = base + src;
+    }
 
-        track.appendChild(img);
-        pages.push(img);
-    });
+    track.appendChild(img);
+    pages.push(img);
+});
 
     update();
 });
@@ -162,14 +168,22 @@ function preload(i) {
     });
 }
 
-/* navigation */
 function next() {
-    if (current < pages.length - 1) current++;
+    if (current < pages.length - 1) {
+        current++;
+
+        const nextImg = pages[current + 1];
+        if (nextImg && !nextImg.src) {
+            nextImg.src = nextImg.dataset.src;
+        }
+    }
     update();
 }
 
 function prev() {
-    if (current > 0) current--;
+    if (current > 0) {
+        current--;
+    }
     update();
 }
 
