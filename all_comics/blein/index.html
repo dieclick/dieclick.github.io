@@ -53,6 +53,10 @@ body.light .d-line{background:rgba(40,40,60,0.15);}
 .d-blk{width:32px;height:3px;background:rgba(220,220,240,0.2);}
 body.light .d-blk{background:rgba(40,40,60,0.2);}
 
+body.dark, body.light {
+  transition: none;
+}
+
 .entries{display:flex;flex-direction:column;gap:4px;max-width:700px;}
 
 .entry{display:block;text-decoration:none;color:inherit;position:relative;
@@ -122,7 +126,7 @@ body.light .entry-sub{color:rgba(40,40,60,0.45);}
 <div class="page">
   <div class="header">
     <div class="title">BLEIN</div>
-    <div class="desc">The anomaly approaches.</div>
+    <div class="desc">An anomaly approaches from the sky. Nobody saw it come.</div>
   </div>
   <div class="divide">
     <div class="d-blk"></div>
@@ -145,7 +149,8 @@ for(let i=0;i<28;i++){
 let dark=true;
 function shift(){
   dark=!dark;
-  document.body.className=dark?'dark':'light';
+  document.body.classList.remove('dark', 'light');
+document.body.classList.add(dark ? 'dark' : 'light');
   setTimeout(shift, 1500+Math.random()*4500);
 }
 setTimeout(shift, 2000+Math.random()*3000);
