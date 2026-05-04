@@ -1,22 +1,22 @@
 [
   {
-    "name": "Chapter 1 — Signal Loss",
-    "folder": "chapter1",
-    "desc": "The first distortion appears"
+    "name": "CH.1",
+    "folder": "Chapter 1",
+    "desc": "From day 1-11 or (16/03/22-27/03/22)"
   },
   {
-    "name": "Chapter 2 — Residual Frame",
-    "folder": "chapter2",
-    "desc": "Something remains in the recording"
+    "name": "CH.2",
+    "folder": "Chapter 2",
+    "desc": "From day 13-25 or (28/03/22-09/04/22)"
   },
   {
-    "name": "Chapter 3 — Misalignment",
-    "folder": "chapter3",
-    "desc": "Time stops matching itself"
+    "name": "CH.3",
+    "folder": "Chapter 3",
+    "desc": "From day 26-36 or (10/04/22-20/04/22)"
   },
   {
-    "name": "Chapter 4 — Unknown Trace",
-    "folder": "chapter4",
-    "desc": "No origin detected"
+    "name": "CH.4",
+    "folder": "Chapter 4",
+    "desc": "No origin known"
   }
 ]
