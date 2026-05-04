@@ -23,9 +23,8 @@ body{
   min-height:100vh;
   background:#0d0d0f;
   color:#ddd;
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'IBM Plex Mono', monospace;
   position:relative;
-
   transition:background 0.4s ease, color 0.4s ease;
 }
 
@@ -34,9 +33,12 @@ body.light{
   color:#111;
 }
 
-/* APP WRAPPER (NEW) */
-#app{
-  position:relative;
+/* SAFE GLITCH LAYER */
+#glitch-layer{
+  position:fixed;
+  inset:0;
+  z-index:5;
+  pointer-events:none;
   will-change:transform;
 }
 
@@ -50,7 +52,7 @@ body.light{
   pointer-events:none;
 }
 
-/* RGB glitch */
+/* RGB EFFECT (safe) */
 body.glitching{
   animation:rgbShift 0.22s steps(3,end) 2;
 }
@@ -97,8 +99,13 @@ body.light .rain span{
   to{transform:translateY(110vh);}
 }
 
-/* BACK BUTTON */
-.topbar{position:fixed;top:22px;left:24px;z-index:200;}
+/* UI */
+.topbar{
+  position:fixed;
+  top:22px;
+  left:24px;
+  z-index:200;
+}
 
 .back{
   font-size:10px;
@@ -112,7 +119,11 @@ body.light .back{color:rgba(80,80,100,0.55);}
 .back:hover{color:#d4a017;}
 
 /* PAGE */
-.page{position:relative;z-index:3;padding:72px 52px;}
+.page{
+  position:relative;
+  z-index:3;
+  padding:72px 52px;
+}
 
 .title{
   font-family:'Russo One';
@@ -134,7 +145,10 @@ body.light .desc{
 }
 
 /* ENTRIES */
-.entries{margin-top:60px;max-width:700px;}
+.entries{
+  margin-top:60px;
+  max-width:700px;
+}
 
 .entry{
   position:relative;
@@ -144,6 +158,7 @@ body.light .desc{
   color:inherit;
   text-decoration:none;
   transition:transform 0.2s ease;
+  z-index:3;
 }
 
 .entry:hover{
@@ -169,15 +184,11 @@ body.light .entry-bg{
 .entry-title{
   font-family:'Russo One';
   font-size:32px;
-  transition:color 0.3s ease;
 }
-
-body.light .entry-title{color:#1a1820;}
 
 .entry-sub{
   font-size:9px;
   color:rgba(200,200,220,0.35);
-  transition:color 0.3s ease;
 }
 
 body.light .entry-sub{
@@ -214,7 +225,7 @@ body.light .entry-sub{
 
 <div class="rain" id="rain"></div>
 
-<div id="app"><!-- NEW WRAPPER -->
+<div id="glitch-layer"></div>
 
 <div class="topbar">
   <a class="back" href="https://dieclick.github.io">← back</a>
@@ -225,8 +236,6 @@ body.light .entry-sub{
   <div class="desc">An anomaly approaches from the sky. Nobody saw it come.</div>
   <div class="entries" id="entries-container"></div>
 </div>
-
-</div><!-- END APP -->
 
 <script>
 
@@ -258,24 +267,20 @@ function scramble(el){
 
   el.textContent=out;
 
-  setTimeout(()=>{
-    el.textContent=original;
-  },120);
+  setTimeout(()=>{ el.textContent=original; },120);
 }
 
 /* GLITCH */
 let dark=true;
 const flash=document.getElementById("flash");
-const app=document.getElementById("app"); // NEW
+const layer=document.getElementById("glitch-layer");
 
 function glitch(real=false){
 
   flash.style.opacity="1";
-
   document.body.classList.add("glitching");
 
-  /* FIX: move wrapper instead of body */
-  app.style.transform=
+  layer.style.transform=
     `translate(${(Math.random()-0.5)*8}px, ${(Math.random()-0.5)*8}px)`;
 
   document.querySelectorAll(".title, .desc, .entry-title, .entry-sub")
@@ -284,14 +289,13 @@ function glitch(real=false){
   setTimeout(()=>{
     flash.style.opacity="0";
     document.body.classList.remove("glitching");
-    app.style.transform="none";
+    layer.style.transform="none";
   },120);
 
   if(real){
     setTimeout(()=>{
       dark=!dark;
-      document.body.classList.remove("dark","light");
-      document.body.classList.add(dark?"dark":"light");
+      document.body.classList.toggle("light", !dark);
     },60);
   }
 }
