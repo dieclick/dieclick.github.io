@@ -14,12 +14,10 @@
 
 body {
   margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  font-family: sans-serif;
+  min-height: 100vh;   /* instead of fixed height */
+  overflow-x: hidden;  /* only block horizontal scroll */
+  font-family: 'Barlow', sans-serif;
   color: white;
-
-  /* 👇 THIS is your grey CRT base */
   background: #2b2b2b;
   position: relative;
 }
