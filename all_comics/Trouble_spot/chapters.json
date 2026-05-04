@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Chapter 1 — Signal Loss",
+    "folder": "chapter1",
+    "desc": "The first distortion appears"
+  },
+  {
+    "name": "Chapter 2 — Residual Frame",
+    "folder": "chapter2",
+    "desc": "Something remains in the recording"
+  },
+  {
+    "name": "Chapter 3 — Misalignment",
+    "folder": "chapter3",
+    "desc": "Time stops matching itself"
+  },
+  {
+    "name": "Chapter 4 — Unknown Trace",
+    "folder": "chapter4",
+    "desc": "No origin detected"
+  }
+]
