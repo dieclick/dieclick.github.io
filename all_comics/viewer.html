@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comic</title>
+
+<style>
+body {
+    margin: 0;
+    background: #0d0d0d;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* subtle noise */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+}
+
+/* viewer */
+.viewer {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.35s ease;
+}
+
+.viewer.vertical {
+    overflow-y: auto;
+}
+
+.viewer.vertical .track {
+    flex-direction: column;
+    transform: none !important;
+}
+
+.track img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* click zones */
+.zone {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    z-index: 5;
+}
+
+.zone.left { left: 0; }
+.zone.right { right: 0; }
+
+/* UI */
+.ui {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.ui.hidden { opacity: 0; }
+
+.button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.12);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.leftBtn { left: 20px; }
+.rightBtn { right: 20px; }
+
+.counter {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.toggle {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.progress {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: white;
+    width: 0%;
+}
+
+/* zoom */
+.zoomed {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.4);
+    max-width: 90vw;
+    max-height: 90vh;
+    z-index: 50;
+    cursor: zoom-out;
+}
+</style>
+</head>
+
+<body>
+
+<div class="viewer" id="viewer">
+    <div class="track" id="track"></div>
+
+    <div class="zone left" id="zoneLeft"></div>
+    <div class="zone right" id="zoneRight"></div>
+
+    <div class="ui" id="ui">
+        <button class="button leftBtn" id="prev">❮</button>
+        <button class="button rightBtn" id="next">❯</button>
+        <div class="counter" id="counter"></div>
+        <button class="toggle" id="toggle">VERTICAL</button>
+    </div>
+</div>
+
+<div class="progress" id="progress"></div>
+
+<script>
+const track = document.getElementById('track');
+const viewer = document.getElementById('viewer');
+const counter = document.getElementById('counter');
+const progress = document.getElementById('progress');
+const ui = document.getElementById('ui');
+
+let pages = [];
+let current = 0;
+let vertical = false;
+let hideTimer;
+
+/* ===== GET CHAPTER PATH FROM URL ===== */
+const params = new URLSearchParams(window.location.search);
+const chapterPath = params.get("chapter");
+
+const base = chapterPath 
+  ? "/comics/" + chapterPath + "/"
+  : "./";
+
+/* ===== LOAD pages.json ===== */
+fetch(base + "pages.json")
+.then(res => res.json())
+.then(data => {
+
+    document.title = data.title || "Comic";
+
+    data.pages.forEach(src => {
+        const img = document.createElement("img");
+        img.src = base + src;
+
+        img.onclick = () => zoomImage(img.src);
+
+        track.appendChild(img);
+        pages.push(img);
+    });
+
+    update();
+});
+
+/* ===== ZOOM ===== */
+function zoomImage(src) {
+    const zoom = document.createElement('img');
+    zoom.src = src;
+    zoom.className = 'zoomed';
+    document.body.appendChild(zoom);
+
+    const close = (e) => {
+        if (e.type === "click" || e.key === "Escape") {
+            zoom.remove();
+            document.removeEventListener('keydown', close);
+        }
+    };
+
+    zoom.onclick = close;
+    document.addEventListener('keydown', close);
+}
+
+/* ===== NAVIGATION ===== */
+function next() {
+    if (current < pages.length - 1) current++;
+    update();
+}
+
+function prev() {
+    if (current > 0) current--;
+    update();
+}
+
+document.getElementById('next').onclick = next;
+document.getElementById('prev').onclick = prev;
+document.getElementById('zoneRight').onclick = next;
+document.getElementById('zoneLeft').onclick = prev;
+
+document.addEventListener('keydown', e => {
+    if (e.key === "ArrowRight") next();
+    if (e.key === "ArrowLeft") prev();
+});
+
+/* ===== TOGGLE MODE ===== */
+document.getElementById('toggle').onclick = () => {
+    vertical = !vertical;
+    viewer.classList.toggle('vertical');
+    document.getElementById('toggle').textContent = vertical ? "HORIZONTAL" : "VERTICAL";
+    update();
+};
+
+/* ===== UPDATE ===== */
+function update() {
+    if (!vertical) {
+        track.style.transform = `translateX(-${current * 100}vw)`;
+    }
+
+    counter.textContent = `${current + 1} / ${pages.length}`;
+    progress.style.width = `${(current / (pages.length - 1)) * 100}%`;
+}
+
+/* ===== UI AUTO-HIDE ===== */
+function showUI() {
+    ui.classList.remove('hidden');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => ui.classList.add('hidden'), 2000);
+}
+
+document.addEventListener('mousemove', showUI);
+document.addEventListener('touchstart', showUI);
+</script>
+
+</body>
+</html>
