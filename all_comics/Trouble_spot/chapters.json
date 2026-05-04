@@ -1,22 +1,37 @@
 [
   {
     "name": "CH.1",
-    "folder": "Chapter 1",
+    "folder": "chapter1",
     "desc": "From day 1-11 or (16/03/22-27/03/22)"
   },
   {
     "name": "CH.2",
-    "folder": "Chapter 2",
+    "folder": "chapter2",
     "desc": "From day 13-25 or (28/03/22-09/04/22)"
   },
   {
     "name": "CH.3",
-    "folder": "Chapter 3",
+    "folder": "chapter3",
     "desc": "From day 26-36 or (10/04/22-20/04/22)"
   },
   {
     "name": "CH.4",
-    "folder": "Chapter 4",
+    "folder": "chapter4",
+    "desc": "From day 37-48"
+  },
+  {
+    "name": "CH.5",
+    "folder": "chapter5",
+    "desc": "From day 49-59"
+  },
+  {
+    "name": "CH.6",
+    "folder": "chapter6",
+    "desc": "From day 60-71"
+  },
+  {
+    "name": "CH.7",
+    "folder": "chapter7",
     "desc": "No origin known"
   }
 ]
