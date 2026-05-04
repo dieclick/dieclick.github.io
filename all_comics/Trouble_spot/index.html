@@ -13,14 +13,16 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: #111;
+  background: #111; /* fallback grey CRT base */
   font-family: 'Barlow', sans-serif;
   color: white;
   overflow-x: hidden;
   position: relative;
 }
 
-/* BACKGROUND IMAGE */
+/* =========================
+   BACKGROUND IMAGE LAYER
+========================= */
 body::before {
   content: "";
   position: fixed;
@@ -30,10 +32,14 @@ body::before {
 
   background: url('TS_cover.png') no-repeat center center;
   background-size: cover;
+
   opacity: 0.85;
+  filter: contrast(1.1) brightness(0.9) saturate(1.1);
 }
 
-/* STATIC + SCANLINES LAYER */
+/* =========================
+   STATIC + NOISE LAYER
+========================= */
 body::after {
   content: "";
   position: fixed;
@@ -41,7 +47,7 @@ body::after {
   z-index: 2;
   pointer-events: none;
 
-  /* scanlines */
+  /* moving scanlines */
   background: repeating-linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.25),
@@ -50,19 +56,22 @@ body::after {
     transparent 3px
   );
 
-  opacity: 0.2;
+  opacity: 0.15;
   mix-blend-mode: multiply;
 
-  /* animation for movement */
-  animation: scanMove 6s linear infinite;
-
-  /* optional static overlay (adds “TV noise feel”) */
-  box-shadow: inset 0 0 200px rgba(255,255,255,0.03);
+  animation: scanMove 1.2s linear infinite;
 }
 
+/* =========================
+   SCANLINE ANIMATION
+========================= */
 @keyframes scanMove {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(6px); }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 6px;
+  }
 }
 
 /* BACK BUTTON */
