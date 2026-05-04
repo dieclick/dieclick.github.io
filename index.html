@@ -272,9 +272,9 @@
       setTimeout(() => applyFrame(f), t);
     });
 
-    const next = Math.random() < 0.3
-      ? rand(600, 1500)
-      : rand(2500, 8000);
+    const next = Math.random() < 0.5
+      ? rand(600, 1000)
+      : rand(1500, 5000);
 
     setTimeout(burst, t + next);
   }
