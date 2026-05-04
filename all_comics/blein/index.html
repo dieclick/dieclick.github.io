@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -16,17 +15,18 @@
   padding:0;
 }
 
+html, body{
+  overflow-x:hidden;
+}
+
 body{
   min-height:100vh;
   background:#0d0d0f;
   color:#ddd;
   font-family:'IBM Plex Mono',monospace;
-  overflow-x:hidden;
   position:relative;
 
-  /* smooth UI */
   transition:background 0.4s ease, color 0.4s ease;
-  will-change:transform, filter;
 }
 
 body.light{
@@ -34,7 +34,13 @@ body.light{
   color:#111;
 }
 
-/* FLASH (instant, no transition) */
+/* APP WRAPPER (NEW) */
+#app{
+  position:relative;
+  will-change:transform;
+}
+
+/* FLASH */
 .glitch-flash{
   position:fixed;
   inset:0;
@@ -137,7 +143,6 @@ body.light .desc{
   display:block;
   color:inherit;
   text-decoration:none;
-
   transition:transform 0.2s ease;
 }
 
@@ -209,6 +214,8 @@ body.light .entry-sub{
 
 <div class="rain" id="rain"></div>
 
+<div id="app"><!-- NEW WRAPPER -->
+
 <div class="topbar">
   <a class="back" href="https://dieclick.github.io">← back</a>
 </div>
@@ -218,6 +225,8 @@ body.light .entry-sub{
   <div class="desc">An anomaly approaches from the sky. Nobody saw it come.</div>
   <div class="entries" id="entries-container"></div>
 </div>
+
+</div><!-- END APP -->
 
 <script>
 
@@ -233,7 +242,7 @@ for(let i=0;i<28;i++){
   rain.appendChild(s);
 }
 
-/* SCRAMBLE (less aggressive) */
+/* SCRAMBLE */
 const CHARS="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@%&*";
 
 function scramble(el){
@@ -257,15 +266,16 @@ function scramble(el){
 /* GLITCH */
 let dark=true;
 const flash=document.getElementById("flash");
+const app=document.getElementById("app"); // NEW
 
 function glitch(real=false){
 
-  /* instant white flash */
   flash.style.opacity="1";
 
   document.body.classList.add("glitching");
 
-  document.body.style.transform=
+  /* FIX: move wrapper instead of body */
+  app.style.transform=
     `translate(${(Math.random()-0.5)*8}px, ${(Math.random()-0.5)*8}px)`;
 
   document.querySelectorAll(".title, .desc, .entry-title, .entry-sub")
@@ -274,7 +284,7 @@ function glitch(real=false){
   setTimeout(()=>{
     flash.style.opacity="0";
     document.body.classList.remove("glitching");
-    document.body.style.transform="none";
+    app.style.transform="none";
   },120);
 
   if(real){
