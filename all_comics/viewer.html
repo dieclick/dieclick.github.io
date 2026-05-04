@@ -72,6 +72,17 @@ body::after {
     opacity: 0.85;
 }
 
+.progress {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: white;
+    transition: width 0.2s ease;
+    z-index: 10;
+}
+
 /* hidden UI */
 .ui.hidden { opacity: 0; transition: 0.3s; }
 </style>
@@ -85,11 +96,12 @@ body::after {
         <div class="counter" id="counter"></div>
     </div>
 </div>
-
+<div class="progress" id="progress"></div>
 <script>
 const track = document.getElementById("track");
 const viewer = document.getElementById("viewer");
 const counter = document.getElementById("counter");
+const progress = document.getElementById("progress");
 
 let pages = [];
 let current = 0;
@@ -122,7 +134,6 @@ fetch(base + "pages.json")
     update();
 });
 
-/* update view */
 function update() {
 
     if (!vertical) {
@@ -130,6 +141,12 @@ function update() {
     }
 
     counter.textContent = `${current + 1} / ${pages.length}`;
+
+    const percent = pages.length > 1
+        ? (current / (pages.length - 1)) * 100
+        : 100;
+
+    progress.style.width = percent + "%";
 
     preload(current);
 }
