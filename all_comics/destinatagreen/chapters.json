@@ -1,17 +1,17 @@
 [
   {
     "name": "SUMA MERTE",
-    "folder": "axioma_uno",
+    "folder": "axioma1",
     "desc": "AXIOMA UNO"
   },
   {
     "name": "GAMBETTO",
-    "folder": "axioma_dos",
+    "folder": "axioma2",
     "desc": "AXIOMA DOS"
   },
   {
     "name": "AXIOMA TRES",
-    "folder": "axioma_tres",
+    "folder": "axioma3",
     "desc": "Inside the crisol"
   }
 ]
