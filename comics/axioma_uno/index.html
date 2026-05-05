@@ -1,1 +1,149 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>DESTINATA Triplet B</title> <style> body { background-image: url('hm7.png'); background-repeat: no-repeat; background-attachment: fixed; width: 1280px; height: 720px; margin: 0; padding: 0; font-family: Arial, sans-serif; } span { background-color: #0F0F0F; color: #FFEEFB; position: fixed; top: 20px; left: 20px; padding: 10px; border-radius: 5px; } span a { color: #FFEEFB; text-decoration: none; margin-right: 10px; padding: 5px 10px; border-radius: 3px; transition: background-color 0.3s ease; } span a:hover { background-color: #FFEEFB; color: #0F0F0F; } .image-container { display: none; /* Hide all image containers by default */ } .image-container.active { display: block; /* Show the active image container */ } </style> </head> <body> <span> <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Vol 1</a> <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">Vol 2</a> <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Triplet A</a> <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">Triplet B</a> <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">Triplet C</a> <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">Triplet D</a> </span> <button onclick="nextTriplet()">Next Triplet</button> <div class="image-container triplet-a active"> <img loading="lazy" src="pag 10.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 9.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 8.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 7.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 6.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 5.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 4.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 3.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 2.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 1.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 00.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="prepagB.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="prepagA.png" style="width: 1280px; height: 720px;"> </div> <div class="image-container triplet-b"> <img loading="lazy" src="pag 20.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 19.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 18.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 17.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 16.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 15.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 14.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 13.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 12.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 11.png" style="width: 1280px; height: 720px;"> </div> <div class="image-container triplet-c"> <img loading="lazy" src="pag 30.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 29.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 28.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 27.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 26.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 25.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 24.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 23.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 22.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 21.png" style="width: 1280px; height: 720px;"> </div> <div class="image-container triplet-d"> <img loading="lazy" src="pag 40.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 39.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 38.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 37.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 36.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 35.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 34.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 33.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 32.png" style="width: 1280px; height: 720px;"> <img loading="lazy" src="pag 31.png" style="width: 1280px; height: 720px;"> </div> <!-- Script for scrolling to bottom --> <script> // Ensure DOM is fully loaded before executing document.addEventListener('DOMContentLoaded', function() { topFunction(); }); function topFunction() { // Smooth scroll to the bottom of the page window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); } function nextTriplet() { const currentTriplet = document.querySelector('.image-container.active'); const nextTriplet = currentTriplet.nextElementSibling || document.querySelector('.image-container:first-child'); currentTriplet.classList.remove('active'); nextTriplet.classList.add('active'); topFunction(); // Scroll to the bottom when changing triplets } </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DESTINATA Triplet B</title>
+
+<style>
+body {
+    background-image: url('hm7.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 1280px;
+    height: 720px;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+span {
+    background-color: #0F0F0F;
+    color: #FFEEFB;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+span a {
+    color: #FFEEFB;
+    text-decoration: none;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+span a:hover {
+    background-color: #FFEEFB;
+    color: #0F0F0F;
+}
+
+.image-container {
+    display: none;
+}
+
+.image-container.active {
+    display: block;
+}
+</style>
+</head>
+
+<body>
+
+<span>
+    <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Vol 1</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Vol.2/Triplet%20A/index.html">Vol 2</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/index.html">Triplet A</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20B/index.html">Triplet B</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20C/index.html">Triplet C</a>
+    <a href="https://dieclick.github.io/comics/axioma_uno/Triplet%20D/index.html">Triplet D</a>
+</span>
+
+<button onclick="nextTriplet()">Next Triplet</button>
+
+<div class="image-container triplet-a active">
+    <img src="pag 10.png">
+    <img src="pag 9.png">
+    <img src="pag 8.png">
+    <img src="pag 7.png">
+    <img src="pag 6.png">
+    <img src="pag 5.png">
+    <img src="pag 4.png">
+    <img src="pag 3.png">
+    <img src="pag 2.png">
+    <img src="pag 1.png">
+    <img src="pag 00.png">
+    <img src="prepagB.png">
+    <img src="prepagA.png">
+</div>
+
+<div class="image-container triplet-b">
+    <img src="pag 20.png">
+    <img src="pag 19.png">
+    <img src="pag 18.png">
+    <img src="pag 17.png">
+    <img src="pag 16.png">
+    <img src="pag 15.png">
+    <img src="pag 14.png">
+    <img src="pag 13.png">
+    <img src="pag 12.png">
+    <img src="pag 11.png">
+</div>
+
+<div class="image-container triplet-c">
+    <img src="pag 30.png">
+    <img src="pag 29.png">
+    <img src="pag 28.png">
+    <img src="pag 27.png">
+    <img src="pag 26.png">
+    <img src="pag 25.png">
+    <img src="pag 24.png">
+    <img src="pag 23.png">
+    <img src="pag 22.png">
+    <img src="pag 21.png">
+</div>
+
+<div class="image-container triplet-d">
+    <img src="pag 40.png">
+    <img src="pag 39.png">
+    <img src="pag 38.png">
+    <img src="pag 37.png">
+    <img src="pag 36.png">
+    <img src="pag 35.png">
+    <img src="pag 34.png">
+    <img src="pag 33.png">
+    <img src="pag 32.png">
+    <img src="pag 31.png">
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    scrollToBottom();
+});
+
+function scrollToBottom() {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+    });
+}
+
+function nextTriplet() {
+    const current = document.querySelector('.image-container.active');
+    const all = document.querySelectorAll('.image-container');
+
+    let index = Array.from(all).indexOf(current);
+    current.classList.remove('active');
+
+    let nextIndex = (index + 1) % all.length;
+    all[nextIndex].classList.add('active');
+
+    scrollToBottom();
+}
+</script>
+
+</body>
+</html>
