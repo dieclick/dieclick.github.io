@@ -325,7 +325,7 @@ function render(data){
   data.forEach((ch)=>{
     const a=document.createElement("a");
     a.className="entry";
-    a.href=`all_comics/viewer.html?blein/${ch.folder}`;
+    a.href = `/all_comics/viewer.html?chapter=blein/${ch.folder}`;
     a.innerHTML=`
       <div class="entry-bg"></div>
       <div class="entry-content">
