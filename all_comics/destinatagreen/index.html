@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destinata Green</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-height: 100%; overflow-x: hidden; }
+
+body {
+  min-height: 100vh;
+  background: #f2f0e8;
+  color: #1a1a1a;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.grid {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(40,160,40,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(40,160,40,0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.vignette {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse 85% 85% at 50% 50%, transparent 40%, rgba(220,218,208,0.6) 100%);
+}
+
+.page {
+  position: relative; z-index: 3;
+  padding: 48px 52px 56px;
+}
+
+.back {
+  font-size: 10px; letter-spacing: 2px;
+  text-decoration: none; color: rgba(30,30,30,0.35);
+  display: inline-block; margin-bottom: 36px;
+}
+.back:hover { color: #2a9a2a; }
+
+.editors-note {
+  max-width: 620px;
+  margin-bottom: 32px;
+  padding: 18px 22px;
+  border: 1px solid rgba(30,30,30,0.1);
+  background: rgba(255,255,255,0.45);
+  position: relative;
+}
+.note-label { font-size: 9px; letter-spacing: 3px; color: #2aaa2a; margin-bottom: 10px; }
+.note-label span { color: rgba(30,30,30,0.35); }
+.note-text { font-size: 11px; color: rgba(30,30,30,0.6); line-height: 1.85; }
+.note-text em { color: #1a8a1a; font-style: normal; }
+.note-corner {
+  position: absolute; top: -1px; right: -1px;
+  width: 0; height: 0;
+  border-top: 18px solid #2aaa2a;
+  border-left: 18px solid transparent;
+}
+
+.entries { 
+  max-width: 620px; 
+}
+
+/* entries */
+.entry {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+  gap: 16px; padding: 16px 0;
+  border-top: 1px solid rgba(30,30,30,0.08);
+  text-decoration: none; color: inherit;
+  transition: background 0.15s;
+}
+.entry:last-child { border-bottom: 1px solid rgba(30,30,30,0.08); }
+.entry:hover { background: rgba(42,170,42,0.04); }
+.entry:hover .arr { opacity: 1; transform: translateX(4px); }
+
+.entry-num { font-size: 9px; color: #2aaa2a; letter-spacing: 1px; }
+.entry-name { font-family: 'VT323', monospace; font-size: 30px; color: #111; line-height: 1; }
+.entry-desc { font-size: 10px; color: rgba(30,30,30,0.45); margin-top: 2px; }
+.arr { font-size: 13px; color: #2aaa2a; opacity: 0; transition: opacity 0.15s, transform 0.15s; }
+
+/* description injected after entries */
+.bottom-desc {
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(30,30,30,0.08);
+  margin-bottom: 20px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(30,30,30,0.38);
+}
+
+.sys-tag { font-size: 9px; letter-spacing: 4px; color: rgba(30,30,30,0.2); margin-bottom: 6px; }
+
+.title {
+  font-family: 'VT323', monospace;
+  font-size: clamp(72px, 11vw, 140px);
+  color: #111; line-height: 0.9;
+}
+
+.title-sub {
+  margin-top: 10px;
+  font-size: 11px; letter-spacing: 6px;
+  color: #2aaa2a;
+}
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.cursor { display: inline-block; color: #2aaa2a; animation: blink 1.2s step-end infinite; }
+</style>
+</head>
+<body>
+
+<div class="grid"></div>
+<div class="vignette"></div>
+
+<div class="page">
+  <a class="back" href="https://dieclick.github.io">← back</a>
+
+  <div class="editors-note">
+    <div class="note-label">&gt;&gt; EDITOR'S NOTE <span>// code:101119</span></div>
+    <div class="note-corner"></div>
+    <p class="note-text">
+      What you will see are not events — these are called <em>Axioms</em>.<br>
+      An Axiom is assumed true until proven, then it becomes a theorem.<br>
+      <em>DESTINATA GREEN</em> is NOT true until <em>DESTINATA RED</em> happens.<br>
+      Until then, all this is merely something assumed in the coding of each avatar.
+    </p>
+  </div>
+
+  <!-- entries only -->
+  <div class="entries" id="entries"></div>
+
+  <!-- title block -->
+  <div class="sys-tag">SIM_LAYER :: FORK:GREEN</div>
+  <div class="title">DESTINATA<br>GREEN</div>
+  <div class="title-sub">GREEN EDITION<span class="cursor">_</span></div>
+
+</div>
+
+<script>
+const fallback = [
+  { name: "Axiom I",   desc: "axioma.", folder: "dg_01" },
+  { name: "Axiom II",  desc: "axioma", folder: "dg_02" },
+  { name: "Axiom III", desc: "axioma", folder: "dg_03" }
+];
+
+function render(data) {
+  const c = document.getElementById('entries');
+  c.innerHTML = '';
+
+  data.forEach((ch, i) => {
+    const a = document.createElement('a');
+    a.className = 'entry';
+    a.href = `/all_comics/viewer.html?chapter=destinatagreen/${ch.folder}`;
+    a.innerHTML = `
+      <div class="entry-num">0${i+1}</div>
+      <div>
+        <div class="entry-name">${ch.name}</div>
+        <div class="entry-desc">${ch.desc}</div>
+      </div>
+      <div class="arr">→</div>`;
+    c.appendChild(a);
+  });
+
+  // ✅ description guaranteed AFTER entries
+  const desc = document.createElement('div');
+  desc.className = 'bottom-desc';
+  desc.textContent = 'Nolmare runtime — simulacro branch';
+  c.appendChild(desc);
+}
+
+fetch('chapters.json')
+  .then(r => r.json())
+  .then(render)
+  .catch(() => render(fallback));
+</script>
+</body>
+</html>
