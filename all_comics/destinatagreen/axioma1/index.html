@@ -154,7 +154,7 @@ function render(data) {
   data.forEach((ch, i) => {
     const a = document.createElement('a');
     a.className = 'entry';
-    a.href = `/all_comics/destinatagreen/${ch.folder}/index.html`;
+    a.href = `/all_comics/viewer.html?chapter=destinatagreen/axioma1/${ch.folder}`;
     a.innerHTML = `
       <div class="entry-num">0${i+1}</div>
       <div>
