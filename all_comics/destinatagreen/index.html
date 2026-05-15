@@ -67,7 +67,6 @@ body {
 /* entries */
 .entry {
   display: grid;
-  grid-template-columns: 36px 1fr auto;
   align-items: center;
   gap: 16px; padding: 16px 0;
   border-top: 1px solid rgba(30,30,30,0.08);
@@ -76,12 +75,12 @@ body {
 }
 .entry:last-child { border-bottom: 1px solid rgba(30,30,30,0.08); }
 .entry:hover { background: rgba(42,170,42,0.04); }
-.entry:hover .arr { opacity: 1; transform: translateX(4px); }
+
 
 .entry-num { font-size: 9px; color: #2aaa2a; letter-spacing: 1px; }
 .entry-name { font-family: 'VT323', monospace; font-size: 30px; color: #111; line-height: 1; }
 .entry-desc { font-size: 10px; color: rgba(30,30,30,0.45); margin-top: 2px; }
-.arr { font-size: 13px; color: #2aaa2a; opacity: 0; transition: opacity 0.15s, transform 0.15s; }
+
 
 /* description injected after entries */
 .bottom-desc {
