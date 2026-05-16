@@ -1,2 +1,2 @@
 # dieclick.github.io
-This is my outlet, i hope you enjoy your stay
+This is my outlet, i hope you enjoy your stay.
