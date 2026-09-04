@@ -4,7 +4,6 @@ from datetime import datetime
 POSTS_DIR = "blog/posts"
 INDEX_FILE = "blog/index.html"
 
-# Ensure posts directory exists
 os.makedirs(POSTS_DIR, exist_ok=True)
 
 posts = []
@@ -15,7 +14,6 @@ for filename in os.listdir(POSTS_DIR):
         with open(filepath, "r", encoding="utf-8") as f:
             content = f.read()
 
-        # extract date and title from filename
         try:
             year, month, day, rest = filename.split("-", 3)
             date = datetime(int(year), int(month), int(day))
@@ -24,7 +22,6 @@ for filename in os.listdir(POSTS_DIR):
             date = None
             title = filename.replace(".html", "")
 
-        # wrap each post in full HTML
         full_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,18 +74,11 @@ for filename in os.listdir(POSTS_DIR):
       detectRetina: true
     }});
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
-  <script>
-    tsParticles.load("tsparticles", {{
-      ...
-    }});
-  </script>
   <script data-goatcounter="https://dieclick.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>"""
 
-        # overwrite post file with full HTML
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(full_html)
 
@@ -98,7 +88,6 @@ for filename in os.listdir(POSTS_DIR):
             "date": date.strftime("%Y-%m-%d") if date else "Unknown"
         })
 
-# generate blog index
 posts.sort(key=lambda p: p["date"], reverse=True)
 html = """<!DOCTYPE html>
 <html lang="en">
@@ -130,12 +119,6 @@ html += """  </ul></main>
         move: { enable: true, speed: 0.5, direction: "none", outModes: { default: "bounce" } }
       },
       detectRetina: true
-    });
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
-  <script>
-    tsParticles.load("tsparticles", {
-      ...
     });
   </script>
   <script data-goatcounter="https://dieclick.goatcounter.com/count"
