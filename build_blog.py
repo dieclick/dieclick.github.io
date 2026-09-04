@@ -77,6 +77,14 @@ for filename in os.listdir(POSTS_DIR):
       detectRetina: true
     }});
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script>
+    tsParticles.load("tsparticles", {{
+      ...
+    }});
+  </script>
+  <script data-goatcounter="https://dieclick.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>"""
 
@@ -124,6 +132,14 @@ html += """  </ul></main>
       detectRetina: true
     });
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script>
+    tsParticles.load("tsparticles", {
+      ...
+    });
+  </script>
+  <script data-goatcounter="https://dieclick.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
 """
